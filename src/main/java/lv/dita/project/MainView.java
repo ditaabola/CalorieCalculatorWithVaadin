@@ -1,14 +1,18 @@
+
 package lv.dita.project;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.awt.*;
 
 /**
  * A sample Vaadin view class.
@@ -31,24 +35,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 @CssImport(value = "./styles/vaadin-text-field-styles.css", themeFor = "vaadin-text-field")
 public class MainView extends VerticalLayout {
 
-      public MainView(@Autowired GreetService service) {
+    public MainView(@Autowired GreetService service) {
 
-       NumberField height = new NumberField("Your height");
-       add(height);
-       NumberField weight = new NumberField("Your weight");
-       add(weight);
-       NumberField age = new NumberField("Your age");
-       add(age);
-       ComboBox gender = new ComboBox("Your gender");
-       gender.setItems("Male", "Female", "Non-Binary");
-       add(gender);
-       ComboBox activityLevel = new ComboBox("Your usual activity level");
-          activityLevel.setItems("Sedentary", "Light", "Moderate", "Active");
-          add(activityLevel);
-       Button submitButton = new Button("Calculate!");
-       submitButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-       add(submitButton);
+        NumberField height = new NumberField("Your height");
+        add(height);
+        double userHeight = height.getValue();
+        NumberField weight = new NumberField("Your weight");
+        add(weight);
+        NumberField age = new NumberField("Your age");
+        add(age);
+        ComboBox gender = new ComboBox("Your gender");
+        gender.setItems("Male", "Female", "Non-Binary");
+        add(gender);
+        ComboBox activityLevel = new ComboBox("Your usual activity level");
+        activityLevel.setItems("Sedentary", "Light", "Moderate", "Active");
+        add(activityLevel);
+        Button submitButton = new Button("Calculate!");
+        submitButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        add(submitButton);
+       // submitButton.addClickListener(buttonClickEvent -> add(new Label("eeee"+ userHeight*2)));
 
     }
+
 
 }

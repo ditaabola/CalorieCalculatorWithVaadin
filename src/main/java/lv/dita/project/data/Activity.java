@@ -1,10 +1,12 @@
 package lv.dita.project.data;
 
+import lv.dita.project.data.interfaces.EntityBase;
+
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static lv.dita.project.data.Constants.SCHEMA_NAME;
+import static lv.dita.project.data.enums.Constants.SCHEMA_NAME;
 
 public class Activity implements EntityBase {
     public static final String SELECT_QUERY = "select * from "+SCHEMA_NAME+".activities_met_values";
