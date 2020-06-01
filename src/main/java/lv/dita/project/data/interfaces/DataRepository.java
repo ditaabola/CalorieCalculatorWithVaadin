@@ -1,4 +1,7 @@
-package lv.dita.project.data;
+package lv.dita.project.data.interfaces;
+
+import lv.dita.project.data.Activity;
+import lv.dita.project.data.Food;
 
 import java.util.List;
 

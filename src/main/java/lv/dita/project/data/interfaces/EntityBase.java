@@ -1,4 +1,4 @@
-package lv.dita.project.data;
+package lv.dita.project.data.interfaces;
 import java.sql.ResultSet;
 
 public interface EntityBase {

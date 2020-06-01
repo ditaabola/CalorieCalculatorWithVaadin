@@ -1,5 +1,7 @@
 package lv.dita.project.data;
 
+import lv.dita.project.enums.Constants;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;

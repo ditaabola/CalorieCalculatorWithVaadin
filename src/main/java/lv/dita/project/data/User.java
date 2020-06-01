@@ -1,5 +1,9 @@
 package lv.dita.project.data;
 
+import lv.dita.project.enums.DailyActivityLevel;
+import lv.dita.project.enums.PersonsGender;
+import lv.dita.project.enums.WeightGoal;
+
 public class User {
     private int height;
     private double weight;
