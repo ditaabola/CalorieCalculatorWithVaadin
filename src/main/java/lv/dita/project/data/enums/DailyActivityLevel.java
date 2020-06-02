@@ -7,7 +7,6 @@ public enum DailyActivityLevel {
     MODERATE(1.27),
     ACTIVE(1.45);
 
-
     private final double pa;
 
     DailyActivityLevel(double pa) {

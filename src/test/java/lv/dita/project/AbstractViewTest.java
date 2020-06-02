@@ -27,6 +27,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
  * <a href="https://vaadin.com/docs/v10/testbench/testbench-overview.html">Vaadin TestBench</a>.
  */
 public abstract class AbstractViewTest extends ParallelTest {
+
     private static final int SERVER_PORT = 8080;
 
     private final String route;
