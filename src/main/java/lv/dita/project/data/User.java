@@ -5,6 +5,7 @@ import lv.dita.project.data.enums.PersonsGender;
 import lv.dita.project.data.enums.WeightGoal;
 
 public class User {
+
     private int height;
     private double weight;
     private int age;

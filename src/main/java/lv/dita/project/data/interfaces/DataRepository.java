@@ -6,6 +6,7 @@ import lv.dita.project.data.Food;
 import java.util.List;
 
 public interface DataRepository {
+
     <T extends EntityBase> List<T> getList (Class<T> item);
     <T extends EntityBase> T getById(Class<T> item, int id);
 

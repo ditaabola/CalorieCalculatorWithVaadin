@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import static lv.dita.project.data.enums.Constants.SCHEMA_NAME;
 
 public class Activity implements EntityBase {
+
     public static final String SELECT_QUERY = "select * from "+SCHEMA_NAME+".activities_met_values";
 
     private int id;
