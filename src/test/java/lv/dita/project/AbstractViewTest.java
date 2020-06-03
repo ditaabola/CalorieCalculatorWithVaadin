@@ -5,6 +5,7 @@ import com.vaadin.testbench.ScreenshotOnFailureRule;
 import com.vaadin.testbench.TestBench;
 import com.vaadin.testbench.parallel.ParallelTest;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -80,7 +81,7 @@ public abstract class AbstractViewTest extends ParallelTest {
      * @param themeClass    theme class (such as {@code Lumo.class}
      */
     protected void assertThemePresentOnElement(
-            WebElement element, Class<? extends AbstractTheme> themeClass) {
+            WebElement element, @NotNull Class<? extends AbstractTheme> themeClass) {
         String themeName = themeClass.getSimpleName().toLowerCase();
         Boolean hasStyle = (Boolean) executeScript("" +
                 "var styles = Array.from(arguments[0]._template.content" +

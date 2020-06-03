@@ -1,6 +1,7 @@
 package lv.dita.project.data;
 
 import lv.dita.project.data.enums.DailyActivityLevel;
+import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.util.Scanner;
@@ -61,7 +62,7 @@ public class Calculator {
         }
     }
 
-    private static void calculateIBW(String gender, double height) {
+    private static void calculateIBW(@NotNull String gender, double height) {
 
         //IBW = ideal body weight
         //dropdown option in the interface for selecting gender therefore no additional validation needed
@@ -81,7 +82,7 @@ public class Calculator {
         System.out.println("Your ideal weight is " + df.format(ibw) + " kgs.");
     }
 
-    private static void calculateEER(String gender, int age, double weight, double height, DailyActivityLevel activityLevel) {
+    private static void calculateEER(@NotNull String gender, int age, double weight, double height, DailyActivityLevel activityLevel) {
 
         //EER = Estimated Energy Requirements (calories/day) required to maintain the current weight.
 

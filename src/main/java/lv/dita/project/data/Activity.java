@@ -1,6 +1,8 @@
 package lv.dita.project.data;
 
 import lv.dita.project.data.interfaces.EntityBase;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
@@ -26,7 +28,7 @@ public class Activity implements EntityBase {
         this.level = level;
     }
 
-    public static Activity createActivity(ResultSet rs) {
+    public static Activity createActivity(@NotNull ResultSet rs) {
         Activity activity = null;
         try {
             activity = new Activity(rs.getInt("activity_id"),
@@ -48,7 +50,8 @@ public class Activity implements EntityBase {
         return Activity.createActivity(rs);
     }
 
-    public static String getSelectByIdSql() {
+    @Contract(pure = true)
+    public static @NotNull String getSelectByIdSql() {
         return getSelectSql() + " where activity_id = ?";
     }
 

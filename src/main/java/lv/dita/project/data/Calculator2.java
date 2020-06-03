@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.text.DecimalFormat;
 
 public class Calculator2 {
+
     private double weight;
     private double height;
 
@@ -40,6 +41,5 @@ public class Calculator2 {
         }
         return "Something went wrong.";
     }
-
 }
 

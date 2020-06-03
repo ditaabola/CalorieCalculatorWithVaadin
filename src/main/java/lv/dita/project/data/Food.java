@@ -1,6 +1,8 @@
 package lv.dita.project.data;
 
 import lv.dita.project.data.interfaces.EntityBase;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;
@@ -29,7 +31,7 @@ public class Food implements EntityBase {
         this.fatGPer100G = fatGPer100G;
     }
 
-    public static Food createFood(ResultSet rs) {
+    public static Food createFood(@NotNull ResultSet rs) {
         Food food = null;
         try {
             food = new Food(
@@ -55,7 +57,8 @@ public class Food implements EntityBase {
         return Food.createFood(rs);
     }
 
-    public static String getSelectByIdSql() {
+    @Contract(pure = true)
+    public static @NotNull String getSelectByIdSql() {
         return getSelectSql() + " where food_id = ?";
     }
 

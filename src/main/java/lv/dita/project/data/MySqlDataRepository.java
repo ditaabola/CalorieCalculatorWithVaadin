@@ -158,8 +158,6 @@ public class MySqlDataRepository implements DataRepository {
         return null;
     }
 
-
-
     @Override
     public int addFood(Food food) {
         try {
@@ -181,8 +179,10 @@ public class MySqlDataRepository implements DataRepository {
         }
         return 0;
     }
+
     @Override
     public List<Food> getFoodItemsByType(String type) {
+
         try {
             connection = DriverManager.getConnection(connectionString, userName, passWord);
             CallableStatement statement = connection.prepareCall("{call spGetFoodItemsByType(?)}");
@@ -224,6 +224,7 @@ public class MySqlDataRepository implements DataRepository {
     //šeit vajadzētu storetajā procedūrā "contains", bet neizpētīju vēl, jāmaina tā, manuprāt
     @Override
     public List<Food> getCaloriesByName(String name) {
+
         try {
             connection = DriverManager.getConnection(connectionString, userName, passWord);
             CallableStatement statement = connection.prepareCall("{call spCaloriesByName(?,?)}");
@@ -241,6 +242,4 @@ public class MySqlDataRepository implements DataRepository {
         }
         return null;
     }
-
-
 }
