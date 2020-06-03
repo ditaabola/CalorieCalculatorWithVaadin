@@ -1,5 +1,9 @@
 package lv.dita.project;
 
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.charts.Chart;
+import com.vaadin.flow.component.polymertemplate.Id;
+import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.templatemodel.TemplateModel;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
@@ -14,6 +18,7 @@ import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 @Tag("testing-vaadin-designer")
 @JsModule("./testing-vaadin-designer.js")
 public class TestingVaadinDesigner extends PolymerTemplate<TestingVaadinDesigner.TestingVaadinDesignerModel> {
+
 
     /**
      * Creates a new TestingVaadinDesigner.
