@@ -18,7 +18,7 @@ import java.util.List;
 public class MySqlDataRepository implements DataRepository {
 
     private Connection connection;
-    private static final String connectionString = "jdbc:mysql://localhost:3306/"+ Constants.SCHEMA_NAME;
+    private static final String connectionString = "jdbc:mysql://localhost:3306/"+ Constants.SCHEMA_NAME+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String userName = Constants.DB_USER;
     private static final String passWord = Constants.DB_PASSWORD;
 

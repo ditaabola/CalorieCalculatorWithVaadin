@@ -6,7 +6,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import lv.dita.project.views.AddLabel;
-import lv.dita.project.views.CalculateBMI;
+import lv.dita.project.views.CalculateBMIv2;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -30,13 +30,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 @CssImport(value = "./styles/vaadin-text-field-styles.css", themeFor = "vaadin-text-field")
 public class MainView extends VerticalLayout {
 
-    private CalculateBMI calBmi;
+    private CalculateBMIv2 calBmi;
     private AddLabel addLbl;
 
     public MainView(@Autowired GreetService service) {
 
             addLbl = new AddLabel(this);
-            calBmi = new CalculateBMI(this);
+            calBmi = new CalculateBMIv2(this);
 
 
 
