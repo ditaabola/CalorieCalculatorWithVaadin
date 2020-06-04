@@ -2,6 +2,7 @@ package lv.dita.project;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.charts.Chart;
+import com.vaadin.flow.component.html.Input;
 import com.vaadin.flow.component.polymertemplate.Id;
 import com.vaadin.flow.dom.Element;
 import com.vaadin.flow.templatemodel.TemplateModel;
@@ -19,6 +20,9 @@ import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 @JsModule("./testing-vaadin-designer.js")
 public class TestingVaadinDesigner extends PolymerTemplate<TestingVaadinDesigner.TestingVaadinDesignerModel> {
 
+
+    @Id("input-centimeters")
+    private Input inputCentimeters;
 
     /**
      * Creates a new TestingVaadinDesigner.
