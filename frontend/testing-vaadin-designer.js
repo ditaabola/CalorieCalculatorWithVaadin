@@ -19,6 +19,10 @@ class TestingVaadinDesigner extends PolymerElement {
                     height: 100%;
                 }
             </style>
+<h1 
+id="header" class="header" 
+style="margin-left: 40%; padding: 10px; width: 100%; color: #00909e;"
+>Calorie calculator</h1>
 
 `;
     }
