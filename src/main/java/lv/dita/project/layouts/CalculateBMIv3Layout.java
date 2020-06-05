@@ -49,7 +49,7 @@ public class CalculateBMIv3Layout extends VerticalLayout {
             gender = new RadioButtonGroup<>();
             gender.setLabel("Select gender");
             gender.setItems(PersonsGender.values());
-            gender.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
+//            gender.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
             gender.setRequired(true);
             gender.setValue(PersonsGender.FEMALE);
             add(gender);
