@@ -50,7 +50,6 @@ public class MainView extends VerticalLayout {
         Tab tab1 = new Tab("CALCULATE BMI");
         CalculateBMIv3Layout page1 = new CalculateBMIv3Layout();
         page1.setVisible(true);
-        //page1.add("Please enter data to find out about your BMI");
 
         Tab tab2 = new Tab("ACTIVITIES");
         ActivitiesLayout page2 = new ActivitiesLayout();
@@ -58,7 +57,6 @@ public class MainView extends VerticalLayout {
 
         Tab tab3 = new Tab("FOOD");
         FoodLayout page3 = new FoodLayout();
-//        page3.setText("Something with food");
         page3.setVisible(false);
 
         Map<Tab, Component> tabsToPages = new HashMap<>();

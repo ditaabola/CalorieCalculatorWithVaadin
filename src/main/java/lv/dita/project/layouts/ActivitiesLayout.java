@@ -18,19 +18,25 @@ public class ActivitiesLayout extends Div {
         Label lblProof = new Label("Tests, vai ir redzams activities");
         add(lblProof);
 
-       //Taisām tabulu
         grid = new Grid<>();
-        grid.addColumn(Activity::getName).setHeader("Name");
-        grid.addColumn(Activity::getLevel).setHeader("Level");
-        grid.addColumn(Activity::getMetValue).setHeader("MetValue");
-        grid.addColumn(Activity::getType).setHeader("Type");
+
+        Grid.Column<Activity> colName = grid.addColumn(Activity::getName).setHeader("Name");
+        colName.setSortable(true);
+
+        Grid.Column<Activity> colLevel = grid.addColumn(Activity::getLevel).setHeader("Level");
+        colLevel.setSortable(true);
+
+        Grid.Column<Activity> colMetValue = grid.addColumn(Activity::getMetValue).setHeader("MET value");
+        colMetValue.setSortable(true);
+
+        Grid.Column<Activity> colType = grid.addColumn(Activity::getType).setHeader("Type");
+        colType.setSortable(true);
 
         MySqlDataRepository repo = new MySqlDataRepository();
         List result = repo.getList(Activity.class);
         grid.setItems(result);
+
         grid.setWidth("600px");
-        //Jāizdomā, kā var sakārtot...esot iebūvēta funkcija, tik nemāku palaist
-        //grid.getColumnByKey("Name").setSortable(true);
         add(grid);
     }
 
