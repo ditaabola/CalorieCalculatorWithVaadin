@@ -99,6 +99,7 @@ public class FoodLayout extends Div {
                 add(lblCalorieCalculation);
             }
 
+
             public void createGridWithData() {
                 grid = new Grid<>();
                 Grid.Column<Food> colName = grid.addColumn(Food::getName).setHeader("Name").setSortable(true);
