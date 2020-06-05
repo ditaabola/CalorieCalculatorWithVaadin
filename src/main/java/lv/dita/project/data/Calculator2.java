@@ -1,6 +1,7 @@
 package lv.dita.project.data;
 
 import lv.dita.project.data.enums.DailyActivityLevel;
+import lv.dita.project.data.enums.PersonsGender;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,7 +43,7 @@ public class Calculator2 {
         return "Something went wrong.";
     }
 
-    public static @NotNull String calculateIBW(@NotNull String gender, double height) {
+    public static @NotNull String calculateIBW(@NotNull PersonsGender gender, double height) {
 
         //IBW = ideal body weight
         //dropdown option in the interface for selecting gender therefore no additional validation needed
@@ -52,10 +53,10 @@ public class Calculator2 {
 
         if (gender.equals("")) {
             return "Choose gender";
-        } else if (gender == "Female") {
+        } else if (gender.equals(PersonsGender.FEMALE) ) {
             ibw = 22 * Math.pow((height - 0.1), 2);
             return "Your ideal body weight is: " + df.format(ibw) + " kg";
-        } else if (gender == "Male") {
+        } else if (gender.equals(PersonsGender.MALE)) {
             ibw = 22 * Math.pow(height, 2);
             return "Your ideal body weight is: " + df.format(ibw) + " kg";
         } else {
@@ -64,7 +65,39 @@ public class Calculator2 {
 
     }
 
+    public static @NotNull String calculateEER(@NotNull PersonsGender gender, int age, double weight,
+                                               double height, DailyActivityLevel activityLevel) {
+
+        //EER = Estimated Energy Requirements (calories/day) required to maintain the current weight.
+
+        height = height / 100;
+        int eer;
+
+        if (gender.equals("") || activityLevel.equals("")) {
+            return "Please enter all data";
+
+        } else if (gender.equals(PersonsGender.FEMALE) ) {
+            eer = (int) ((354 - (6.91 * age)) + (activityLevel.getPa() * ((9.36 * weight) + (726 * height))));
+            int caloriesToLoseWeight = eer - ((eer/100) * 30);
+            int caloriesToGainWeight = eer + ((eer/100) * 30);
+
+            return "To maintain your current weight you need " + eer + " calories a day. " +
+                    " To lose weight you need " + caloriesToLoseWeight + " calories a day. "+
+                    " To gain weight you need " + caloriesToGainWeight + " calories a day.";
 
 
+        } else if (gender.equals(PersonsGender.MALE)) {
+            eer = (int) ((662 - (9.53 * age)) + (activityLevel.getPa() * ((15.91 * weight) + (539.6 * height))));
+            int caloriesToLoseWeight = eer - ((eer/100) * 30);
+            int caloriesToGainWeight = eer + ((eer/100) * 30);
+
+            return "To maintain your current weight you need " + eer + " calories a day. " +
+                    " To lose weight you need " + caloriesToLoseWeight + " calories a day. "+
+                    " To gain weight you need " + caloriesToGainWeight + " calories a day.";
+
+        } else {
+            return "Something went wrong!";
+        }
+    }
 }
 
