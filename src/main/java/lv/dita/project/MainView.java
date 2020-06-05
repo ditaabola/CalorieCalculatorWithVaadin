@@ -58,7 +58,7 @@ public class MainView extends VerticalLayout {
 
         Tab tab3 = new Tab("FOOD");
         FoodLayout page3 = new FoodLayout();
-        page3.setText("Something with food");
+//        page3.setText("Something with food");
         page3.setVisible(false);
 
         Map<Tab, Component> tabsToPages = new HashMap<>();
