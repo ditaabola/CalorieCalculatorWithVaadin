@@ -80,7 +80,7 @@ public class CalculateBMIv3Layout extends VerticalLayout {
                 @Override
                 public void onComponentEvent(ClickEvent<Button> buttonClickEvent) {
 
-                    if (height.isEmpty() || weight.isEmpty()) {
+                    if (height.isEmpty() || weight.isEmpty() || age.isEmpty()){
                         lblCalculatedBmi.setText("Please enter data!");
                     } else {
 
