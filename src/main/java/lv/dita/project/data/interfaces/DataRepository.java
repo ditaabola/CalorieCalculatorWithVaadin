@@ -2,6 +2,7 @@ package lv.dita.project.data.interfaces;
 
 import lv.dita.project.data.Activity;
 import lv.dita.project.data.Food;
+import lv.dita.project.data.FoodCategory;
 
 import java.util.List;
 
@@ -20,4 +21,4 @@ public interface DataRepository {
     List<Activity> getActivityByType (String type);
     List<Activity> getMetValueByActivityName (String name);
 
-}
+    }

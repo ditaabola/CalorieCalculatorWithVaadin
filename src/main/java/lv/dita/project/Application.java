@@ -1,6 +1,7 @@
 package lv.dita.project;
 
 import lv.dita.project.data.Activity;
+import lv.dita.project.data.FoodCategory;
 import lv.dita.project.data.interfaces.DataRepository;
 import lv.dita.project.data.Food;
 import lv.dita.project.data.MySqlDataRepository;
@@ -45,6 +46,15 @@ public class Application extends SpringBootServletInitializer {
         List<Activity> result = repo.getActivityByType("home");
         for (Activity item : result) {
             System.out.println(item.getName());
+        }
+    }
+
+    @Test
+    public void printFoodCategory(){
+        DataRepository repo = new MySqlDataRepository();
+        List<FoodCategory> result = repo.getList(FoodCategory.class);
+        for(FoodCategory item: result){
+            System.out.println(item);
         }
     }
 

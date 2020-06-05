@@ -4,6 +4,7 @@ import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
@@ -26,8 +27,6 @@ public class CalculateBMIv3Layout extends VerticalLayout {
     private Label lblCommentIbw;
     private Label lblCommentEer;
     private RadioButtonGroup<PersonsGender> gender;
-//    private RadioButtonGroup<DailyActivityLevel> activityLevel;
-
     private ComboBox<DailyActivityLevel> dailyActivityLevel;
 
     public CalculateBMIv3Layout() {
@@ -72,8 +71,6 @@ public class CalculateBMIv3Layout extends VerticalLayout {
             lblCommentBmi = new Label();
             lblCommentIbw = new Label();
             lblCommentEer = new Label();
-
-            //Te aprēķinus nedrīkst veikt!!!
 
             calculate = new Button("Calculate", new ComponentEventListener<ClickEvent<Button>>() {
 

@@ -18,7 +18,7 @@ import java.util.List;
 public class MySqlDataRepository implements DataRepository {
 
     private Connection connection;
-    private static final String connectionString = "jdbc:mysql://localhost:3306/"+ Constants.SCHEMA_NAME+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static final String connectionString = "jdbc:mysql://localhost:3306/" + Constants.SCHEMA_NAME + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String userName = Constants.DB_USER;
     private static final String passWord = Constants.DB_PASSWORD;
 
@@ -158,6 +158,8 @@ public class MySqlDataRepository implements DataRepository {
         return null;
     }
 
+
+
     @Override
     public int addFood(Food food) {
         try {
@@ -180,7 +182,7 @@ public class MySqlDataRepository implements DataRepository {
         return 0;
     }
 
-    @Override
+   @Override
     public List<Food> getFoodItemsByType(String type) {
 
         try {
@@ -221,7 +223,7 @@ public class MySqlDataRepository implements DataRepository {
         return null;
     }
 
-    //šeit vajadzētu storetajā procedūrā "contains", bet neizpētīju vēl, jāmaina tā, manuprāt
+
     @Override
     public List<Food> getCaloriesByName(String name) {
 
