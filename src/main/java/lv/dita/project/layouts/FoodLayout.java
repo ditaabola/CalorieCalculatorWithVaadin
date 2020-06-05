@@ -75,7 +75,8 @@ public class FoodLayout extends Div {
         List result = repo.getList(Food.class);
         grid.setItems(result);
         grid.getColumns().forEach(column -> column.setAutoWidth(true));
-        grid.setHeight("1000px");
+//        grid.setHeight("1000px");
+        grid.setHeightByRows(true);
         add(grid);
         grid.setRowsDraggable(true);
         grid.setDragDataGenerator("Name", Food::getName);
