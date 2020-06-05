@@ -3,6 +3,7 @@ package lv.dita.project.layouts;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
@@ -25,9 +26,11 @@ public class CalculateBMIv3Layout extends VerticalLayout {
     private Label lblCommentIbw;
     private Label lblCommentEer;
     private RadioButtonGroup<PersonsGender> gender;
-    private RadioButtonGroup<DailyActivityLevel> activityLevel;
+//    private RadioButtonGroup<DailyActivityLevel> activityLevel;
 
-    public CalculateBMIv3Layout(){
+    private ComboBox<DailyActivityLevel> dailyActivityLevel;
+
+    public CalculateBMIv3Layout() {
 
         try {
 
@@ -44,20 +47,26 @@ public class CalculateBMIv3Layout extends VerticalLayout {
             age.setRequiredIndicatorVisible(true);
 
             gender = new RadioButtonGroup<>();
-            gender.setLabel("Select gender!");
+            gender.setLabel("Select gender");
             gender.setItems(PersonsGender.values());
             gender.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
             gender.setRequired(true);
             gender.setValue(PersonsGender.FEMALE);
             add(gender);
 
-            activityLevel = new RadioButtonGroup<>();
-            activityLevel.setLabel("Select activity level!");
-            activityLevel.setItems(DailyActivityLevel.values());
-            activityLevel.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
-            activityLevel.setRequired(true);
-            activityLevel.setValue(DailyActivityLevel.SEDENTARY);
-            add(activityLevel);
+//            activityLevel = new RadioButtonGroup<>();
+//            activityLevel.setLabel("Select activity level");
+//            activityLevel.setItems(DailyActivityLevel.values());
+//            activityLevel.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
+//            activityLevel.setRequired(true);
+//            activityLevel.setValue(DailyActivityLevel.SEDENTARY);
+//            add(activityLevel);
+
+            dailyActivityLevel = new ComboBox<>();
+            dailyActivityLevel.setPlaceholder("Select activity level");
+            dailyActivityLevel.setItems(DailyActivityLevel.values());
+            dailyActivityLevel.setRequired(true);
+            add(dailyActivityLevel);
 
             lblCalculatedBmi = new Label();
             lblCommentBmi = new Label();
@@ -79,7 +88,7 @@ public class CalculateBMIv3Layout extends VerticalLayout {
                         double weightUser = weight.getValue();
                         PersonsGender genderUser = gender.getValue();
                         int ageUser = age.getValue();
-                        DailyActivityLevel actLevUser = activityLevel.getValue();
+                        DailyActivityLevel actLevUser = dailyActivityLevel.getValue();
 
                         String bmi = Calculator2.calculateBMI(weightUser, heightUser);
                         lblCalculatedBmi.setText("BMI: " + bmi);
@@ -101,8 +110,7 @@ public class CalculateBMIv3Layout extends VerticalLayout {
             add(lblCommentBmi);
             add(lblCommentIbw);
             add(lblCommentEer);
-        }catch (Exception e){
+        } catch (Exception e) {
         }
-
     }
 }
