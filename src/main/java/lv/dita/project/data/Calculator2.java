@@ -1,12 +1,12 @@
 package lv.dita.project.data;
 
+import lv.dita.project.data.enums.DailyActivityLevel;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 
 public class Calculator2 {
-
     private double weight;
     private double height;
 
@@ -41,5 +41,30 @@ public class Calculator2 {
         }
         return "Something went wrong.";
     }
+
+    public static @NotNull String calculateIBW(@NotNull String gender, double height) {
+
+        //IBW = ideal body weight
+        //dropdown option in the interface for selecting gender therefore no additional validation needed
+        height = height / 100;
+        double ibw;
+        DecimalFormat df = new DecimalFormat("##.##");
+
+        if (gender.equals("")) {
+            return "Choose gender";
+        } else if (gender == "Female") {
+            ibw = 22 * Math.pow((height - 0.1), 2);
+            return "Your ideal body weight is: " + df.format(ibw) + " kg";
+        } else if (gender == "Male") {
+            ibw = 22 * Math.pow(height, 2);
+            return "Your ideal body weight is: " + df.format(ibw) + " kg";
+        } else {
+            return "Something went wrong!";
+        }
+
+    }
+
+
+
 }
 
