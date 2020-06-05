@@ -37,6 +37,7 @@ public class ActivitiesLayout extends Div {
         grid.setItems(result);
 
         grid.setWidth("600px");
+        grid.setHeightByRows(true);
         add(grid);
     }
 
