@@ -7,19 +7,25 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.radiobutton.RadioGroupVariant;
+import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.NumberField;
 import lv.dita.project.data.Calculator2;
+import lv.dita.project.data.enums.DailyActivityLevel;
+import lv.dita.project.data.enums.PersonsGender;
 
 
 public class CalculateBMIv3Layout extends VerticalLayout {
 
     private NumberField height;
     private NumberField weight;
-    private Button calculateBMI;
+    private IntegerField age;
+    private Button calculate;
     private Label lblCalculatedBmi;
     private Label lblCommentBmi;
     private Label lblCommentIbw;
-    private RadioButtonGroup<String> gender;
+    private Label lblCommentEer;
+    private RadioButtonGroup<PersonsGender> gender;
+    private RadioButtonGroup<DailyActivityLevel> activityLevel;
 
     public CalculateBMIv3Layout(){
 
@@ -33,22 +39,34 @@ public class CalculateBMIv3Layout extends VerticalLayout {
             add(weight);
             weight.setRequiredIndicatorVisible(true);
 
-            gender = new RadioButtonGroup<>();
+            age = new IntegerField("Age");
+            add(age);
+            age.setRequiredIndicatorVisible(true);
 
-            gender.setLabel("Select gender");
-            gender.setItems("Female", "Male");
+            gender = new RadioButtonGroup<>();
+            gender.setLabel("Select gender!");
+            gender.setItems(PersonsGender.values());
             gender.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
             gender.setRequired(true);
-            gender.setValue("Female");
+            gender.setValue(PersonsGender.FEMALE);
             add(gender);
+
+            activityLevel = new RadioButtonGroup<>();
+            activityLevel.setLabel("Select activity level!");
+            activityLevel.setItems(DailyActivityLevel.values());
+            activityLevel.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
+            activityLevel.setRequired(true);
+            activityLevel.setValue(DailyActivityLevel.SEDENTARY);
+            add(activityLevel);
 
             lblCalculatedBmi = new Label();
             lblCommentBmi = new Label();
             lblCommentIbw = new Label();
+            lblCommentEer = new Label();
 
             //Te aprēķinus nedrīkst veikt!!!
 
-            calculateBMI = new Button("Calculate BMI", new ComponentEventListener<ClickEvent<Button>>() {
+            calculate = new Button("Calculate", new ComponentEventListener<ClickEvent<Button>>() {
 
                 @Override
                 public void onComponentEvent(ClickEvent<Button> buttonClickEvent) {
@@ -59,7 +77,9 @@ public class CalculateBMIv3Layout extends VerticalLayout {
 
                         double heightUser = height.getValue();
                         double weightUser = weight.getValue();
-                        String genderUser = gender.getValue();
+                        PersonsGender genderUser = gender.getValue();
+                        int ageUser = age.getValue();
+                        DailyActivityLevel actLevUser = activityLevel.getValue();
 
                         String bmi = Calculator2.calculateBMI(weightUser, heightUser);
                         lblCalculatedBmi.setText("BMI: " + bmi);
@@ -69,14 +89,18 @@ public class CalculateBMIv3Layout extends VerticalLayout {
 
                         String commentIbw = Calculator2.calculateIBW(genderUser, heightUser);
                         lblCommentIbw.setText(commentIbw);
+
+                        String commentEer = Calculator2.calculateEER(genderUser, ageUser, weightUser,
+                                heightUser, actLevUser);
+                        lblCommentEer.setText(commentEer);
                     }
                 }
             });
-
-            add(calculateBMI);
+            add(calculate);
             add(lblCalculatedBmi);
             add(lblCommentBmi);
             add(lblCommentIbw);
+            add(lblCommentEer);
         }catch (Exception e){
         }
 
