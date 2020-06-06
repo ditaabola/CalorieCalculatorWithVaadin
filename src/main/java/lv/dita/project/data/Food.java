@@ -1,5 +1,7 @@
 package lv.dita.project.data;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lv.dita.project.data.interfaces.EntityBase;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -9,32 +11,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import static lv.dita.project.data.enums.Constants.SCHEMA_NAME;
 
-
-import lombok.Getter;
-
-
+@AllArgsConstructor
+@Data
 public class Food implements EntityBase {
 
     public static final String SELECT_QUERY = "select * from " + SCHEMA_NAME + ".food_calories";
 
     private int id;
-@Getter
     private String name;
     private String type;
     private int caloriesPer100G;
     private BigDecimal proteinGPer100G;
     private BigDecimal carbGPer100G;
     private BigDecimal fatGPer100G;
-
-    public Food(int id, String name, String type, int caloriesPer100G, BigDecimal proteinGPer100G, BigDecimal carbGPer100G, BigDecimal fatGPer100G) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.caloriesPer100G = caloriesPer100G;
-        this.proteinGPer100G = proteinGPer100G;
-        this.carbGPer100G = carbGPer100G;
-        this.fatGPer100G = fatGPer100G;
-    }
 
     public static Food createFood(@NotNull ResultSet rs) {
         Food food = null;
@@ -65,54 +54,5 @@ public class Food implements EntityBase {
     @Contract(pure = true)
     public static @NotNull String getSelectByIdSql() {
         return getSelectSql() + " where food_id = ?";
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public int getCaloriesPer100G() {
-        return caloriesPer100G;
-    }
-
-    public void setCaloriesPer100G(int caloriesPer100G) {
-        this.caloriesPer100G = caloriesPer100G;
-    }
-
-    public BigDecimal getProteinGPer100G() {
-        return proteinGPer100G;
-    }
-
-    public void setProteinGPer100G(BigDecimal proteinGPer100G) {
-        this.proteinGPer100G = proteinGPer100G;
-    }
-
-    public BigDecimal getCarbGPer100G() {
-        return carbGPer100G;
-    }
-
-    public void setCarbGPer100G(BigDecimal carbGPer100G) {
-        this.carbGPer100G = carbGPer100G;
-    }
-
-    public BigDecimal getFatGPer100G() {
-        return fatGPer100G;
-    }
-
-    public void setFatGPer100G(BigDecimal fatGPer100G) {
-        this.fatGPer100G = fatGPer100G;
     }
 }
