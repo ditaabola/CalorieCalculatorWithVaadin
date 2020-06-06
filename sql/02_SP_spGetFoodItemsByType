@@ -1,0 +1,4 @@
+CREATE PROCEDURE `spGetFoodItemsByType` (in type varchar(100))
+BEGIN
+select * from calories_all.food_calories where food_type = type;
+END

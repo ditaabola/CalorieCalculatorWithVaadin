@@ -1,0 +1,4 @@
+CREATE PROCEDURE `spGetMetValueByActivityName` (in name varchar(100))
+BEGIN
+    select activity_name, activity_met_value from calories_all.activities_met_values where activity_name = name;
+END
