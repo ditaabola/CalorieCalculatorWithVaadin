@@ -9,11 +9,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import static lv.dita.project.data.enums.Constants.SCHEMA_NAME;
 
+
+import lombok.Getter;
+
+
 public class Food implements EntityBase {
 
     public static final String SELECT_QUERY = "select * from " + SCHEMA_NAME + ".food_calories";
 
     private int id;
+@Getter
     private String name;
     private String type;
     private int caloriesPer100G;
