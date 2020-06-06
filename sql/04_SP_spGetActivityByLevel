@@ -1,0 +1,4 @@
+CREATE PROCEDURE `spGetActivityByLevel` (in level varchar(100))
+BEGIN
+    select * from calories_all.activities_met_values where activity_level = level;
+END

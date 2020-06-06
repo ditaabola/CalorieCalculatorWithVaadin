@@ -1,0 +1,11 @@
+CREATE PROCEDURE `spAddFood`(in food_name varchar(100),
+                             in food_type varchar(100),
+                             in food_calories_per_100g int,
+                             in food_carbohydrates_per_100_g decimal(6,2),
+                             in food_fats_per_100_g decimal(6,2),
+                             in food_protein_per_100_g decimal(6,2),
+                             out food_id int)
+BEGIN
+    insert into calories_all.food_calories(food_name, food_type, food_calories_per_100g, food_carbohydrates_per_100_g, food_fats_per_100_g, food_protein_per_100_g) values (food_name, food_type, food_calories_per_100g, food_carbohydrates_per_100_g, food_fats_per_100_g, food_protein_per_100_g);
+    SELECT last_insert_id() into food_id;
+END
