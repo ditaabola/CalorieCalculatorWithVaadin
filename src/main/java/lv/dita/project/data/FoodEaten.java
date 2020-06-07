@@ -16,6 +16,7 @@ public class FoodEaten implements EntityBase {
     private int id;
     private String name;
     private double quantity;
+    private int calories;
 
     public static final String SELECT_QUERY = "select * from " + SCHEMA_NAME + ".food_eaten";
 
@@ -24,7 +25,8 @@ public class FoodEaten implements EntityBase {
         try {
             foodEaten = new FoodEaten(rs.getInt("food_eaten_id"),
                     rs.getString("food_eaten_name"),
-                    rs.getDouble("food_eaten_quantity"));
+                    rs.getDouble("food_eaten_quantity"),
+                    rs.getInt("food_eaten_calories"));
 
         } catch (SQLException e) {
             e.printStackTrace();

@@ -20,7 +20,7 @@ public class Food implements EntityBase {
     private int id;
     private String name;
     private String type;
-    private int caloriesPer100G;
+    private double caloriesPer100G;
     private BigDecimal proteinGPer100G;
     private BigDecimal carbGPer100G;
     private BigDecimal fatGPer100G;
@@ -32,7 +32,7 @@ public class Food implements EntityBase {
                     rs.getInt("food_id"),
                     rs.getString("food_name"),
                     rs.getString("food_type"),
-                    rs.getInt("food_calories_per_100g"),
+                    rs.getDouble("food_calories_per_100g"),
                     rs.getBigDecimal("food_protein_per_100_g"),
                     rs.getBigDecimal("food_carbohydrates_per_100_g"),
                     rs.getBigDecimal("food_fats_per_100_g"));

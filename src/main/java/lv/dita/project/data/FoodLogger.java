@@ -17,6 +17,7 @@ import com.vaadin.flow.component.textfield.NumberField;
 import lv.dita.project.data.interfaces.DataRepository;
 import lv.dita.project.layouts.FoodLayout;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class FoodLogger extends FormLayout {
@@ -26,10 +27,12 @@ public class FoodLogger extends FormLayout {
     private Select<String> foodTypes = new Select<String>();
     private Select<String> foodItemsByType = new Select<String>();
     private NumberField quantityEaten = new NumberField();
+    private NumberField calories = new NumberField();
     private Button addToSelect = new Button();
     private Button calculateCaloriesEaten = new Button();
     private Button cancel = new Button();
     private Label lblCommentBmi = new Label();
+    private Label lblCalorieCalculation = new Label();
 
     public FoodLogger() {
         addClassName("food-logger");
@@ -43,6 +46,9 @@ public class FoodLogger extends FormLayout {
         addButtons.setWidthFull();
         add(addOptions);
         add(addButtons);
+        createCaloriesCalculationButton();
+        add(calculateCaloriesEaten);
+        add(lblCalorieCalculation);
 
     }
 
@@ -50,9 +56,11 @@ public class FoodLogger extends FormLayout {
         foodTypes.setLabel("Select type of food");
         List<FoodCategory> result = repo.getList(FoodCategory.class);
         foodTypes.setItems(result.stream().map(s -> s.getType()));
+        foodTypes.setRequiredIndicatorVisible(true);
         foodTypes.addValueChangeListener(e -> {
             List<Food> items = repo.getFoodItemsByType(e.getValue());
             foodItemsByType.setItems(items.stream().map(s -> s.getName()));
+
         });
     }
 
@@ -75,32 +83,37 @@ public class FoodLogger extends FormLayout {
         creatingTypeSelectOption();
         creatingFoodItemSelectFromTypeOption();
         createQuantityField();
-
-        return new HorizontalLayout(foodTypes, foodItemsByType, quantityEaten);
+        calories.setVisible(false);
+        return new HorizontalLayout(foodTypes, foodItemsByType, quantityEaten, calories);
     }
 
-//    public String calculateCalories(String food, Double quantity, Double caloriesPer100G) {
-//        double caloriesEaten = 0;
-//        List<String> items = new ArrayList<>();
-//        for (String item : items) {
-//            double caloriesPerFoodEaten = (caloriesPer100G / 100) * quantity;
-//            caloriesEaten += caloriesPerFoodEaten;
-//        }
-//        DecimalFormat df = new DecimalFormat("##.##");
-//        return df.format(caloriesEaten);
-//    }
+    public String calculateCalories() {
+        double caloriesEaten = 0;
+        double quantity = 0;
+        double caloriesPer100G = 0;
+        String food = "";
+        DecimalFormat df = new DecimalFormat("##.##");
+        List<FoodEaten> eatenFoodList = repo.getList(FoodEaten.class);
+        for (FoodEaten eatenFood : eatenFoodList) {
+            food = eatenFood.getName();
+            quantity = eatenFood.getQuantity();
+            caloriesPer100G = eatenFood.getCalories();
+            double caloriesPerFoodEaten = (caloriesPer100G / 100) * quantity;
+            caloriesEaten += caloriesPerFoodEaten;
+
+        }
+        return df.format(caloriesEaten);
+    }
 
 
     public void createCaloriesCalculationButton() {
         calculateCaloriesEaten.setText("Calculate calories eaten");
         calculateCaloriesEaten.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
         calculateCaloriesEaten.addClickListener(e -> {
-
-//                String res = calculateCalories(foodChosen, quantity, calories);
-//                lblCalorieCalculation.setText(res);
-
+            String res = calculateCalories();
+            lblCalorieCalculation.setText("The total of the calories you have eaten during the day is: " + res);
+            lblCalorieCalculation.setVisible(true);
         });
-        add(calculateCaloriesEaten);
     }
 
     public void createAddFoodToGridButton() {
@@ -109,16 +122,13 @@ public class FoodLogger extends FormLayout {
         addToSelect.addClickShortcut(Key.ENTER);
         addToSelect.addClickListener(e->{
             if (quantityEaten.isEmpty()){
-                Notification.show("Please enter the quantity");
+                Notification.show("Please enter the quantity").setDuration(1000);
             } else {
-                repo.addFoodEaten(new FoodEaten(0, foodItemsByType.getValue(), quantityEaten.getValue()));
-                Notification.show("The food item added");
-
+                repo.addFoodEaten(new FoodEaten(0, foodItemsByType.getValue(), quantityEaten.getValue(), 100)); //ATCERĒTIES NOMAINĪT, TIKAI IZMĒĢINĀJUMS
+                Notification.show("The food item added").setDuration(1000);
             }});
                 add(addToSelect);
-
     }
-
 
     private void createResetChoiceButton(){
         cancel.setText("Reset the choice");
