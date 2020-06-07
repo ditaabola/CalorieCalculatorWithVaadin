@@ -2,9 +2,11 @@ package lv.dita.project.layouts;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -54,6 +56,7 @@ public class FoodLayout extends VerticalLayout {
         hideGrid.addClickListener(e -> {
             grid.setVisible(false);
             showGrid.setVisible(true);
+            hideGrid.setVisible(false);
         });
 
         add(showGrid);
@@ -66,11 +69,15 @@ public class FoodLayout extends VerticalLayout {
         Grid.Column<FoodEaten> colQuantity = gridEaten.addColumn(FoodEaten::getQuantity).setHeader("Quantity");
         List result = repo.getList(FoodEaten.class);
         gridEaten.setItems(result);
-        gridEaten.getColumns().forEach(column -> column.setWidth("50px"));
+        gridEaten.setWidth("200px");
         gridEaten.setHeightByRows(true);
         gridEaten.setVisible(true);
+        gridEaten.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
+
         add(gridEaten);
 
     }
+
+
 
 }
