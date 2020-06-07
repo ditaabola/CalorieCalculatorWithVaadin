@@ -155,8 +155,17 @@
             <version>1.18.12</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-split-layout-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-core</artifactId>
+        </dependency>
 
     </dependencies>
+
 
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>
