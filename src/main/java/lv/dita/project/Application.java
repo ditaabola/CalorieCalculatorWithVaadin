@@ -1,10 +1,7 @@
 package lv.dita.project;
 
-import lv.dita.project.data.Activity;
-import lv.dita.project.data.FoodCategory;
+import lv.dita.project.data.*;
 import lv.dita.project.data.interfaces.DataRepository;
-import lv.dita.project.data.Food;
-import lv.dita.project.data.MySqlDataRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -58,5 +55,21 @@ public class Application extends SpringBootServletInitializer {
         }
     }
 
+    @Test
+    public void createFoodEaten(){
+        DataRepository repo = new MySqlDataRepository();
+        List<FoodEaten> result = repo.getList(FoodEaten.class);
+        for(FoodEaten item: result){
+            System.out.println(item);
+        }
+    }
 
-}
+    @Test
+    public void add_food_eaten(){
+        DataRepository repo = new MySqlDataRepository();
+        FoodEaten foodEaten = new FoodEaten(0, "bread", 50);
+        repo.addFoodEaten(foodEaten);
+        }
+    }
+
+

@@ -33,7 +33,7 @@ import java.util.stream.Stream;
  * A new instance of this class is created for every new user and every
  * browser tab/window.
  */
-@Route
+@Route("")
 @PWA(name = "Vaadin Application",
         shortName = "Vaadin App",
         description = "This is an example Vaadin application.",
@@ -44,9 +44,8 @@ import java.util.stream.Stream;
 public class MainView extends VerticalLayout {
 
 
-    public MainView(@Autowired GreetService service) {
-//
-        //Pievienoju calculateBMIv3 klāt zem 1. taba
+    public MainView() {
+
         Tab tab1 = new Tab("CALCULATE BMI");
         CalculateBMIv3Layout page1 = new CalculateBMIv3Layout();
         page1.setVisible(true);
@@ -85,11 +84,5 @@ public class MainView extends VerticalLayout {
 
         tabs.setFlexGrowForEnclosedTabs(1);
         setClassName("main-layout");
-
-
-
-
     }
-
-
 }
