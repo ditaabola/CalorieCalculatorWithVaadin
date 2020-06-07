@@ -10,8 +10,6 @@ import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.NumberField;
 import lv.dita.project.data.*;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class FoodLayout extends Div {

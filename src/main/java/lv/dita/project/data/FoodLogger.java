@@ -12,7 +12,6 @@ public class FoodLogger {
     private DataRepository repo = new MySqlDataRepository();
 
 
-
     public String calculateCalories(String food, Double quantity, Double caloriesPer100G) {
         double caloriesEaten = 0;
         List<String> items = new ArrayList<>();
