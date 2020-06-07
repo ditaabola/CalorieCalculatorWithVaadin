@@ -1,17 +1,12 @@
 package lv.dita.project.data;
 
+import com.mysql.cj.xdevapi.Type;
 import lv.dita.project.data.interfaces.DataRepository;
 import lv.dita.project.data.interfaces.EntityBase;
 import lv.dita.project.data.enums.Constants;
 
 import java.lang.reflect.Method;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.Types;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -142,7 +137,7 @@ public class MySqlDataRepository implements DataRepository {
     public List<Activity> getMetValueByActivityName(String name) {
         try {
             connection = DriverManager.getConnection(connectionString, userName, passWord);
-            CallableStatement statement = connection.prepareCall("{call spMetValueByActivityName(?,?)}");
+            CallableStatement statement = connection.prepareCall("{call spMetValueByActivityName(?)}");
             statement.setString("name", name);
 
             ResultSet rs = statement.executeQuery();
@@ -166,7 +161,7 @@ public class MySqlDataRepository implements DataRepository {
             statement.setInt("food_eaten_id", foodEaten.getId());
             statement.setString("food_eaten_name", foodEaten.getName());
             statement.setDouble("food_eaten_quantity", foodEaten.getQuantity());
-            statement.setInt("food_eaten_calories", foodEaten.getCalories());
+            statement.setDouble("food_eaten_calories", foodEaten.getCalories());
             statement.execute();
 
         } catch (Exception e) {
@@ -222,7 +217,7 @@ public class MySqlDataRepository implements DataRepository {
         try {
             connection = DriverManager.getConnection(connectionString, userName, passWord);
             CallableStatement statement = connection.prepareCall("{call spFoodItemsByMaxCaloriesPer100g(?)}");
-            statement.setInt("calories", calories);
+            statement.setDouble("calories", calories);
 
             ResultSet rs = statement.executeQuery();
             List<Food> items = new ArrayList<>();
@@ -239,23 +234,20 @@ public class MySqlDataRepository implements DataRepository {
 
 
     @Override
-    public List<Food> getCaloriesByName(String name) {
-
+    public double getCaloriesByName(String name) {
         try {
             connection = DriverManager.getConnection(connectionString, userName, passWord);
             CallableStatement statement = connection.prepareCall("{call spCaloriesByName(?,?)}");
             statement.setString("name", name);
-
-            ResultSet rs = statement.executeQuery();
-            List<Food> items = new ArrayList<>();
-            while (rs.next()) {
-                items.add(Food.createFood(rs));
-            }
-            return items;
-
+            statement.registerOutParameter("calories", Types.DOUBLE);
+            statement.execute();
+            double calories = statement.getDouble("calories");
+            return calories;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+            return 0;
     }
+
+
 }

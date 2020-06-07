@@ -1,0 +1,4 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spCaloriesByName`(in name varchar(100), out calories double)
+BEGIN
+    select food_calories_per_100g into calories from calories_all.food_calories where food_name = name;
+END

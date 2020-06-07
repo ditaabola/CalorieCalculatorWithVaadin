@@ -15,7 +15,7 @@ public interface DataRepository {
     int addFood(Food food);
     List<Food> getFoodItemsByMaxCaloriesPer100G(int calories);
     List<Food> getFoodItemsByType(String type);
-    List<Food> getCaloriesByName(String name);
+    double getCaloriesByName(String name);
 
     int addActivity(Activity activity);
     List<Activity> getActivityByLevel (String level);

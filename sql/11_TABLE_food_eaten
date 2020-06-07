@@ -2,4 +2,5 @@ CREATE TABLE `calories_all`.`food_eaten` (
                                              `food_eaten_id` INT NOT NULL AUTO_INCREMENT,
                                              `food_eaten_name` NVARCHAR(100) NOT NULL,
                                              `food_eaten_quantity` DOUBLE NULL,
+                                             `food_eaten_calories` DOUBLE NULL,
                                              PRIMARY KEY (`food_eaten_id`));
