@@ -58,7 +58,6 @@ public class FoodLogger extends FormLayout {
         foodTypes.addValueChangeListener(e -> {
             List<Food> items = repo.getFoodItemsByType(e.getValue());
             foodItemsByType.setItems(items.stream().map(s -> s.getName()));
-
         });
     }
 
@@ -67,7 +66,9 @@ public class FoodLogger extends FormLayout {
         List<Food> res = repo.getList(Food.class);
         foodItemsByType.setItems(res.stream().map(s -> s.getName()));
         foodItemsByType.setRequiredIndicatorVisible(true);
-
+        foodItemsByType.addValueChangeListener(e->{
+            calories.setValue(repo.getCaloriesByName(foodItemsByType.getValue()));
+        });
     }
 
     private void createQuantityField() {
@@ -122,7 +123,7 @@ public class FoodLogger extends FormLayout {
             if (quantityEaten.isEmpty()){
                 Notification.show("Please enter the quantity").setDuration(1000);
             } else {
-                repo.addFoodEaten(new FoodEaten(0, foodItemsByType.getValue(), quantityEaten.getValue(), 100)); //ATCERĒTIES NOMAINĪT, TIKAI IZMĒĢINĀJUMS
+                repo.addFoodEaten(new FoodEaten(0, foodItemsByType.getValue(), quantityEaten.getValue(), calories.getValue()));
                 Notification.show("The food item added").setDuration(1000);
             }});
                 add(addToSelect);

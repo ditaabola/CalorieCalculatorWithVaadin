@@ -65,11 +65,29 @@ public class Application extends SpringBootServletInitializer {
     }
 
     @Test
+    public void createFood(){
+        DataRepository repo = new MySqlDataRepository();
+        List<Food> result = repo.getList(Food.class);
+        for(Food item: result){
+            System.out.println(item);
+        }
+    }
+
+
+    @Test
     public void add_food_eaten(){
         DataRepository repo = new MySqlDataRepository();
         FoodEaten foodEaten = new FoodEaten(0, "testFoodWithCalories", 50, 100);
         repo.addFoodEaten(foodEaten);
         }
-    }
+
+    @Test
+    public void get_calories_by_name(){
+        DataRepository repo = new MySqlDataRepository();
+        double res = repo.getCaloriesByName("pear");
+        System.out.println(res);
+        }
+
+}
 
 

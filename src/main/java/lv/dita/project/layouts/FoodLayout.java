@@ -66,7 +66,7 @@ public class FoodLayout extends VerticalLayout {
     public void createGridWithSelectedValues() {
         gridEaten = new Grid<FoodEaten>();
         Grid.Column<FoodEaten> colName = gridEaten.addColumn(FoodEaten::getName).setHeader("Name");
-        Grid.Column<FoodEaten> colQuantity = gridEaten.addColumn(FoodEaten::getQuantity).setHeader("Quantity");
+        Grid.Column<FoodEaten> colQuantity = gridEaten.addColumn(FoodEaten::getQuantity).setHeader("Quantity in grams");
         List result = repo.getList(FoodEaten.class);
         gridEaten.setItems(result);
         gridEaten.setWidth("400px");
