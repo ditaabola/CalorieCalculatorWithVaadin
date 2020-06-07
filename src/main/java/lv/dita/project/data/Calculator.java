@@ -104,4 +104,6 @@ public class Calculator {
         System.out.println("To lose weight you need " + caloriesToLoseWeight + " calories a day.");
         System.out.println("To gain weight you need " + caloriesToGainWeight + " calories a day.");
     }
+
+    
 }
