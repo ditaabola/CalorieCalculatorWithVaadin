@@ -8,7 +8,6 @@ import lv.dita.project.data.MySqlDataRepository;
 
 import java.util.List;
 
-
 public class ActivitiesLayout extends Div {
 
     Grid<Activity> grid;
@@ -39,7 +38,7 @@ public class ActivitiesLayout extends Div {
         grid.setWidth("600px");
         grid.setHeightByRows(true);
         add(grid);
+
     }
-
-
 }
+

@@ -6,6 +6,8 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.radiobutton.RadioGroupVariant;
@@ -77,7 +79,7 @@ public class CalculateBMIv3Layout extends VerticalLayout {
                 @Override
                 public void onComponentEvent(ClickEvent<Button> buttonClickEvent) {
 
-                    if (height.isEmpty() || weight.isEmpty() || age.isEmpty()){
+                    if (height.isEmpty() || weight.isEmpty() || age.isEmpty() || dailyActivityLevel.isEmpty()){
                         lblCalculatedBmi.setText("Please enter data!");
                     } else {
 
