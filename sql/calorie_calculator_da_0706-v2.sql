@@ -66,7 +66,7 @@ CREATE TABLE `food_calories` (
   `food_id` int NOT NULL AUTO_INCREMENT,
   `food_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `food_type` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `food_calories_per_100g` int NOT NULL,
+  `food_calories_per_100g` double NOT NULL,
   `food_carbohydrates_per_100_g` decimal(6,2) unsigned DEFAULT NULL,
   `food_fats_per_100_g` decimal(6,2) unsigned DEFAULT NULL,
   `food_protein_per_100_g` decimal(6,2) unsigned DEFAULT NULL,
@@ -96,8 +96,9 @@ CREATE TABLE `food_eaten` (
   `food_eaten_id` int NOT NULL AUTO_INCREMENT,
   `food_eaten_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `food_eaten_quantity` double NOT NULL,
+  `food_eaten_calories` int NOT NULL,
   PRIMARY KEY (`food_eaten_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +107,7 @@ CREATE TABLE `food_eaten` (
 
 LOCK TABLES `food_eaten` WRITE;
 /*!40000 ALTER TABLE `food_eaten` DISABLE KEYS */;
-INSERT INTO `food_eaten` VALUES (1,'apple',100),(2,'banana',50),(3,'pear',50);
+INSERT INTO `food_eaten` VALUES (1,'apple',100,50),(2,'banana',50,50),(3,'pear',50,50),(16,'grapefruit red',58,50),(17,'milk whole',56,50),(18,'bread whole wheat',80,50),(19,'testFoodWithCalories',50,100),(20,'grapefruit red',100,100),(21,'bread whole wheat',100,100),(22,'bread whole wheat',80,100),(23,'milk whole',50,100),(24,'frozen yogurt',100,100),(25,'bread whole wheat',500,100);
 /*!40000 ALTER TABLE `food_eaten` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +162,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `spAddFood`(in food_name varchar(100), 
 in food_type varchar(100), 
-in food_calories_per_100g int, 
+in food_calories_per_100g double, 
 in food_carbohydrates_per_100_g decimal(6,2),
 in food_fats_per_100_g decimal(6,2),
 in food_protein_per_100_g decimal(6,2),
@@ -187,9 +188,10 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `spAddFoodEaten`(in food_eaten_id int, 
 								in food_eaten_name varchar(100),
-                             in food_eaten_quantity double)
+                             in food_eaten_quantity double,
+                             in food_eaten_calories double)
 BEGIN
-    insert into calories_all.food_eaten(food_eaten_name, food_eaten_quantity) values (food_eaten_name, food_eaten_quantity);
+    insert into calories_all.food_eaten(food_eaten_name, food_eaten_quantity, food_eaten_calories) values (food_eaten_name, food_eaten_quantity, food_eaten_calories);
     
 END ;;
 DELIMITER ;
@@ -357,4 +359,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-07 15:33:25
+-- Dump completed on 2020-06-07 19:07:16

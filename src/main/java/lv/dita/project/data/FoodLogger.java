@@ -38,11 +38,9 @@ public class FoodLogger extends FormLayout {
         addClassName("food-logger");
         Div addOptions = new Div();
         addOptions.add(createSelectOptionLayout());
-//        addOptions.setWidth("40px");
         addOptions.setWidthFull();
         Div addButtons = new Div();
         addButtons.add(createButtonsLayout());
-//        addButtons.setWidth("40px");
         addButtons.setWidthFull();
         add(addOptions);
         add(addButtons);
