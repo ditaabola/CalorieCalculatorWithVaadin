@@ -1,128 +1,76 @@
 package lv.dita.project.layouts;
 
-import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.select.Select;
-import com.vaadin.flow.component.textfield.NumberField;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import lv.dita.project.data.*;
 
 import java.util.List;
 
-public class FoodLayout extends Div {
-    private Button addToSelect;
-    private Select<String> foodTypes;
-    private Select<String> foodItemsByType;
-    private Button calculateCaloriesEaten;
-    private NumberField quantityEaten;
-    private Label lblQuantity;
+public class FoodLayout extends VerticalLayout {
+
     private Grid<Food> grid;
-    private MySqlDataRepository repo;
-    private FoodLogger fl;
-    private Label lblCalorieCalculation;
+    private Grid<FoodEaten> gridEaten;
+    private MySqlDataRepository repo = new MySqlDataRepository();
+    private FoodLogger form;
     private Button showGrid;
+    private Button hideGrid;
 
     public FoodLayout() {
-        repo = new MySqlDataRepository();
-        creatingTypeSelectOption();
-        creatingFoodItemSelectFromTypeOption();
-        createQuantityField();
-        createAddFoodToGridButton();
-        createCaloriesCalculationButton();
+
+        form = new FoodLogger();
+        createGridWithSelectedValues();
         createGridWithData();
+        Div content = new Div(grid, form, gridEaten);
+        content.addClassName("content");
+        content.setSizeFull();
+        add(content, showGrid, hideGrid);
+
     }
 
-    public void creatingTypeSelectOption() {
-        foodTypes = new Select<String>();
-        foodTypes.setLabel("Select type of food");
-        List<FoodCategory> result = repo.getList(FoodCategory.class);
-        foodTypes.setItems(result.stream().map(s -> s.getType()));
-        foodTypes.addValueChangeListener(e -> {
-            List<Food> items = repo.getFoodItemsByType(e.getValue());
-            foodItemsByType.setItems(items.stream().map(s -> s.getName()));
+    private void createGridWithData() {
+        grid = new Grid<Food>();
+        Grid.Column<Food> colName = grid.addColumn(Food::getName).setHeader("Name").setSortable(true);
+        Grid.Column<Food> colType = grid.addColumn(Food::getType).setHeader("Type").setSortable(true);
+        Grid.Column<Food> colCalories = grid.addColumn(Food::getCaloriesPer100G).setHeader("Calories per 100 g").setSortable(true);
+        List result = repo.getList(Food.class);
+        grid.setItems(result);
+        grid.getColumns().forEach(column -> column.setAutoWidth(true));
+        grid.setHeight("1000px");
+        grid.setVisible(false);
+        add(grid);
+        hideGrid = new Button("Hide the food table");
+        hideGrid.setVisible(false);
+        showGrid = new Button("Show the food table", e -> {
+            grid.setVisible(true);
+            hideGrid.setVisible(true);
+            showGrid.setVisible(false);
         });
-        add(foodTypes);
-    }
-
-    public void creatingFoodItemSelectFromTypeOption() {
-        foodItemsByType = new Select<>();
-        foodItemsByType.setLabel("Select food item");
-        List<Food> result = repo.getList(Food.class);
-        foodItemsByType.setItems(result.stream().map(s -> s.getName()));
-        foodItemsByType.setRequiredIndicatorVisible(true);
-        add(foodItemsByType);
-    }
-
-    public void createQuantityField() {
-        quantityEaten = new NumberField();
-        quantityEaten.setLabel("Enter the quantity eaten in grams");
-        quantityEaten.setRequiredIndicatorVisible(true);
-        quantityEaten.setWidth("250px");
-        quantityEaten.setMin(2d);
-        add(quantityEaten);
-    }
-
-    public void createAddFoodToGridButton() {
-        addToSelect = new Button("Add selected food");
-//        List<String> columnValuesTypes = new ArrayList<>();
-//        List<String> columnValuesItems = new ArrayList<>();
-//        List<Double> columnValuesQuantity = new ArrayList<>();
-//        addToSelect.addClickListener(e -> {
-//            columnValuesTypes.add(foodTypes.getValue());
-//            columnValuesItems.add(foodItemsByType.getValue());
-//            columnValuesQuantity.add(quantityEaten.getValue());
-//
-//        });
-        add(addToSelect);
-
-    }
-
-    public void createCaloriesCalculationButton() {
-        lblCalorieCalculation = new Label();
-        calculateCaloriesEaten = new Button("Calculate calories eaten", new ComponentEventListener<ClickEvent<Button>>() {
-            @Override
-            public void onComponentEvent(ClickEvent<Button> buttonClickEvent) {
-
-                String foodChosen = foodItemsByType.getValue();
-                Double quantity = quantityEaten.getValue();
-                Double calories = 100d;
-                String res = fl.calculateCalories(foodChosen, quantity, calories);
-                lblCalorieCalculation.setText(res);
-            }
+        hideGrid.addClickListener(e -> {
+            grid.setVisible(false);
+            showGrid.setVisible(true);
         });
-                add(calculateCaloriesEaten);
-                add(lblCalorieCalculation);
-            }
 
+        add(showGrid);
+        add(hideGrid);
+    }
 
-            public void createGridWithData() {
-                grid = new Grid<>();
-                Grid.Column<Food> colName = grid.addColumn(Food::getName).setHeader("Name").setSortable(true);
-                Grid.Column<Food> colType = grid.addColumn(Food::getType).setHeader("Type").setSortable(true);
-                Grid.Column<Food> colCalories = grid.addColumn(Food::getCaloriesPer100G).setHeader("Calories per 100 g").setSortable(true);
-                List result = repo.getList(Food.class);
-                grid.setItems(result);
-                grid.getColumns().forEach(column -> column.setAutoWidth(true));
-                grid.setHeight("1000px");
-                grid.setVisible(false);
-                showGrid = new Button("Show the food table", e->{
-                    grid.setVisible(true);
-                });
+    public void createGridWithSelectedValues() {
+        gridEaten = new Grid<FoodEaten>();
+        Grid.Column<FoodEaten> colName = gridEaten.addColumn(FoodEaten::getName).setHeader("Name");
+        Grid.Column<FoodEaten> colQuantity = gridEaten.addColumn(FoodEaten::getQuantity).setHeader("Quantity");
+        List result = repo.getList(FoodEaten.class);
+        gridEaten.setItems(result);
+        gridEaten.getColumns().forEach(column -> column.setWidth("50px"));
+        gridEaten.setHeightByRows(true);
+        gridEaten.setVisible(true);
+        add(gridEaten);
 
-//        grid.setRowsDraggable(true);
-//        grid.setDragDataGenerator("Name", Food::getName);
-                add(grid);
-                add(showGrid);
-            }
+    }
 
-            public void createGridWithSelectedValues() {
-                grid = new Grid<>();
-                grid.setColumns("Type", "Name", "Quantity");
-                add(grid);
-
-            }
-
-        }
+}

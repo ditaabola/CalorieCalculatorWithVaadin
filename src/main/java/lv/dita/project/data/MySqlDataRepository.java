@@ -158,7 +158,20 @@ public class MySqlDataRepository implements DataRepository {
         return null;
     }
 
+    @Override
+    public void addFoodEaten(FoodEaten foodEaten) {
+        try {
+            connection = DriverManager.getConnection(connectionString, userName, passWord);
+            CallableStatement statement = connection.prepareCall("{call spAddFoodEaten(?,?, ?)}");
+            statement.setInt("food_eaten_id", foodEaten.getId());
+            statement.setString("food_eaten_name", foodEaten.getName());
+            statement.setDouble("food_eaten_quantity", foodEaten.getQuantity());
+            statement.execute();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public int addFood(Food food) {
