@@ -162,10 +162,11 @@ public class MySqlDataRepository implements DataRepository {
     public void addFoodEaten(FoodEaten foodEaten) {
         try {
             connection = DriverManager.getConnection(connectionString, userName, passWord);
-            CallableStatement statement = connection.prepareCall("{call spAddFoodEaten(?,?, ?)}");
+            CallableStatement statement = connection.prepareCall("{call spAddFoodEaten(?,?,?, ?)}");
             statement.setInt("food_eaten_id", foodEaten.getId());
             statement.setString("food_eaten_name", foodEaten.getName());
             statement.setDouble("food_eaten_quantity", foodEaten.getQuantity());
+            statement.setInt("food_eaten_calories", foodEaten.getCalories());
             statement.execute();
 
         } catch (Exception e) {
@@ -180,7 +181,7 @@ public class MySqlDataRepository implements DataRepository {
             CallableStatement statement = connection.prepareCall("{call spAddFood(?,?,?,?,?,?,?)}");
             statement.setString("food_name", food.getName());
             statement.setString("food_type", food.getType());
-            statement.setInt("food_calories_per_100_g", food.getCaloriesPer100G());
+            statement.setDouble("food_calories_per_100_g", food.getCaloriesPer100G());
             statement.setBigDecimal("food_carbohydrates_per_100_g", food.getCarbGPer100G());
             statement.setBigDecimal("food_fats_per_100_g", food.getFatGPer100G());
             statement.setBigDecimal("food_protein_per_100_g", food.getProteinGPer100G());

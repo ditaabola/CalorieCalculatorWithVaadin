@@ -69,7 +69,7 @@ public class FoodLayout extends VerticalLayout {
         Grid.Column<FoodEaten> colQuantity = gridEaten.addColumn(FoodEaten::getQuantity).setHeader("Quantity");
         List result = repo.getList(FoodEaten.class);
         gridEaten.setItems(result);
-        gridEaten.setWidth("200px");
+        gridEaten.setWidth("400px");
         gridEaten.setHeightByRows(true);
         gridEaten.setVisible(true);
         gridEaten.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);

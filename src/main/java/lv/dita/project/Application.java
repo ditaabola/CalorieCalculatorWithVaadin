@@ -67,7 +67,7 @@ public class Application extends SpringBootServletInitializer {
     @Test
     public void add_food_eaten(){
         DataRepository repo = new MySqlDataRepository();
-        FoodEaten foodEaten = new FoodEaten(0, "bread", 50);
+        FoodEaten foodEaten = new FoodEaten(0, "testFoodWithCalories", 50, 100);
         repo.addFoodEaten(foodEaten);
         }
     }
