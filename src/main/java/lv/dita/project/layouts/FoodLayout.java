@@ -82,7 +82,7 @@ public class FoodLayout extends VerticalLayout {
     }
 
     public void createGridWithSelectedValues() {
-        
+
         gridEaten = new Grid<FoodEaten>();
         Grid.Column<FoodEaten> colName = gridEaten.addColumn(FoodEaten::getName).setHeader("Name");
         Grid.Column<FoodEaten> colQuantity = gridEaten.addColumn(FoodEaten::getQuantity).setHeader("Quantity in grams");
