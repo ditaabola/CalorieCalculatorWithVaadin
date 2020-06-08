@@ -44,6 +44,46 @@ INSERT INTO `activities_met_values` VALUES (1,'bicycling','leisure',4.00,'modera
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `activities_with_met_values`
+--
+
+DROP TABLE IF EXISTS `activities_with_met_values`;
+/*!50001 DROP VIEW IF EXISTS `activities_with_met_values`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `activities_with_met_values` AS SELECT 
+ 1 AS `activity_name`,
+ 1 AS `activity_met_value`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `activity_performed`
+--
+
+DROP TABLE IF EXISTS `activity_performed`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `activity_performed` (
+  `activity_performed_id` int NOT NULL,
+  `activity_performed_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `activity_performed_met_value` decimal(4,2) NOT NULL,
+  `activity_performed_user_weight` decimal(4,1) NOT NULL,
+  `activity_performed_minutes` int NOT NULL,
+  PRIMARY KEY (`activity_performed_id`),
+  UNIQUE KEY `activity_performed_id_UNIQUE` (`activity_performed_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `activity_performed`
+--
+
+LOCK TABLES `activity_performed` WRITE;
+/*!40000 ALTER TABLE `activity_performed` DISABLE KEYS */;
+/*!40000 ALTER TABLE `activity_performed` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Temporary view structure for view `activity_type`
 --
 
@@ -98,7 +138,7 @@ CREATE TABLE `food_eaten` (
   `food_eaten_quantity` double NOT NULL,
   `food_eaten_calories` int NOT NULL,
   PRIMARY KEY (`food_eaten_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +147,7 @@ CREATE TABLE `food_eaten` (
 
 LOCK TABLES `food_eaten` WRITE;
 /*!40000 ALTER TABLE `food_eaten` DISABLE KEYS */;
-INSERT INTO `food_eaten` VALUES (1,'apple',100,50),(2,'banana',50,50),(3,'pear',50,50),(16,'grapefruit red',58,50),(17,'milk whole',56,50),(18,'bread whole wheat',80,50),(19,'testFoodWithCalories',50,100),(20,'grapefruit red',100,100),(21,'bread whole wheat',100,100),(22,'bread whole wheat',80,100),(23,'milk whole',50,100),(24,'frozen yogurt',100,100),(25,'bread whole wheat',500,100);
+INSERT INTO `food_eaten` VALUES (1,'apple',100,50),(2,'banana',50,50),(3,'pear',50,50),(16,'grapefruit red',58,50),(17,'milk whole',56,50),(18,'bread whole wheat',80,50),(19,'testFoodWithCalories',50,100),(20,'grapefruit red',100,100),(21,'bread whole wheat',100,100),(22,'bread whole wheat',80,100),(23,'milk whole',50,100),(24,'frozen yogurt',100,100),(25,'bread whole wheat',500,100),(26,'bread whole wheat',4444,0),(27,'bread whole wheat',5,0),(28,'milk whole',45,0),(29,'frozen yogurt',456,107);
 /*!40000 ALTER TABLE `food_eaten` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -209,9 +249,9 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spCaloriesByName`(in name varchar(100))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spCaloriesByName`(in name varchar(100), out calories double)
 BEGIN
-select food_name,food_calories_per_100g from calories_all.food_calories where  food_name = name;
+    select food_calories_per_100g into calories from calories_all.food_calories where food_name = name;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -315,6 +355,24 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
+-- Final view structure for view `activities_with_met_values`
+--
+
+/*!50001 DROP VIEW IF EXISTS `activities_with_met_values`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `activities_with_met_values` AS select `activities_met_values`.`activity_name` AS `activity_name`,`activities_met_values`.`activity_met_value` AS `activity_met_value` from `activities_met_values` order by `activities_met_values`.`activity_name` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `activity_type`
 --
 
@@ -359,4 +417,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-07 19:07:16
+-- Dump completed on 2020-06-08 16:08:59
