@@ -126,7 +126,6 @@ public class FoodLogger extends VerticalLayout {
             if (quantityEaten.isEmpty()){
                 Notification.show("Please enter the quantity").setDuration(1000);
             } else {
-
                 repo.addFoodEaten(new FoodEaten(0, foodItemsByType.getValue(), quantityEaten.getValue(), calories.getValue()));
 //                listChosen.add(new FoodEaten(0, foodItemsByType.getValue(), quantityEaten.getValue(), calories.getValue()));
                 Notification.show("The food item added").setDuration(1000);

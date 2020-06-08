@@ -14,7 +14,7 @@ import lv.dita.project.data.*;
 
 import java.util.List;
 
-import static lv.dita.project.data.enums.Constants.SCHEMA_NAME;
+
 
 public class FoodLayout extends VerticalLayout {
 
@@ -25,7 +25,7 @@ public class FoodLayout extends VerticalLayout {
     private Button showGrid;
     private Button hideGrid;
     private Button startLogging = new Button();
-    public static final String DELETE_QUERY = "SELECT * FROM" + SCHEMA_NAME+ ".food_eaten;";
+
 
     public FoodLayout() {
 
@@ -83,9 +83,7 @@ public class FoodLayout extends VerticalLayout {
 
     public void createGridWithSelectedValues() {
 
-
-        new FoodLogger().emptyDataTable();
-
+//        new FoodLogger().emptyDataTable();
 
         gridEaten = new Grid<FoodEaten>();
         Grid.Column<FoodEaten> colName = gridEaten.addColumn(FoodEaten::getName).setHeader("Name");
