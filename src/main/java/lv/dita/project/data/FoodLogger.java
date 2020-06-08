@@ -18,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import java.sql.CallableStatement;
 import java.sql.DriverManager;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FoodLogger extends VerticalLayout {
@@ -33,6 +34,7 @@ public class FoodLogger extends VerticalLayout {
     private Button cancel = new Button();
     private Label lblCommentBmi = new Label();
     private Label lblCalorieCalculation = new Label();
+//    public List <FoodEaten> listChosen = new ArrayList<>();
 
     public FoodLogger() {
         addClassName("food-logger");
@@ -124,7 +126,9 @@ public class FoodLogger extends VerticalLayout {
             if (quantityEaten.isEmpty()){
                 Notification.show("Please enter the quantity").setDuration(1000);
             } else {
+
                 repo.addFoodEaten(new FoodEaten(0, foodItemsByType.getValue(), quantityEaten.getValue(), calories.getValue()));
+//                listChosen.add(new FoodEaten(0, foodItemsByType.getValue(), quantityEaten.getValue(), calories.getValue()));
                 Notification.show("The food item added").setDuration(1000);
             }});
                 add(addToSelect);
@@ -144,6 +148,7 @@ public class FoodLogger extends VerticalLayout {
 
         add(cancel);
     }
+
 
     @Contract(" -> new")
     private @NotNull Component createButtonsLayout() {
