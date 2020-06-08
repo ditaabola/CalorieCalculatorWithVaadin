@@ -81,6 +81,7 @@ public class MainView extends VerticalLayout {
             pagesShown.forEach(page -> page.setVisible(false));
             pagesShown.clear();
 
+
             Component selectedPage = tabsToPages.get(tabs.getSelectedTab());
             selectedPage.setVisible(true);
 
