@@ -156,7 +156,6 @@ public class FoodLogger extends VerticalLayout {
         repo.resetFoodEatenTable();
     }
 
-
     @Contract(" -> new")
     private @NotNull Component createButtonsLayout() {
         createAddFoodToGridButton();
