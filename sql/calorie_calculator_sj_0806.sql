@@ -68,6 +68,7 @@ CREATE TABLE `activity_performed` (
   `activity_performed_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `activity_performed_met_value` decimal(4,2) NOT NULL,
   `activity_performed_user_weight` decimal(4,1) NOT NULL,
+  `activity_performed_minutes` int NOT NULL,
   PRIMARY KEY (`activity_performed_id`),
   UNIQUE KEY `activity_performed_id_UNIQUE` (`activity_performed_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -225,4 +226,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-08 11:24:39
+-- Dump completed on 2020-06-08 11:42:06
