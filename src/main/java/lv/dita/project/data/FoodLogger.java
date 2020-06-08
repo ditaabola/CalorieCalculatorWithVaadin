@@ -150,6 +150,14 @@ public class FoodLogger extends VerticalLayout {
     }
 
 
+    public void emptyDataTable(){
+        foodTypes.clear();
+        foodItemsByType.clear();
+        quantityEaten.clear();
+        repo.resetFoodEatenTable();
+    }
+
+
     @Contract(" -> new")
     private @NotNull Component createButtonsLayout() {
         createAddFoodToGridButton();
