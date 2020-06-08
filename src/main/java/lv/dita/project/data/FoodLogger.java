@@ -15,6 +15,8 @@ import lv.dita.project.data.interfaces.DataRepository;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.sql.CallableStatement;
+import java.sql.DriverManager;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -45,6 +47,8 @@ public class FoodLogger extends VerticalLayout {
         createCaloriesCalculationButton();
         add(calculateCaloriesEaten);
         add(lblCalorieCalculation);
+        add(cancel);
+
     }
 
     private void creatingTypeSelectOption() {
@@ -134,6 +138,8 @@ public class FoodLogger extends VerticalLayout {
             foodTypes.clear();
             foodItemsByType.clear();
             quantityEaten.clear();
+            repo.resetFoodEatenTable();
+
         });
 
         add(cancel);
@@ -146,6 +152,9 @@ public class FoodLogger extends VerticalLayout {
 
         return new HorizontalLayout(addToSelect, cancel);
     }
+
+
+
 }
 
 
