@@ -15,6 +15,7 @@ import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.NumberField;
 import lv.dita.project.data.interfaces.DataRepository;
+import lv.dita.project.layouts.CaloriesBurnedLayout;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -72,6 +73,7 @@ public class ActivityLogger extends VerticalLayout {
         userWeight.setRequiredIndicatorVisible(true);
         userWeight.setWidth("100px");
         userWeight.setMin(2d);
+        userWeight.setRequiredIndicatorVisible(true);
     }
 
     private void createMinutesField() {
@@ -115,19 +117,25 @@ public class ActivityLogger extends VerticalLayout {
     @Contract(" -> new")
     private @NotNull Component createButtonsLayout() {
         createAddActivityToGridButton();
-        createResetChoiceButton();
+       // createResetChoiceButton();
 
-        return new HorizontalLayout(addToSelect, cancel);
+        return new HorizontalLayout(addToSelect);
     }
 
     private void createAddActivityToGridButton(){
         addToSelect.setText("Add activity");
         addToSelect.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         addToSelect.addClickShortcut(Key.ENTER);
-        addToSelect.addClickListener(e->{
-            if (hours.isEmpty() & minutes.isEmpty() || userWeight.isEmpty()){
+        addToSelect.addClickListener(e-> {
+            if (hours.isEmpty() & minutes.isEmpty() || userWeight.isEmpty() || activitiesByType.isEmpty()) {
                 Notification.show("Please enter data!").setDuration(1000);
-            } else {
+            }else {
+                if (hours.getValue()==null){
+                    hours.setValue(0);
+                }
+                if (minutes.getValue()==null){
+                    minutes.setValue(0);
+                }
                 int time = hours.getValue()*60 + minutes.getValue();
                 double met = repo.getMetValueByName1(activitiesByType.getValue());
 
@@ -137,22 +145,23 @@ public class ActivityLogger extends VerticalLayout {
                         userWeight.getValue(),
                         time ));
                 Notification.show("Activity added").setDuration(1000);
+                //&&&&&&&&&&&&&&&&&&&&&&refresh
             }});
         add(addToSelect);
     }
 
-    private void createResetChoiceButton() {
-        cancel.setText("Reset the choice");
-        cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-        cancel.addClickShortcut(Key.ESCAPE);
-//        cancel.addClickListener(e -> {
-//            activityTypes.clear();
-//            activitiesByType.clear();
-//            minutes.clear();
-//            userWeight.clear();
-//        });
-        add(cancel);
-    }
+//    private void createResetChoiceButton() {
+//        cancel.setText("Reset the choice");
+//        cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+//        cancel.addClickShortcut(Key.ESCAPE);
+////        cancel.addClickListener(e -> {
+////            activityTypes.clear();
+////            activitiesByType.clear();
+////            minutes.clear();
+////            userWeight.clear();
+////        });
+//        add(cancel);
+//    }
 
     //Pogai vajag citu vietu
     public void createCaloriesCalculationButton() {
