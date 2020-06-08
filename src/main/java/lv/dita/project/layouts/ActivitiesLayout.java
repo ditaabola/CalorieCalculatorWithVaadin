@@ -16,8 +16,8 @@ public class ActivitiesLayout extends VerticalLayout {
 
     public ActivitiesLayout() {
 
-        Label lblProof = new Label("Tests, vai ir redzams activities");
-        add(lblProof);
+      // Label lblProof = new Label("Tests, vai ir redzams activities");
+      //  add(lblProof);
 
         grid = new Grid<>();
 

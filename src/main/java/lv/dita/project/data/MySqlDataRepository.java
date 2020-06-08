@@ -154,6 +154,22 @@ public class MySqlDataRepository implements DataRepository {
     }
 
     @Override
+    public double getMetValueByName1(String name) {
+        try {
+            connection = DriverManager.getConnection(connectionString, userName, passWord);
+            CallableStatement statement = connection.prepareCall("{call spMetValueByActivityName1(?,?)}");
+            statement.setString("name", name);
+            statement.registerOutParameter("met", Types.DOUBLE);
+            statement.execute();
+            double met = statement.getDouble("met");
+            return met;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
     public void addFoodEaten(FoodEaten foodEaten) {
         try {
             connection = DriverManager.getConnection(connectionString, userName, passWord);
@@ -162,6 +178,23 @@ public class MySqlDataRepository implements DataRepository {
             statement.setString("food_eaten_name", foodEaten.getName());
             statement.setDouble("food_eaten_quantity", foodEaten.getQuantity());
             statement.setDouble("food_eaten_calories", foodEaten.getCalories());
+            statement.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addActivityPerformed(ActivityPerformed activityPerformed) {
+        try {
+            connection = DriverManager.getConnection(connectionString, userName, passWord);
+            CallableStatement statement = connection.prepareCall("{call spAddActivityPerformed(?,?,?,?,?)}");
+            statement.setInt("activity_performed_id", activityPerformed.getId());
+            statement.setString("activity_performed_name", activityPerformed.getName());
+            statement.setDouble("activity_performed_met_value", activityPerformed.getMet_value());
+            statement.setDouble("activity_performed_user_weight", activityPerformed.getUser_weight());
+            statement.setDouble("activity_performed_minutes", activityPerformed.getMinutes());
             statement.execute();
 
         } catch (Exception e) {
