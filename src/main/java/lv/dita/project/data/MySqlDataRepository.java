@@ -297,6 +297,18 @@ public class MySqlDataRepository implements DataRepository {
 
         }
         return comment;
-    };
+    }
+
+    @Override
+    public void emptyActivitiesTable() {
+        try {
+            connection = DriverManager.getConnection(connectionString, userName, passWord);
+            CallableStatement statement = connection.prepareCall("{call spResetActivityPerformedTable()}");
+            statement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
