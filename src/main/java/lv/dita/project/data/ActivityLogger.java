@@ -41,7 +41,7 @@ public class ActivityLogger extends FormLayout {
         addButtons.setWidthFull();
         add(addOptions);
         add(addButtons);
-//        createCaloriesCalculationButton();
+        createCaloriesCalculationButton();
         add(calculateCaloriesBurned);
         add(lblCalorieCalculation);
     }
@@ -54,6 +54,13 @@ public class ActivityLogger extends FormLayout {
 //        calories.setVisible(false);
 //        return new HorizontalLayout(userWeight, activityTypes, activitiesByType, minutes);
 //    }
+
+    private void createMinutesField() {
+        minutes.setLabel("Enter minutes");
+        minutes.setRequiredIndicatorVisible(true);
+        minutes.setWidth("200px");
+        minutes.setMin(2d);
+    }
 
 private void creatingTypeSelectOption() {
     activityTypes.setLabel("Select activity type");
