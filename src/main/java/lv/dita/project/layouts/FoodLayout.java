@@ -28,10 +28,13 @@ public class FoodLayout extends VerticalLayout {
         form = new FoodLogger();
         createGridWithSelectedValues();
         createGridWithData();
-        Div content = new Div(grid, form, gridEaten);
+
+        Div content = new Div(form, gridEaten, grid);
         content.addClassName("content");
         content.setSizeFull();
         add(content, showGrid, hideGrid);
+
+
 
     }
 
