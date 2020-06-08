@@ -1,9 +1,6 @@
 package lv.dita.project.data.interfaces;
 
-import lv.dita.project.data.Activity;
-import lv.dita.project.data.Food;
-import lv.dita.project.data.FoodCategory;
-import lv.dita.project.data.FoodEaten;
+import lv.dita.project.data.*;
 
 import java.util.List;
 
@@ -16,6 +13,7 @@ public interface DataRepository {
     List<Food> getFoodItemsByMaxCaloriesPer100G(int calories);
     List<Food> getFoodItemsByType(String type);
     double getCaloriesByName(String name);
+    double getMetValueByName1(String name);
 
     int addActivity(Activity activity);
     List<Activity> getActivityByLevel (String level);
@@ -24,5 +22,8 @@ public interface DataRepository {
 
     void addFoodEaten(FoodEaten foodEaten);
     String resetFoodEatenTable();
+
+
+    void addActivityPerformed (ActivityPerformed activityPerformed);
 
     }

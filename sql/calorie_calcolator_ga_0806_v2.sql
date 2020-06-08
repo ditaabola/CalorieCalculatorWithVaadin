@@ -64,14 +64,13 @@ DROP TABLE IF EXISTS `activity_performed`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `activity_performed` (
-  `activity_performed_id` int NOT NULL,
+  `activity_performed_id` int NOT NULL AUTO_INCREMENT,
   `activity_performed_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `activity_performed_met_value` decimal(4,2) NOT NULL,
   `activity_performed_user_weight` decimal(4,1) NOT NULL,
   `activity_performed_minutes` int NOT NULL,
-  PRIMARY KEY (`activity_performed_id`),
-  UNIQUE KEY `activity_performed_id_UNIQUE` (`activity_performed_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`activity_performed_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,6 +79,7 @@ CREATE TABLE `activity_performed` (
 
 LOCK TABLES `activity_performed` WRITE;
 /*!40000 ALTER TABLE `activity_performed` DISABLE KEYS */;
+INSERT INTO `activity_performed` VALUES (1,'2222',22.00,22.0,22),(2,'yoga',8.00,74.0,123),(3,'jogging',8.00,45.0,65),(4,'dancing',7.80,74.0,121);
 /*!40000 ALTER TABLE `activity_performed` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +138,7 @@ CREATE TABLE `food_eaten` (
   `food_eaten_quantity` double NOT NULL,
   `food_eaten_calories` int NOT NULL,
   PRIMARY KEY (`food_eaten_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,7 +147,7 @@ CREATE TABLE `food_eaten` (
 
 LOCK TABLES `food_eaten` WRITE;
 /*!40000 ALTER TABLE `food_eaten` DISABLE KEYS */;
-INSERT INTO `food_eaten` VALUES (1,'apple',100,50),(2,'banana',50,50),(3,'pear',50,50),(16,'grapefruit red',58,50),(17,'milk whole',56,50),(18,'bread whole wheat',80,50),(19,'testFoodWithCalories',50,100),(20,'grapefruit red',100,100),(21,'bread whole wheat',100,100),(22,'bread whole wheat',80,100),(23,'milk whole',50,100),(24,'frozen yogurt',100,100),(25,'bread whole wheat',500,100),(26,'bread whole wheat',4444,0),(27,'bread whole wheat',5,0),(28,'milk whole',45,0),(29,'frozen yogurt',456,107);
+INSERT INTO `food_eaten` VALUES (1,'apple',100,50),(2,'banana',50,50),(3,'pear',50,50),(16,'grapefruit red',58,50),(17,'milk whole',56,50),(18,'bread whole wheat',80,50),(19,'testFoodWithCalories',50,100),(20,'grapefruit red',100,100),(21,'bread whole wheat',100,100),(22,'bread whole wheat',80,100),(23,'milk whole',50,100),(24,'frozen yogurt',100,100),(25,'bread whole wheat',500,100),(26,'bread whole wheat',4444,0),(27,'bread whole wheat',5,0),(28,'milk whole',45,0),(29,'frozen yogurt',456,107),(30,'aaaaaa',12,12);
 /*!40000 ALTER TABLE `food_eaten` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -184,6 +184,31 @@ out activity_id int)
 BEGIN
 insert into calories_all.activities_met_values(activity_name, activity_level, activity_type, activity_met_value) values (activity_name, activity_level, activity_type, activity_met_value);
 SELECT last_insert_id() into activity_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spAddActivityPerformed` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spAddActivityPerformed`(in activity_performed_id int, 
+								in activity_performed_name varchar(100),
+                                in activity_performed_met_value double,
+                             in activity_performed_user_weight double,
+                             in activity_performed_minutes int)
+BEGIN
+    insert into calories_all.activity_performed(activity_performed_name, activity_performed_met_value, activity_performed_user_weight, activity_performed_minutes)
+    values (activity_performed_name, activity_performed_met_value, activity_performed_user_weight, activity_performed_minutes);
+    
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -353,6 +378,44 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spMetValueByActivityName1` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spMetValueByActivityName1`(in name varchar(100), out met double)
+BEGIN
+select activity_met_value into met from calories_all.activities_met_values  where activity_name = name;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spResetFoodEatenTable` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spResetFoodEatenTable`()
+BEGIN
+    delete from calories_all.food_eaten;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Final view structure for view `activities_with_met_values`
@@ -417,4 +480,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-08 16:08:59
+-- Dump completed on 2020-06-08 18:34:32
