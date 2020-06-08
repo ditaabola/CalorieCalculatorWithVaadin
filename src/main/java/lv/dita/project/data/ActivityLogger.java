@@ -183,4 +183,6 @@ public class ActivityLogger extends VerticalLayout {
         }
         return df.format(caloriesBurned);
     }
+
+
 }
