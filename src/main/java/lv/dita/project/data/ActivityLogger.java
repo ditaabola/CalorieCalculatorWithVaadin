@@ -19,9 +19,6 @@ import java.util.List;
 
 public class ActivityLogger extends FormLayout {
 
-//    Formula to calculate calories burned using MET values:
-//    MET_value * 3.5 x user_weight_in_kilograms / 200 * minutes = calories_burned
-
     private Activity activity;
     private DataRepository repo = new MySqlDataRepository();
     private Select<String> activityTypes = new Select<String>();
@@ -48,6 +45,7 @@ public class ActivityLogger extends FormLayout {
         add(calculateCaloriesBurned);
         add(lblCalorieCalculation);
     }
+
 //    @Contract(" -> new")
 //    private @NotNull Component createSelectOptionLayout() {
 //        creatingTypeSelectOption();
@@ -56,6 +54,7 @@ public class ActivityLogger extends FormLayout {
 //        calories.setVisible(false);
 //        return new HorizontalLayout(userWeight, activityTypes, activitiesByType, minutes);
 //    }
+
 private void creatingTypeSelectOption() {
     activityTypes.setLabel("Select activity type");
     List<ActivityType> result = repo.getList(ActivityType.class);
@@ -74,6 +73,7 @@ private void creatingTypeSelectOption() {
 //
 //        return new HorizontalLayout(addToSelect, cancel);
 //    }
+
     private void createResetChoiceButton(){
         cancel.setText("Reset the choice");
         cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
@@ -87,30 +87,31 @@ private void creatingTypeSelectOption() {
         add(cancel);
     }
 
-//    public void createCaloriesCalculationButton() {
-//        calculateCaloriesBurned.setText("Calculate calories burned");
-//        calculateCaloriesBurned.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
-//        calculateCaloriesBurned.addClickListener(e -> {
-//            String res = calculateCalories();
-//            lblCalorieCalculation.setText("The total of the calories you have burned is: " + res);
-//            lblCalorieCalculation.setVisible(true);
-//        });
-//    }
-//    public String calculateCalories() {
-//        double userWeight = 0;
-//        int minutes = 0;
-//        double caloriesPer100G = 0;
-//        String food = "";
-//        DecimalFormat df = new DecimalFormat("##.##");
-//        List<FoodEaten> eatenFoodList = repo.getList(FoodEaten.class);
-//        for (FoodEaten eatenFood : eatenFoodList) {
-//            food = eatenFood.getName();
-//            quantity = eatenFood.getQuantity();
-//            caloriesPer100G = eatenFood.getCalories();
-//            double caloriesPerFoodEaten = (caloriesPer100G / 100) * quantity;
-//            caloriesEaten += caloriesPerFoodEaten;
-//
-//        }
-//        return df.format(caloriesBurned);
-//    }
+    public void createCaloriesCalculationButton() {
+        calculateCaloriesBurned.setText("Calculate calories burned");
+        calculateCaloriesBurned.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
+        calculateCaloriesBurned.addClickListener(e -> {
+            String res = calculateCaloriesBurned();
+            lblCalorieCalculation.setText("The total of the calories you have burned is: " + res);
+            lblCalorieCalculation.setVisible(true);
+        });
+    }
+
+    public String calculateCaloriesBurned() {
+        double userWeight = 0;
+        int minutes = 0;
+        double activityMetValue = 0;
+        double caloriesBurned = 0;
+        //String activity = ""; not necessary
+        DecimalFormat df = new DecimalFormat("##.##");
+        List<ActivityPerformed> activityPerformedList = repo.getList(ActivityPerformed.class);
+        for (ActivityPerformed activityPerformed : activityPerformedList) {
+            userWeight = activityPerformed.getUser_weight();
+            minutes = activityPerformed.getMinutes();
+            activityMetValue = activityPerformed.getMet_value();
+            double caloriesPerActivityBurned = (activityMetValue * 3.5 * userWeight) / (200 * minutes);
+            caloriesBurned += caloriesPerActivityBurned;
+        }
+        return df.format(caloriesBurned);
+    }
 }
