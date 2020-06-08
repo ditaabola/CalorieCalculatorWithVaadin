@@ -14,6 +14,8 @@ import lv.dita.project.data.*;
 
 import java.util.List;
 
+import static lv.dita.project.data.enums.Constants.SCHEMA_NAME;
+
 public class FoodLayout extends VerticalLayout {
 
     private Grid<Food> grid;
@@ -22,6 +24,7 @@ public class FoodLayout extends VerticalLayout {
     private FoodLogger form;
     private Button showGrid;
     private Button hideGrid;
+    public static final String DELETE_QUERY = "SELECT * FROM" + SCHEMA_NAME+ ".food_eaten;";
 
     public FoodLayout() {
 
@@ -33,8 +36,6 @@ public class FoodLayout extends VerticalLayout {
         content.addClassName("content");
         content.setSizeFull();
         add(content, showGrid, hideGrid);
-
-
 
     }
 

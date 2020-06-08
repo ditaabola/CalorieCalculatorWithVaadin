@@ -249,5 +249,21 @@ public class MySqlDataRepository implements DataRepository {
             return 0;
     }
 
+    public String resetFoodEatenTable () {
+        String comment = "";
+        try {
+            connection = DriverManager.getConnection(connectionString, userName, passWord);
+            CallableStatement statement = connection.prepareCall("{call spResetFoodEatenTable()}");
+            statement.execute();
+            comment ="The data successfully reset";
+           return comment;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            comment = "Something went wrong";
+
+        }
+        return comment;
+    };
 
 }
