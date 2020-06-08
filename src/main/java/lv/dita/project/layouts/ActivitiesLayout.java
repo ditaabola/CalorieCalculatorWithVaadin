@@ -3,14 +3,16 @@ package lv.dita.project.layouts;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import lv.dita.project.data.Activity;
 import lv.dita.project.data.MySqlDataRepository;
 
 import java.util.List;
 
-public class ActivitiesLayout extends Div {
+public class ActivitiesLayout extends VerticalLayout {
 
-    Grid<Activity> grid;
+    private Grid<Activity> grid;
+
 
     public ActivitiesLayout() {
 
@@ -31,7 +33,6 @@ public class ActivitiesLayout extends Div {
         grid.setWidth("600px");
         grid.setHeightByRows(true);
         add(grid);
-
     }
 }
 
