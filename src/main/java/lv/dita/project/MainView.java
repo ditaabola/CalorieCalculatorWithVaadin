@@ -12,6 +12,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import lv.dita.project.layouts.ActivitiesLayout;
 import lv.dita.project.layouts.CalculateBMIv3Layout;
+import lv.dita.project.layouts.CaloriesBurnedLayout;
 import lv.dita.project.layouts.FoodLayout;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -58,14 +59,19 @@ public class MainView extends VerticalLayout {
         FoodLayout page3 = new FoodLayout();
         page3.setVisible(false);
 
+        Tab tab4 = new Tab("CALCULATE CALORIES BURNED");
+        CaloriesBurnedLayout page4 = new CaloriesBurnedLayout();
+        page4.setVisible(false);
+
         Map<Tab, Component> tabsToPages = new HashMap<>();
 
         tabsToPages.put(tab1, page1);
         tabsToPages.put(tab2, page2);
         tabsToPages.put(tab3, page3);
+        tabsToPages.put(tab4, page4);
 
-        Tabs tabs = new Tabs(tab1, tab2, tab3);
-        Div pages = new Div(page1, page2, page3);
+        Tabs tabs = new Tabs(tab1, tab2, tab3, tab4);
+        Div pages = new Div(page1, page2, page3, page4);
 
         Set<Component> pagesShown = Stream.of(page1)
                 .collect(Collectors.toSet());

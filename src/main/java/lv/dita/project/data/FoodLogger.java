@@ -3,19 +3,16 @@ package lv.dita.project.data;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.charts.model.HorizontalAlign;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
-import com.vaadin.flow.component.tabs.Tab;
-import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.textfield.NumberField;
 import lv.dita.project.data.interfaces.DataRepository;
-import lv.dita.project.layouts.FoodLayout;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -78,7 +75,8 @@ public class FoodLogger extends FormLayout {
         quantityEaten.setMin(2d);
     }
 
-    private Component createSelectOptionLayout() {
+    @Contract(" -> new")
+    private @NotNull Component createSelectOptionLayout() {
         creatingTypeSelectOption();
         creatingFoodItemSelectFromTypeOption();
         createQuantityField();
@@ -103,7 +101,6 @@ public class FoodLogger extends FormLayout {
         }
         return df.format(caloriesEaten);
     }
-
 
     public void createCaloriesCalculationButton() {
         calculateCaloriesEaten.setText("Calculate calories eaten");
@@ -142,7 +139,8 @@ public class FoodLogger extends FormLayout {
         add(cancel);
     }
 
-    private Component createButtonsLayout() {
+    @Contract(" -> new")
+    private @NotNull Component createButtonsLayout() {
         createAddFoodToGridButton();
         createResetChoiceButton();
 
