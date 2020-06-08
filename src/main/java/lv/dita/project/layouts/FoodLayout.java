@@ -77,7 +77,4 @@ public class FoodLayout extends VerticalLayout {
         add(gridEaten);
 
     }
-
-
-
 }
