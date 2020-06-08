@@ -10,13 +10,7 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
-import lv.dita.project.data.ActivityLogger;
-import lv.dita.project.layouts.ActivitiesLayout;
-import lv.dita.project.layouts.CalculateBMIv3Layout;
-import lv.dita.project.layouts.CaloriesBurnedLayout;
-import lv.dita.project.layouts.FoodLayout;
-import org.springframework.beans.factory.annotation.Autowired;
-
+import lv.dita.project.layouts.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -46,6 +40,7 @@ import java.util.stream.Stream;
 public class MainView extends VerticalLayout {
 
 
+
     public MainView() {
 
         Tab tab1 = new Tab("CALCULATE BMI");
@@ -61,7 +56,7 @@ public class MainView extends VerticalLayout {
         page3.setVisible(false);
 
         Tab tab4 = new Tab("CALCULATE CALORIES BURNED");
-        CaloriesBurnedLayout page4 = new CaloriesBurnedLayout();
+        CaloriesBurnedLayout2 page4 = new CaloriesBurnedLayout2();
         page4.setVisible(false);
 
         Map<Tab, Component> tabsToPages = new HashMap<>();
@@ -93,4 +88,5 @@ public class MainView extends VerticalLayout {
         tabs.setFlexGrowForEnclosedTabs(1);
         setClassName("main-layout");
     }
+
 }
