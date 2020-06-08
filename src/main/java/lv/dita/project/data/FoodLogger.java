@@ -44,7 +44,6 @@ public class FoodLogger extends FormLayout {
         createCaloriesCalculationButton();
         add(calculateCaloriesEaten);
         add(lblCalorieCalculation);
-
     }
 
     private void creatingTypeSelectOption() {
