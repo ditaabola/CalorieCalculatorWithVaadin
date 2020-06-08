@@ -8,6 +8,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.NumberField;
 import lv.dita.project.data.interfaces.DataRepository;
@@ -17,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class FoodLogger extends FormLayout {
+public class FoodLogger extends VerticalLayout {
 
     private Food food;
     private DataRepository repo = new MySqlDataRepository();
