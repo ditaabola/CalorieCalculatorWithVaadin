@@ -10,6 +10,7 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
+import lv.dita.project.data.ActivityLogger;
 import lv.dita.project.layouts.ActivitiesLayout;
 import lv.dita.project.layouts.CalculateBMIv3Layout;
 import lv.dita.project.layouts.CaloriesBurnedLayout;
