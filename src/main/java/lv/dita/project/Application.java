@@ -94,6 +94,13 @@ public class Application extends SpringBootServletInitializer {
         repo.deleteItemFromFoodEatenTable("pear");
         System.out.println(true);
     }
+
+    @Test
+    public void print_calculation_on_summary(){
+        FoodLogger fl = new FoodLogger();
+        String calories = fl.calculateCalories();
+        System.out.println("You have eaten " + calories + " calories");
+    }
 }
 
 
