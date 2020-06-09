@@ -185,6 +185,19 @@ public class MySqlDataRepository implements DataRepository {
     }
 
     @Override
+    public void deleteItemFromFoodEatenTable(String name) {
+        try {
+            connection = DriverManager.getConnection(connectionString, userName, passWord);
+            CallableStatement statement = connection.prepareCall("{call spDeleteOneItemFromFoodEatenTable(?)}");
+            statement.setString("name", name);
+            statement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
     public void addActivityPerformed(ActivityPerformed activityPerformed) {
         try {
             connection = DriverManager.getConnection(connectionString, userName, passWord);
@@ -280,16 +293,7 @@ public class MySqlDataRepository implements DataRepository {
         return 0;
     }
 
-    public void resetFoodEatenTable() {
 
-        try {
-            connection = DriverManager.getConnection(connectionString, userName, passWord);
-            CallableStatement statement = connection.prepareCall("{call spResetFoodEatenTable()}");
-            statement.execute();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void emptyActivitiesTable() {

@@ -87,6 +87,12 @@ public class Application extends SpringBootServletInitializer {
         System.out.println(res);
     }
 
+    @Test
+    public void delete_by_name(){
+        DataRepository repo = new MySqlDataRepository();
+        repo.deleteItemFromFoodEatenTable("pear");
+        System.out.println(true);
+    }
 }
 
 
