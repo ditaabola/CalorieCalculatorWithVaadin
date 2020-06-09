@@ -17,6 +17,8 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 public class FoodLogger extends VerticalLayout {
 
@@ -26,12 +28,15 @@ public class FoodLogger extends VerticalLayout {
     private NumberField quantityEaten = new NumberField();
     private NumberField calories = new NumberField();
     private Button addToSelect = new Button();
+    private Button deleteSelected = new Button();
     private Button calculateCaloriesEaten = new Button();
     private Button cancel = new Button();
     private Label lblCalorieCalculation = new Label();
     private Grid<FoodEaten> gridEaten;
     private Label lblEnterQuantity = new Label();
     private Label lblEnteredItem = new Label();
+    private String itemForDelete = "";
+
 
     public FoodLogger() {
         addClassName("food-logger");
@@ -47,6 +52,8 @@ public class FoodLogger extends VerticalLayout {
         Div addTable = new Div();
         addTable.add(createTableData());
         addTable.setWidthFull();
+
+        deleteItem();
 
         Div addCalculation = new Div();
         addCalculation.add(createCalc());
@@ -75,7 +82,7 @@ public class FoodLogger extends VerticalLayout {
     @Contract(" -> new")
     private @NotNull Component createTableData() {
         createTable();
-        repo.resetFoodEatenTable();
+        repo.emptyEatenTable();
         return new HorizontalLayout(gridEaten);
     }
 
@@ -110,7 +117,6 @@ public class FoodLogger extends VerticalLayout {
         quantityEaten.setMin(2d);
     }
 
-
     public String calculateCalories() {
         double caloriesEaten = 0;
         double quantity = 0;
@@ -124,7 +130,6 @@ public class FoodLogger extends VerticalLayout {
             caloriesPer100G = eatenFood.getCalories();
             double caloriesPerFoodEaten = (caloriesPer100G / 100) * quantity;
             caloriesEaten += caloriesPerFoodEaten;
-
         }
         return df.format(caloriesEaten);
     }
@@ -149,6 +154,7 @@ public class FoodLogger extends VerticalLayout {
 
 
     public void createAddFoodToGridButton() {
+
         addToSelect.setText("Add this food item");
 //        addToSelect.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         addToSelect.addClickShortcut(Key.ENTER);
@@ -163,6 +169,10 @@ public class FoodLogger extends VerticalLayout {
                         foodItemsByType.getValue(),
                         quantityEaten.getValue(),
                         calories.getValue()));
+                loadData();
+
+                };
+
                 lblEnterQuantity.setVisible(false);
                 clearFields();
                 loadData();
@@ -170,7 +180,7 @@ public class FoodLogger extends VerticalLayout {
                 lblEnteredItem.setVisible(true);
                 lblEnteredItem.setText("The food item added");
 //                Notification.show("The food item added").setDuration(1000);
-            }});
+            });
 
         add(addToSelect);
     }
@@ -179,13 +189,17 @@ public class FoodLogger extends VerticalLayout {
         cancel.setText("Reset the choice");
 //        cancel.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         cancel.addClickListener(e->{
-            repo.resetFoodEatenTable();
+            repo.emptyEatenTable();
             clearFields();
             loadData();
             lblCalorieCalculation.setVisible(false);
 
         });
-
+    }
+    private void createOneItemDeleteButton(){
+        deleteSelected.setText("Delete the selected choice");
+//        cancel.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        add(deleteSelected);
 
     }
 
@@ -201,18 +215,42 @@ public class FoodLogger extends VerticalLayout {
         Grid.Column<FoodEaten> colName = gridEaten.addColumn(FoodEaten::getName).setHeader("Food item");
         Grid.Column<FoodEaten> colQuantity = gridEaten.addColumn(FoodEaten::getQuantity).setHeader("Quantity eaten");
         loadData();
+        colName.setKey("name");
+        colQuantity.setKey("quantity");
         gridEaten.setWidth("400px");
         gridEaten.setHeightByRows(true);
         gridEaten.setVisible(true);
         gridEaten.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
-        add(cancel);
-
+        gridEaten.setSelectionMode(Grid.SelectionMode.SINGLE);
+            add(cancel);
     }
 
     private void loadData(){
         List result = repo.getList(FoodEaten.class);
         gridEaten.setItems(result);
         add(gridEaten);
+    }
+
+    public void deleteItem(){
+        createOneItemDeleteButton();
+        gridEaten.addSelectionListener(event-> {
+            createOneItemDeleteButton();
+            deleteSelected.setVisible(true);
+            Optional<FoodEaten> chosenFood = event.getFirstSelectedItem();
+            itemForDelete = chosenFood.get().getName();
+        });
+
+        deleteSelected.addClickListener(e->{
+            repo.deleteItemFromFoodEatenTable(itemForDelete);
+            loadData();
+        });
+    }
+
+    @Contract(" -> new")
+    private @NotNull Component createDeleteReset() {
+        deleteItem();
+
+        return new HorizontalLayout(deleteSelected);
     }
 
 
