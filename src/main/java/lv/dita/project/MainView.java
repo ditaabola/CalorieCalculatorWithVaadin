@@ -2,7 +2,6 @@
 package lv.dita.project;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.*;
@@ -64,7 +63,7 @@ public class MainView extends VerticalLayout {
         page2.setVisible(false);
 
         Tab tab3 = new Tab("CALCULATE BMI & EER");
-        CalculateBMIv3Layout page3 = new CalculateBMIv3Layout();
+        CalculateBMILayout page3 = new CalculateBMILayout();
         page3.setVisible(false);
 
         Tab tab4 = new Tab("CALCULATE CALORIES BURNED");

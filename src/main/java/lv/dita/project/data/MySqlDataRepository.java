@@ -1,6 +1,5 @@
 package lv.dita.project.data;
 
-import com.mysql.cj.xdevapi.Type;
 import lv.dita.project.data.interfaces.DataRepository;
 import lv.dita.project.data.interfaces.EntityBase;
 import lv.dita.project.data.enums.Constants;
@@ -265,7 +264,6 @@ public class MySqlDataRepository implements DataRepository {
         return null;
     }
 
-
     @Override
     public double getCaloriesByName(String name) {
         try {
@@ -293,19 +291,19 @@ public class MySqlDataRepository implements DataRepository {
         }
     }
 
-        @Override
-        public void emptyActivitiesTable () {
-            try {
-                connection = DriverManager.getConnection(connectionString, userName, passWord);
-                CallableStatement statement = connection.prepareCall("{call spResetActivityPerformedTable()}");
-                statement.execute();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    @Override
+    public void emptyActivitiesTable() {
+        try {
+            connection = DriverManager.getConnection(connectionString, userName, passWord);
+            CallableStatement statement = connection.prepareCall("{call spResetActivityPerformedTable()}");
+            statement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
 
     @Override
-    public void emptyEatenTable () {
+    public void emptyEatenTable() {
         try {
             connection = DriverManager.getConnection(connectionString, userName, passWord);
             CallableStatement statement = connection.prepareCall("{call spResetFoodEatenTable()}");
@@ -314,6 +312,4 @@ public class MySqlDataRepository implements DataRepository {
             e.printStackTrace();
         }
     }
-
-
 }

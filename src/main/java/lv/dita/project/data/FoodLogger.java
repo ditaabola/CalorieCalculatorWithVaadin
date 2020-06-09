@@ -158,6 +158,10 @@ public class FoodLogger extends VerticalLayout {
                 lblEnterQuantity.setVisible(true);
                 lblEnterQuantity.setText("Please enter quantity!");
 //                 Notification.show("Please enter the quantity").setDuration(1000);
+            } else if (foodItemsByType.isEmpty()) {
+                lblEnterQuantity.setVisible(true);
+                lblEnterQuantity.setText("Please select food!");
+//                 Notification.show("Please enter the quantity").setDuration(1000);
             } else {
                 repo.addFoodEaten(new FoodEaten(0,
                         foodItemsByType.getValue(),
@@ -214,8 +218,6 @@ public class FoodLogger extends VerticalLayout {
         gridEaten.setItems(result);
         add(gridEaten);
     }
-
-
 }
 
 
