@@ -243,9 +243,4 @@ public class FoodLogger extends VerticalLayout {
         add(gridEaten);
     }
 
-    public void deleteItem() {
-//        createOneItemDeleteButton();
-
-
-    }
 }

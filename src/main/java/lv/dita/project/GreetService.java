@@ -14,5 +14,4 @@ public class GreetService implements Serializable {
             return "Hello " + name;
         }
     }
-
 }

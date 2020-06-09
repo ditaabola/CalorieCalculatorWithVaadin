@@ -4,9 +4,9 @@ package lv.dita.project;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.HtmlImport;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Header;
+import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
@@ -46,6 +46,11 @@ public class MainView extends VerticalLayout {
 
     public MainView() {
 
+        Icon logo = new Icon(VaadinIcon.CALC);
+        logo.setSize("100px");
+        logo.setColor("#27496d");
+        add(logo);
+
         H1 header = new H1("ENJOY OUR FIRST VAADIN APP CALCULATOR");
         add(header);
 
@@ -58,7 +63,7 @@ public class MainView extends VerticalLayout {
         page2.setVisible(false);
 
         Tab tab3 = new Tab("CALCULATE BMI & EER");
-        CalculateBMIv3Layout page3 = new CalculateBMIv3Layout();
+        CalculateBMILayout page3 = new CalculateBMILayout();
         page3.setVisible(false);
 
         Tab tab4 = new Tab("CALCULATE CALORIES BURNED");

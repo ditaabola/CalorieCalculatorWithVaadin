@@ -7,7 +7,7 @@ import lv.dita.project.data.ActivityLogger;
 public class CaloriesBurnedLayout extends VerticalLayout {
     private ActivityLogger form;
 
-    public CaloriesBurnedLayout(){
+    public CaloriesBurnedLayout() {
         form = new ActivityLogger();
         Div content = new Div(form);
         content.addClassName("content");

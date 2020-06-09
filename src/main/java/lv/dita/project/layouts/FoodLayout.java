@@ -1,9 +1,9 @@
 package lv.dita.project.layouts;
 
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import lv.dita.project.data.*;
+
 import java.util.List;
 
 public class FoodLayout extends VerticalLayout {
@@ -21,7 +21,6 @@ public class FoodLayout extends VerticalLayout {
         grid.setItems(result);
         grid.setWidth("600px");
         grid.setHeightByRows(true);
-              add(grid);
+        add(grid);
     }
-
 }

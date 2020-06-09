@@ -13,8 +13,7 @@ import lv.dita.project.data.Calculator;
 import lv.dita.project.data.enums.DailyActivityLevel;
 import lv.dita.project.data.enums.PersonsGender;
 
-
-public class CalculateBMIv3Layout extends VerticalLayout {
+public class CalculateBMILayout extends VerticalLayout {
 
     private NumberField height;
     private NumberField weight;
@@ -27,7 +26,7 @@ public class CalculateBMIv3Layout extends VerticalLayout {
     private RadioButtonGroup<PersonsGender> gender;
     private ComboBox<DailyActivityLevel> dailyActivityLevel;
 
-    public CalculateBMIv3Layout() {
+    public CalculateBMILayout() {
 
         try {
 
@@ -46,18 +45,9 @@ public class CalculateBMIv3Layout extends VerticalLayout {
             gender = new RadioButtonGroup<>();
             gender.setLabel("Select gender");
             gender.setItems(PersonsGender.values());
-//            gender.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
             gender.setRequired(true);
             gender.setValue(PersonsGender.FEMALE);
             add(gender);
-
-//            activityLevel = new RadioButtonGroup<>();
-//            activityLevel.setLabel("Select activity level");
-//            activityLevel.setItems(DailyActivityLevel.values());
-//            activityLevel.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
-//            activityLevel.setRequired(true);
-//            activityLevel.setValue(DailyActivityLevel.SEDENTARY);
-//            add(activityLevel);
 
             dailyActivityLevel = new ComboBox<>();
             dailyActivityLevel.setPlaceholder("Select activity level");
@@ -70,43 +60,39 @@ public class CalculateBMIv3Layout extends VerticalLayout {
             lblCommentIbw = new Label();
             lblCommentEer = new Label();
 
-            calculate = new Button("Calculate", new ComponentEventListener<ClickEvent<Button>>() {
+            calculate = new Button("Calculate", (ComponentEventListener<ClickEvent<Button>>) buttonClickEvent -> {
 
-                @Override
-                public void onComponentEvent(ClickEvent<Button> buttonClickEvent) {
+                if (height.isEmpty() || weight.isEmpty() || age.isEmpty() || dailyActivityLevel.isEmpty()) {
+                    lblCalculatedBmi.setText("Please enter data!");
+                } else {
 
-                    if (height.isEmpty() || weight.isEmpty() || age.isEmpty() || dailyActivityLevel.isEmpty()){
-                        lblCalculatedBmi.setText("Please enter data!");
-                    } else {
+                    double heightUser = height.getValue();
+                    double weightUser = weight.getValue();
+                    PersonsGender genderUser = gender.getValue();
+                    int ageUser = age.getValue();
+                    DailyActivityLevel actLevUser = dailyActivityLevel.getValue();
 
-                        double heightUser = height.getValue();
-                        double weightUser = weight.getValue();
-                        PersonsGender genderUser = gender.getValue();
-                        int ageUser = age.getValue();
-                        DailyActivityLevel actLevUser = dailyActivityLevel.getValue();
+                    String bmi = Calculator.calculateBMI(weightUser, heightUser);
+                    lblCalculatedBmi.setText("BMI: " + bmi);
 
-                        String bmi = Calculator.calculateBMI(weightUser, heightUser);
-                        lblCalculatedBmi.setText("BMI: " + bmi);
+                    String commentBmi = Calculator.commentAboutUsersBmi(weightUser, heightUser);
+                    lblCommentBmi.setText(commentBmi);
 
-                        String commentBmi = Calculator.commentAboutUsersBmi(weightUser, heightUser);
-                        lblCommentBmi.setText(commentBmi);
+                    String commentIbw = Calculator.calculateIBW(genderUser, heightUser);
+                    lblCommentIbw.setText(commentIbw);
 
-                        String commentIbw = Calculator.calculateIBW(genderUser, heightUser);
-                        lblCommentIbw.setText(commentIbw);
-
-                        String commentEer = Calculator.calculateEER(genderUser, ageUser, weightUser,
-                                heightUser, actLevUser);
-                        lblCommentEer.setText(commentEer);
-                    }
+                    String commentEer = Calculator.calculateEER(genderUser, ageUser, weightUser,
+                            heightUser, actLevUser);
+                    lblCommentEer.setText(commentEer);
                 }
             });
-//            calculate.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
             add(calculate);
             add(lblCalculatedBmi);
             add(lblCommentBmi);
             add(lblCommentIbw);
             add(lblCommentEer);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

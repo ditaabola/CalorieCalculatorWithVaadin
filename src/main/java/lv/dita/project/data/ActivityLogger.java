@@ -3,7 +3,6 @@ package lv.dita.project.data;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
@@ -37,7 +36,6 @@ public class ActivityLogger extends VerticalLayout {
     private Label lblCalorieCalculation = new Label();
     private Grid<ActivityPerformed> activitiesPerformed;
 
-
     public ActivityLogger() {
         addClassName("activity-logger");
 
@@ -63,7 +61,6 @@ public class ActivityLogger extends VerticalLayout {
         add(addTable);
     }
 
-
     @Contract(" -> new")
     private @NotNull Component createSelectOptionLayout() {
         creatingTypeSelectOption();
@@ -72,22 +69,22 @@ public class ActivityLogger extends VerticalLayout {
         createHoursField();
         createMinutesField();
         //calories.setVisible(false);
-        return new HorizontalLayout( activityTypes, activitiesByType, userWeight, hours,  minutes);
+        return new HorizontalLayout(activityTypes, activitiesByType, userWeight, hours, minutes);
     }
 
     @Contract(" -> new")
     private @NotNull Component createTableData() {
         createTable();
-        return new HorizontalLayout( activitiesPerformed);
+        return new HorizontalLayout(activitiesPerformed);
     }
 
     @Contract(" -> new")
     private @NotNull Component createCalc() {
         createCaloriesCalculationButton();
-        return new HorizontalLayout( calculateCaloriesBurned, lblCalorieCalculation);
+        return new HorizontalLayout(calculateCaloriesBurned, lblCalorieCalculation);
     }
 
-    private  void createWeightField(){
+    private void createWeightField() {
         userWeight.setLabel("Weight in kg");
         // userWeight.setRequiredIndicatorVisible(true);
         userWeight.setWidth("100px");
@@ -122,7 +119,7 @@ public class ActivityLogger extends VerticalLayout {
     }
 
     // izvēlas aktivitāti (atkarigs no tipa)
-    private void creatingActivityNameSelectFromTypeOption(){
+    private void creatingActivityNameSelectFromTypeOption() {
         activitiesByType.setLabel("Select activity");
         List<Activity> res = repo.getList(Activity.class);
         activitiesByType.setItems(res.stream().map(s -> s.getName()));
@@ -141,34 +138,34 @@ public class ActivityLogger extends VerticalLayout {
         return new HorizontalLayout(addToSelect);
     }
 
-    private void createAddActivityToGridButton(){
+    private void createAddActivityToGridButton() {
         addToSelect.setText("Add activity");
 //        addToSelect.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         addToSelect.addClickShortcut(Key.ENTER);
-        addToSelect.addClickListener(e-> {
+        addToSelect.addClickListener(e -> {
             if (hours.isEmpty() & minutes.isEmpty() || userWeight.isEmpty() || activitiesByType.isEmpty()) {
                 Notification.show("Please enter data!").setDuration(1000);
-            }else {
-                if (hours.getValue()==null){
+            } else {
+                if (hours.getValue() == null) {
                     hours.setValue(0);
                 }
-                if (minutes.getValue()==null){
+                if (minutes.getValue() == null) {
                     minutes.setValue(0);
                 }
-                int time = hours.getValue()*60 + minutes.getValue();
+                int time = hours.getValue() * 60 + minutes.getValue();
                 double met = repo.getMetValueByName1(activitiesByType.getValue());
 
                 repo.addActivityPerformed(new ActivityPerformed(0,
                         activitiesByType.getValue(),
                         met,
                         userWeight.getValue(),
-                        time ));
+                        time));
                 clearFields();
 
                 loadData();
                 Notification.show("Activity added").setDuration(1000);
-
-            }});
+            }
+        });
         add(addToSelect);
     }
 
@@ -188,7 +185,7 @@ public class ActivityLogger extends VerticalLayout {
         double userWeight;
         int minutes;
         double activityMetValue;
-        double caloriesBurned=0;
+        double caloriesBurned = 0;
         //String activity = ""; not necessary
         DecimalFormat df = new DecimalFormat("##.##");
         List<ActivityPerformed> activityPerformedList = repo.getList(ActivityPerformed.class);
@@ -202,7 +199,7 @@ public class ActivityLogger extends VerticalLayout {
         return df.format(caloriesBurned);
     }
 
-    private void clearFields(){
+    private void clearFields() {
         activityTypes.clear();
         activitiesByType.clear();
         // userWeight.clear();
@@ -210,7 +207,7 @@ public class ActivityLogger extends VerticalLayout {
         minutes.clear();
     }
 
-    private void createTable(){
+    private void createTable() {
         repo.emptyActivitiesTable();
         activitiesPerformed = new Grid<ActivityPerformed>();
         Grid.Column<ActivityPerformed> colName = activitiesPerformed.addColumn(ActivityPerformed::getName).setHeader("Name");
@@ -220,13 +217,11 @@ public class ActivityLogger extends VerticalLayout {
         activitiesPerformed.setHeightByRows(true);
         activitiesPerformed.setVisible(true);
         activitiesPerformed.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
-
     }
 
-    private void loadData(){
+    private void loadData() {
         List result = repo.getList(ActivityPerformed.class);
         activitiesPerformed.setItems(result);
         add(activitiesPerformed);
     }
-
 }
