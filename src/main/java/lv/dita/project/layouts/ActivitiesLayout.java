@@ -1,8 +1,6 @@
 package lv.dita.project.layouts;
 
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import lv.dita.project.data.Activity;
 import lv.dita.project.data.MySqlDataRepository;
@@ -13,11 +11,7 @@ public class ActivitiesLayout extends VerticalLayout {
 
     private Grid<Activity> grid;
 
-
     public ActivitiesLayout() {
-
-      // Label lblProof = new Label("Tests, vai ir redzams activities");
-      //  add(lblProof);
 
         grid = new Grid<>();
 

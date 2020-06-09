@@ -164,6 +164,10 @@ public class FoodLogger extends VerticalLayout {
                 lblEnterQuantity.setVisible(true);
                 lblEnterQuantity.setText("Please enter quantity!");
 //                 Notification.show("Please enter the quantity").setDuration(1000);
+            } else if (foodItemsByType.isEmpty()) {
+                lblEnterQuantity.setVisible(true);
+                lblEnterQuantity.setText("Please select food!");
+//                 Notification.show("Please enter the quantity").setDuration(1000);
             } else {
                 repo.addFoodEaten(new FoodEaten(0,
                         foodItemsByType.getValue(),
@@ -230,29 +234,6 @@ public class FoodLogger extends VerticalLayout {
         gridEaten.setItems(result);
         add(gridEaten);
     }
-
-    public void deleteItem(){
-        createOneItemDeleteButton();
-        gridEaten.addSelectionListener(event-> {
-            createOneItemDeleteButton();
-            deleteSelected.setVisible(true);
-            Optional<FoodEaten> chosenFood = event.getFirstSelectedItem();
-            itemForDelete = chosenFood.get().getName();
-        });
-
-        deleteSelected.addClickListener(e->{
-            repo.deleteItemFromFoodEatenTable(itemForDelete);
-            loadData();
-        });
-    }
-
-    @Contract(" -> new")
-    private @NotNull Component createDeleteReset() {
-        deleteItem();
-
-        return new HorizontalLayout(deleteSelected);
-    }
-
 
 }
 
