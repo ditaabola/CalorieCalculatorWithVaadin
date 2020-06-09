@@ -23,6 +23,9 @@ public interface DataRepository {
     void addFoodEaten(FoodEaten foodEaten);
     void resetFoodEatenTable();
 
+    void emptyActivitiesTable();
+
+
 
     void addActivityPerformed (ActivityPerformed activityPerformed);
 
