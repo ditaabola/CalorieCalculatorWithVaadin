@@ -5,8 +5,8 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
@@ -46,6 +46,9 @@ public class MainView extends VerticalLayout {
 
     public MainView() {
 
+        H1 header = new H1("ENJOY OUR FIRST VAADIN APP CALCULATOR");
+        add(header);
+
         Tab tab1 = new Tab("ACTIVITIES");
         ActivitiesLayout page1 = new ActivitiesLayout();
         page1.setVisible(true);
@@ -59,7 +62,7 @@ public class MainView extends VerticalLayout {
         page3.setVisible(false);
 
         Tab tab4 = new Tab("CALCULATE CALORIES BURNED");
-        CaloriesBurnedLayout2 page4 = new CaloriesBurnedLayout2();
+        CaloriesBurnedLayout page4 = new CaloriesBurnedLayout();
         page4.setVisible(false);
 
         Tab tab5 = new Tab("CALCULATE CALORIES EATEN");
@@ -97,6 +100,7 @@ public class MainView extends VerticalLayout {
         tabs.setSizeFull();
         Div pages = new Div(page1, page2, page3, page4, page5, page6);
         pages.setWidthFull();
+
         Set<Component> pagesShown = Stream.of(page1)
                 .collect(Collectors.toSet());
 

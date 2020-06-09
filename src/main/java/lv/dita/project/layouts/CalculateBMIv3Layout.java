@@ -3,18 +3,13 @@ package lv.dita.project.layouts;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
-import com.vaadin.flow.component.radiobutton.RadioGroupVariant;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.NumberField;
-import lv.dita.project.data.Calculator2;
+import lv.dita.project.data.Calculator;
 import lv.dita.project.data.enums.DailyActivityLevel;
 import lv.dita.project.data.enums.PersonsGender;
 
@@ -90,16 +85,16 @@ public class CalculateBMIv3Layout extends VerticalLayout {
                         int ageUser = age.getValue();
                         DailyActivityLevel actLevUser = dailyActivityLevel.getValue();
 
-                        String bmi = Calculator2.calculateBMI(weightUser, heightUser);
+                        String bmi = Calculator.calculateBMI(weightUser, heightUser);
                         lblCalculatedBmi.setText("BMI: " + bmi);
 
-                        String commentBmi = Calculator2.commentAboutUsersBmi(weightUser, heightUser);
+                        String commentBmi = Calculator.commentAboutUsersBmi(weightUser, heightUser);
                         lblCommentBmi.setText(commentBmi);
 
-                        String commentIbw = Calculator2.calculateIBW(genderUser, heightUser);
+                        String commentIbw = Calculator.calculateIBW(genderUser, heightUser);
                         lblCommentIbw.setText(commentIbw);
 
-                        String commentEer = Calculator2.calculateEER(genderUser, ageUser, weightUser,
+                        String commentEer = Calculator.calculateEER(genderUser, ageUser, weightUser,
                                 heightUser, actLevUser);
                         lblCommentEer.setText(commentEer);
                     }

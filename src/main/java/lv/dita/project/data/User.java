@@ -5,7 +5,6 @@ import lv.dita.project.data.enums.DailyActivityLevel;
 import lv.dita.project.data.enums.PersonsGender;
 import lv.dita.project.data.enums.WeightGoal;
 
-
 @Getter
 public class User {
 
