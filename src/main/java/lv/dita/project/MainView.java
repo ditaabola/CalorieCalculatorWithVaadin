@@ -67,16 +67,6 @@ public class MainView extends VerticalLayout {
         page5.setVisible(false);
         page5.setSizeFull();
         page5.getAlignItems();
-//        tab5.addSelectedTabChangeListener(new SelectedTabChangeListener() {
-//            @Override
-//            public void selectedTabChange(SelectedTabChangeEvent event) {
-//                int position = tab.getTabPosition(tab.getTab(event.getComponent()));
-//                VaadinService.getCurrentRequest().getWrappedSession().setAttribute("indexTab", position);
-//            }
-
-//        if(VaadinService.getCurrentRequest().getWrappedSession().getAttribute("indexTab") != null){
-//            tab.setSelectedTab((int) VaadinService.getCurrentRequest().getWrappedSession().getAttribute("indexTab"));
-//        }
 
         Tab tab6 = new Tab ("YOUR ALL RESULTS");
         UserResultsSummaryLayout page6 = new UserResultsSummaryLayout();
