@@ -8,6 +8,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
+import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import lv.dita.project.layouts.*;
@@ -30,6 +31,7 @@ import java.util.stream.Stream;
  * browser tab/window.
  */
 @Route("")
+@PreserveOnRefresh
 @PWA(name = "Vaadin Application",
         shortName = "Vaadin App",
         description = "This is an example Vaadin application.",
@@ -59,15 +61,31 @@ public class MainView extends VerticalLayout {
         CaloriesBurnedLayout2 page4 = new CaloriesBurnedLayout2();
         page4.setVisible(false);
 
+        Tab tab5 = new Tab("CALCULATE CALORIES EATEN");
+        CaloriesEatenLayout page5 = new CaloriesEatenLayout();
+        page5.setVisible(false);
+
+//        tab5.addSelectedTabChangeListener(new SelectedTabChangeListener() {
+//            @Override
+//            public void selectedTabChange(SelectedTabChangeEvent event) {
+//                int position = tab.getTabPosition(tab.getTab(event.getComponent()));
+//                VaadinService.getCurrentRequest().getWrappedSession().setAttribute("indexTab", position);
+//            }
+
+//        if(VaadinService.getCurrentRequest().getWrappedSession().getAttribute("indexTab") != null){
+//            tab.setSelectedTab((int) VaadinService.getCurrentRequest().getWrappedSession().getAttribute("indexTab"));
+//        }
+
         Map<Tab, Component> tabsToPages = new HashMap<>();
 
         tabsToPages.put(tab1, page1);
         tabsToPages.put(tab2, page2);
         tabsToPages.put(tab3, page3);
         tabsToPages.put(tab4, page4);
+        tabsToPages.put(tab5, page5);
 
-        Tabs tabs = new Tabs(tab1, tab2, tab3, tab4);
-        Div pages = new Div(page1, page2, page3, page4);
+        Tabs tabs = new Tabs(tab1, tab2, tab3, tab4, tab5);
+        Div pages = new Div(page1, page2, page3, page4, page5);
 
         Set<Component> pagesShown = Stream.of(page1)
                 .collect(Collectors.toSet());
@@ -87,6 +105,9 @@ public class MainView extends VerticalLayout {
 
         tabs.setFlexGrowForEnclosedTabs(1);
         setClassName("main-layout");
+
+
+//        });
     }
 
 }
