@@ -2,13 +2,13 @@ package lv.dita.project.layouts;
 
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import lv.dita.project.data.ActivityLogger;
+import lv.dita.project.data.ActivityLoggerList;
 
 public class CaloriesBurnedLayout extends VerticalLayout {
-    private ActivityLogger form;
+    private ActivityLoggerList form;
 
     public CaloriesBurnedLayout() {
-        form = new ActivityLogger();
+        form = new ActivityLoggerList();
         Div content = new Div(form);
         content.addClassName("content");
         content.setSizeFull();
