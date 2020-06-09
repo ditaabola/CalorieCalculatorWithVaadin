@@ -1,6 +1,7 @@
 package lv.dita.project.data.interfaces;
 
 import lv.dita.project.data.*;
+import lv.dita.project.data.activityWithMysql.ActivityPerformed;
 
 import java.util.List;
 
