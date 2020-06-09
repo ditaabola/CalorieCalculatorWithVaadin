@@ -7,10 +7,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 
-public class Calculator2 {
+public class Calculator {
     private double weight;
     private double height;
-
 
     public static String calculateBMI(double weight, double height) {
 

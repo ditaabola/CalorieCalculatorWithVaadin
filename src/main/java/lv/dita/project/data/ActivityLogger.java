@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class ActivityLogger2 extends VerticalLayout {
+public class ActivityLogger extends VerticalLayout {
 
     private Activity activity;
     private DataRepository repo = new MySqlDataRepository();
@@ -38,7 +38,7 @@ public class ActivityLogger2 extends VerticalLayout {
     private Grid<ActivityPerformed> activitiesPerformed;
 
 
-    public ActivityLogger2() {
+    public ActivityLogger() {
         addClassName("activity-logger");
 
         Div addOptions = new Div();

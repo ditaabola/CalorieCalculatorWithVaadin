@@ -14,3 +14,15 @@
   margin-left: 50px;
 }
 
+H1 {
+  width: 100%;
+  text-align: center;
+  color: #edf7fa;
+  background-color: #27496d;
+  font-family: "Dosis", Arial, Helvetica, sans-serif;
+  font-style: italic;
+}
+
+html {
+  background-color: #edf7fa;
+}
