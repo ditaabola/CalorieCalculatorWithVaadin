@@ -65,9 +65,7 @@ public class FoodLogger extends VerticalLayout {
         add(addButtons);
         add(addCalculation);
         add(addTable);
-        createOneItemDeleteButton();
-//        add(deleteSelected);
-//        deleteSelected.setVisible(false);
+        deleteItem();
         createCaloriesCalculationButton();
 
     }
@@ -197,17 +195,7 @@ public class FoodLogger extends VerticalLayout {
         deleteSelected.setText("Delete the selected choice");
         deleteSelected.setVisible(false);
 //        cancel.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        gridEaten.addSelectionListener(selectionEvent -> {
-            deleteSelected.setVisible(true);
-            Optional<FoodEaten> chosenFood = selectionEvent.getFirstSelectedItem();
-            itemForDelete = chosenFood.get().getName();
-            deleteSelected.addClickListener(e -> {
-                repo.deleteItemFromFoodEatenTable(itemForDelete);
-                loadData();
-                deleteSelected.setVisible(false);
 
-            });
-        });
         add(deleteSelected);
     }
 
@@ -216,6 +204,22 @@ public class FoodLogger extends VerticalLayout {
         foodItemsByType.clear();
         quantityEaten.clear();
 
+    }
+
+    private void deleteItem(){
+        createOneItemDeleteButton();
+        gridEaten.addSelectionListener(selectionEvent -> {
+            deleteSelected.setVisible(true);
+            Optional<FoodEaten> chosenFood = selectionEvent.getFirstSelectedItem();
+            chosenFood.ifPresent(e->{
+                itemForDelete =  chosenFood.get().getName();
+                deleteSelected.addClickListener(event -> {
+                    repo.deleteItemFromFoodEatenTable(itemForDelete);
+                    loadData();
+                    deleteSelected.setVisible(false);
+                });
+            });
+        });
     }
 
     private void createTable() {
@@ -229,9 +233,6 @@ public class FoodLogger extends VerticalLayout {
         gridEaten.setWidth("400px");
         gridEaten.setHeightByRows(true);
         gridEaten.setVisible(true);
-//        lblEnterItemSuccess.setVisible(false);
-//        lblEnterItemWarning.setVisible(false);
-//        lblEnterQuantityWarning.setVisible(false);
         gridEaten.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
         gridEaten.setSelectionMode(Grid.SelectionMode.SINGLE);
         add(cancel);
@@ -242,5 +243,4 @@ public class FoodLogger extends VerticalLayout {
         gridEaten.setItems(result);
         add(gridEaten);
     }
-
 }
