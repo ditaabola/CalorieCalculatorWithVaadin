@@ -6,6 +6,9 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.NativeButton;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
@@ -54,7 +57,6 @@ public class FoodLogger extends VerticalLayout {
         Div addTable = new Div();
         addTable.add(createTableData());
         addTable.setWidthFull();
-
 
 
         Div addCalculation = new Div();
@@ -159,7 +161,7 @@ public class FoodLogger extends VerticalLayout {
 //        addToSelect.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         addToSelect.addClickShortcut(Key.ENTER);
         addToSelect.addClickListener(e -> {
-           if (foodItemsByType.isEmpty() || quantityEaten.isEmpty()) {
+            if (foodItemsByType.isEmpty() || quantityEaten.isEmpty()) {
                 lblEnterItemSuccess.setVisible(false);
                 lblEnterItemWarning.setVisible(true);
                 lblEnterItemWarning.setText("Please select food item and / or quantity eaten!");
@@ -171,13 +173,16 @@ public class FoodLogger extends VerticalLayout {
                         calories.getValue()));
                 loadData();
                 lblEnterItemWarning.setVisible(false);
-                lblEnterItemSuccess.setVisible(true);
-                lblEnterItemSuccess.setText("The food item added");
+//                lblEnterItemSuccess.setVisible(true);
+//                lblEnterItemSuccess.setText("The food item added");
                 clearFields();
                 lblCalorieCalculation.setVisible(false);
             }
         });
-
+        Notification notification = new Notification("The food item added",4000);
+        notification.setPosition(Notification.Position.MIDDLE);
+        notification.addThemeVariants(NotificationVariant.LUMO_CONTRAST);
+        addToSelect.addClickListener(event -> notification.open());
         add(addToSelect);
     }
 
@@ -206,13 +211,13 @@ public class FoodLogger extends VerticalLayout {
 
     }
 
-    private void deleteItem(){
+    private void deleteItem() {
         createOneItemDeleteButton();
         gridEaten.addSelectionListener(selectionEvent -> {
             deleteSelected.setVisible(true);
             Optional<FoodEaten> chosenFood = selectionEvent.getFirstSelectedItem();
-            chosenFood.ifPresent(e->{
-                itemForDelete =  chosenFood.get().getName();
+            chosenFood.ifPresent(e -> {
+                itemForDelete = chosenFood.get().getName();
                 deleteSelected.addClickListener(event -> {
                     repo.deleteItemFromFoodEatenTable(itemForDelete);
                     loadData();
