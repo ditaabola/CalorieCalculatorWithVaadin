@@ -6,6 +6,9 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.NativeButton;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
@@ -170,13 +173,16 @@ public class FoodLogger extends VerticalLayout {
                         calories.getValue()));
                 loadData();
                 lblEnterItemWarning.setVisible(false);
-                lblEnterItemSuccess.setVisible(true);
-                lblEnterItemSuccess.setText("The food item added");
+//                lblEnterItemSuccess.setVisible(true);
+//                lblEnterItemSuccess.setText("The food item added");
                 clearFields();
                 lblCalorieCalculation.setVisible(false);
             }
         });
-
+        Notification notification = new Notification("The food item added",4000);
+        notification.setPosition(Notification.Position.MIDDLE);
+        notification.addThemeVariants(NotificationVariant.LUMO_CONTRAST);
+        addToSelect.addClickListener(event -> notification.open());
         add(addToSelect);
     }
 
