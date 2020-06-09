@@ -40,7 +40,6 @@ public class FoodLogger extends VerticalLayout {
     private Label lblEnterItemSuccess = new Label();
     private Label lblEnterItemWarning = new Label();
     private String itemForDelete = "";
-    double caloriesEaten = 0;
     public String totalCaloriesCalculated;
 
     public FoodLogger() {
@@ -63,12 +62,12 @@ public class FoodLogger extends VerticalLayout {
         addCalculation.add(createCalc());
         addCalculation.setWidthFull();
 
+        createCaloriesCalculationButton();
         add(addOptions);
         add(addButtons);
         add(addCalculation);
         add(addTable);
         deleteItem();
-        createCaloriesCalculationButton();
 
     }
 
@@ -124,18 +123,16 @@ public class FoodLogger extends VerticalLayout {
     public String calculateCalories() {
         double quantity = 0;
         double caloriesPer100G = 0;
-        String food = "";
+        double caloriesEaten = 0;
         DecimalFormat df = new DecimalFormat("##.##");
         List<FoodEaten> eatenFoodList = repo.getList(FoodEaten.class);
         for (FoodEaten eatenFood : eatenFoodList) {
-            food = eatenFood.getName();
             quantity = eatenFood.getQuantity();
             caloriesPer100G = eatenFood.getCalories();
             double caloriesPerFoodEaten = (caloriesPer100G / 100) * quantity;
             caloriesEaten += caloriesPerFoodEaten;
-            totalCaloriesCalculated = df.format(caloriesEaten);
         }
-        return totalCaloriesCalculated;
+        return df.format(caloriesEaten);
     }
 
     public void createCaloriesCalculationButton() {
@@ -193,6 +190,7 @@ public class FoodLogger extends VerticalLayout {
             repo.emptyEatenTable();
             clearFields();
             loadData();
+            calculateCalories();
         });
     }
 
