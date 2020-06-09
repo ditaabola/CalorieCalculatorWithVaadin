@@ -304,6 +304,16 @@ public class MySqlDataRepository implements DataRepository {
             }
         }
 
+    @Override
+    public void emptyEatenTable () {
+        try {
+            connection = DriverManager.getConnection(connectionString, userName, passWord);
+            CallableStatement statement = connection.prepareCall("{call spResetFoodEatenTable()}");
+            statement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

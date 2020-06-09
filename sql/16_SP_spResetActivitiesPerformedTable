@@ -1,0 +1,4 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spResetActivityPerformedTable`()
+BEGIN
+    delete from calories_all.activity_performed;
+END

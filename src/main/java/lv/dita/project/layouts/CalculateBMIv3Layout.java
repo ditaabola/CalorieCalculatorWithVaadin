@@ -3,6 +3,7 @@ package lv.dita.project.layouts;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
@@ -104,6 +105,7 @@ public class CalculateBMIv3Layout extends VerticalLayout {
                     }
                 }
             });
+//            calculate.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
             add(calculate);
             add(lblCalculatedBmi);
             add(lblCommentBmi);
