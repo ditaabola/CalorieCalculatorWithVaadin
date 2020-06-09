@@ -70,7 +70,7 @@ CREATE TABLE `activity_performed` (
   `activity_performed_user_weight` decimal(4,1) NOT NULL,
   `activity_performed_minutes` int NOT NULL,
   PRIMARY KEY (`activity_performed_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,7 +79,7 @@ CREATE TABLE `activity_performed` (
 
 LOCK TABLES `activity_performed` WRITE;
 /*!40000 ALTER TABLE `activity_performed` DISABLE KEYS */;
-INSERT INTO `activity_performed` VALUES (1,'2222',22.00,22.0,22),(2,'yoga',8.00,74.0,123),(3,'jogging',8.00,45.0,65),(4,'dancing',7.80,74.0,121);
+INSERT INTO `activity_performed` VALUES (73,'water aerobics',5.30,87.0,120);
 /*!40000 ALTER TABLE `activity_performed` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +138,7 @@ CREATE TABLE `food_eaten` (
   `food_eaten_quantity` double NOT NULL,
   `food_eaten_calories` int NOT NULL,
   PRIMARY KEY (`food_eaten_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,7 +147,7 @@ CREATE TABLE `food_eaten` (
 
 LOCK TABLES `food_eaten` WRITE;
 /*!40000 ALTER TABLE `food_eaten` DISABLE KEYS */;
-INSERT INTO `food_eaten` VALUES (1,'apple',100,50),(2,'banana',50,50),(3,'pear',50,50),(16,'grapefruit red',58,50),(17,'milk whole',56,50),(18,'bread whole wheat',80,50),(19,'testFoodWithCalories',50,100),(20,'grapefruit red',100,100),(21,'bread whole wheat',100,100),(22,'bread whole wheat',80,100),(23,'milk whole',50,100),(24,'frozen yogurt',100,100),(25,'bread whole wheat',500,100),(26,'bread whole wheat',4444,0),(27,'bread whole wheat',5,0),(28,'milk whole',45,0),(29,'frozen yogurt',456,107),(30,'aaaaaa',12,12);
+INSERT INTO `food_eaten` VALUES (38,'milk whole',400,60);
 /*!40000 ALTER TABLE `food_eaten` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -397,6 +397,25 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spResetActivityPerformedTable` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spResetActivityPerformedTable`()
+BEGIN
+    delete from calories_all.activity_performed;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `spResetFoodEatenTable` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -480,4 +499,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-08 18:34:32
+-- Dump completed on 2020-06-09 11:46:52
