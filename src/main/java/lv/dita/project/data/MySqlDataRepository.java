@@ -1,5 +1,6 @@
 package lv.dita.project.data;
 
+import lv.dita.project.data.activityWithMysql.ActivityPerformed;
 import lv.dita.project.data.interfaces.DataRepository;
 import lv.dita.project.data.interfaces.EntityBase;
 import lv.dita.project.data.enums.Constants;

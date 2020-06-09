@@ -1,4 +1,4 @@
-package lv.dita.project.data;
+package lv.dita.project.data.activityWithMysql;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Key;
@@ -13,6 +13,9 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.NumberField;
+import lv.dita.project.data.Activity;
+import lv.dita.project.data.ActivityType;
+import lv.dita.project.data.MySqlDataRepository;
 import lv.dita.project.data.interfaces.DataRepository;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

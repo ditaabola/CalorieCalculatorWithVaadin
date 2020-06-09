@@ -8,6 +8,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.html.Label;
 import lv.dita.project.data.*;
+import lv.dita.project.data.activityWithMysql.ActivityLogger;
 
 public class UserResultsSummaryLayout extends VerticalLayout {
 
