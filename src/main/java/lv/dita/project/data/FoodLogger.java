@@ -56,7 +56,6 @@ public class FoodLogger extends VerticalLayout {
         addTable.setWidthFull();
 
 
-
         Div addCalculation = new Div();
         addCalculation.add(createCalc());
         addCalculation.setWidthFull();
@@ -159,7 +158,7 @@ public class FoodLogger extends VerticalLayout {
 //        addToSelect.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         addToSelect.addClickShortcut(Key.ENTER);
         addToSelect.addClickListener(e -> {
-           if (foodItemsByType.isEmpty() || quantityEaten.isEmpty()) {
+            if (foodItemsByType.isEmpty() || quantityEaten.isEmpty()) {
                 lblEnterItemSuccess.setVisible(false);
                 lblEnterItemWarning.setVisible(true);
                 lblEnterItemWarning.setText("Please select food item and / or quantity eaten!");
@@ -206,13 +205,13 @@ public class FoodLogger extends VerticalLayout {
 
     }
 
-    private void deleteItem(){
+    private void deleteItem() {
         createOneItemDeleteButton();
         gridEaten.addSelectionListener(selectionEvent -> {
             deleteSelected.setVisible(true);
             Optional<FoodEaten> chosenFood = selectionEvent.getFirstSelectedItem();
-            chosenFood.ifPresent(e->{
-                itemForDelete =  chosenFood.get().getName();
+            chosenFood.ifPresent(e -> {
+                itemForDelete = chosenFood.get().getName();
                 deleteSelected.addClickListener(event -> {
                     repo.deleteItemFromFoodEatenTable(itemForDelete);
                     loadData();
