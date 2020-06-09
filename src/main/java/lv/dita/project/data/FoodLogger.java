@@ -169,17 +169,12 @@ public class FoodLogger extends VerticalLayout {
                         quantityEaten.getValue(),
                         calories.getValue()));
                 loadData();
+                Notification.show("The food item added").setDuration(2000);
                 lblEnterItemWarning.setVisible(false);
-//                lblEnterItemSuccess.setVisible(true);
-//                lblEnterItemSuccess.setText("The food item added");
                 clearFields();
                 lblCalorieCalculation.setVisible(false);
             }
         });
-        Notification notification = new Notification("The food item added",4000);
-        notification.setPosition(Notification.Position.MIDDLE);
-        notification.addThemeVariants(NotificationVariant.LUMO_CONTRAST);
-        addToSelect.addClickListener(event -> notification.open());
         add(addToSelect);
     }
 
