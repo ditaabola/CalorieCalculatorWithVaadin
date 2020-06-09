@@ -21,7 +21,7 @@ public interface DataRepository {
     List<Activity> getMetValueByActivityName (String name);
 
     void addFoodEaten(FoodEaten foodEaten);
-    String resetFoodEatenTable();
+    void resetFoodEatenTable();
 
     void emptyActivitiesTable();
 

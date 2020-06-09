@@ -29,7 +29,6 @@ public class ActivitiesLayout extends VerticalLayout {
         MySqlDataRepository repo = new MySqlDataRepository();
         List result = repo.getList(Activity.class);
         grid.setItems(result);
-
         grid.setWidth("600px");
         grid.setHeightByRows(true);
         add(grid);
