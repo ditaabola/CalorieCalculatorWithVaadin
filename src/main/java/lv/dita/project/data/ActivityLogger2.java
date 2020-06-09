@@ -14,13 +14,10 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.NumberField;
-import lv.dita.project.MainView;
 import lv.dita.project.data.interfaces.DataRepository;
-import lv.dita.project.layouts.CaloriesBurnedLayout;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Method;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -146,7 +143,7 @@ public class ActivityLogger2 extends VerticalLayout {
 
     private void createAddActivityToGridButton(){
         addToSelect.setText("Add activity");
-        addToSelect.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
+//        addToSelect.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         addToSelect.addClickShortcut(Key.ENTER);
         addToSelect.addClickListener(e-> {
             if (hours.isEmpty() & minutes.isEmpty() || userWeight.isEmpty() || activitiesByType.isEmpty()) {
@@ -167,7 +164,7 @@ public class ActivityLogger2 extends VerticalLayout {
                         userWeight.getValue(),
                         time ));
                 clearFields();
-                //&&&&&&&&&&&&&&&&&&&&&&refresh
+
                 loadData();
                 Notification.show("Activity added").setDuration(1000);
 
@@ -178,7 +175,7 @@ public class ActivityLogger2 extends VerticalLayout {
     //Pogai vajag citu vietu
     private void createCaloriesCalculationButton() {
         calculateCaloriesBurned.setText("Calculate burned calories");
-        calculateCaloriesBurned.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
+//        calculateCaloriesBurned.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         calculateCaloriesBurned.addClickListener(e -> {
 
             String res = calculateCaloriesBurned();

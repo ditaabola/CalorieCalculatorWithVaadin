@@ -24,6 +24,7 @@ public interface DataRepository {
     void resetFoodEatenTable();
 
     void emptyActivitiesTable();
+    void emptyEatenTable();
 
 
 

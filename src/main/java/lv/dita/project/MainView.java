@@ -45,6 +45,7 @@ public class MainView extends VerticalLayout {
 
     public MainView() {
 
+
         Tab tab1 = new Tab("CALCULATE BMI");
         CalculateBMIv3Layout page1 = new CalculateBMIv3Layout();
         page1.setVisible(true);
@@ -64,7 +65,8 @@ public class MainView extends VerticalLayout {
         Tab tab5 = new Tab("CALCULATE CALORIES EATEN");
         CaloriesEatenLayout page5 = new CaloriesEatenLayout();
         page5.setVisible(false);
-
+        page5.setSizeFull();
+        page5.getAlignItems();
 //        tab5.addSelectedTabChangeListener(new SelectedTabChangeListener() {
 //            @Override
 //            public void selectedTabChange(SelectedTabChangeEvent event) {
@@ -85,8 +87,9 @@ public class MainView extends VerticalLayout {
         tabsToPages.put(tab5, page5);
 
         Tabs tabs = new Tabs(tab1, tab2, tab3, tab4, tab5);
+        tabs.setSizeFull();
         Div pages = new Div(page1, page2, page3, page4, page5);
-
+        pages.setWidthFull();
         Set<Component> pagesShown = Stream.of(page1)
                 .collect(Collectors.toSet());
 
