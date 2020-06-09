@@ -181,7 +181,7 @@ public class ActivityLogger extends VerticalLayout {
         });
     }
 
-    private String calculateCaloriesBurned() {
+    public String calculateCaloriesBurned() {
         double userWeight;
         int minutes;
         double activityMetValue;

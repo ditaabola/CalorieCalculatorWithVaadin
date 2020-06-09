@@ -79,7 +79,6 @@ CREATE TABLE `activity_performed` (
 
 LOCK TABLES `activity_performed` WRITE;
 /*!40000 ALTER TABLE `activity_performed` DISABLE KEYS */;
-INSERT INTO `activity_performed` VALUES (73,'water aerobics',5.30,87.0,120);
 /*!40000 ALTER TABLE `activity_performed` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +137,7 @@ CREATE TABLE `food_eaten` (
   `food_eaten_quantity` double NOT NULL,
   `food_eaten_calories` int NOT NULL,
   PRIMARY KEY (`food_eaten_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,7 +146,6 @@ CREATE TABLE `food_eaten` (
 
 LOCK TABLES `food_eaten` WRITE;
 /*!40000 ALTER TABLE `food_eaten` DISABLE KEYS */;
-INSERT INTO `food_eaten` VALUES (38,'milk whole',400,60);
 /*!40000 ALTER TABLE `food_eaten` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,6 +275,25 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `spCaloriesByName`(in name varchar(100), out calories double)
 BEGIN
     select food_calories_per_100g into calories from calories_all.food_calories where food_name = name;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spDeleteOneItemFromFoodEatenTable` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spDeleteOneItemFromFoodEatenTable`(in name varchar(100))
+BEGIN
+delete from calories_all.food_eaten where food_eaten_name = name;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -499,4 +516,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-09 11:46:52
+-- Dump completed on 2020-06-09 17:50:53
