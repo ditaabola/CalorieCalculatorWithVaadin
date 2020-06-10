@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -100,6 +102,8 @@ public class Application extends SpringBootServletInitializer {
         String calories = fl.calculateCalories();
         System.out.println("You have eaten " + calories + " calories");
     }
+
+
 }
 
 
