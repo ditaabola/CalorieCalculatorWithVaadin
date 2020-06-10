@@ -154,6 +154,29 @@ public class MySqlDataRepository implements DataRepository {
     }
 
     @Override
+    public List<ActivityListByCalories> getListWithCalories(int time, double weight, double calories) {
+
+        try {
+            connection = DriverManager.getConnection(connectionString, userName, passWord);
+            CallableStatement statement = connection.prepareCall("{call spGetBurnedCaloriesByTime(?,?,?)}");
+            statement.setInt("timeMin", time);
+            statement.setDouble("weight", weight);
+            statement.setDouble("cal", calories);
+
+            ResultSet rs = statement.executeQuery();
+            List<ActivityListByCalories> items = new ArrayList<>();
+            while (rs.next()) {
+                items.add(ActivityListByCalories.create(rs));
+            }
+            return items;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public double getMetValueByName1(String name) {
         try {
             connection = DriverManager.getConnection(connectionString, userName, passWord);
