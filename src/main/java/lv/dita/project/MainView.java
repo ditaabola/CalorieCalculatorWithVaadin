@@ -69,33 +69,33 @@ public class MainView extends VerticalLayout {
         H1 header = new H1("ENJOY OUR FIRST VAADIN APP CALCULATOR");
         add(header);
 
-        Tab tab1 = new Tab("ACTIVITIES");
-        ActivitiesLayout page1 = new ActivitiesLayout();
+        Tab tab6 = new Tab("ACTIVITIES");
+        ActivitiesLayout page6 = new ActivitiesLayout();
+        page6.setVisible(false);
+
+        Tab tab5 = new Tab("FOOD");
+        FoodLayout page5 = new FoodLayout();
+        page5.setVisible(false);
+
+        Tab tab1 = new Tab("CALCULATE BMI & EER");
+        CalculateBMILayout page1 = new CalculateBMILayout();
         page1.setVisible(true);
 
-        Tab tab2 = new Tab("FOOD");
-        FoodLayout page2 = new FoodLayout();
-        page2.setVisible(false);
-
-        Tab tab3 = new Tab("CALCULATE BMI & EER");
-        CalculateBMILayout page3 = new CalculateBMILayout();
+        Tab tab3 = new Tab("CALCULATE CALORIES BURNED");
+        CaloriesBurnedLayout page3 = new CaloriesBurnedLayout();
         page3.setVisible(false);
 
-        Tab tab4 = new Tab("CALCULATE CALORIES BURNED");
-        CaloriesBurnedLayout page4 = new CaloriesBurnedLayout();
+        Tab tab2 = new Tab("CALCULATE CALORIES EATEN");
+        CaloriesEatenLayout page2 = new CaloriesEatenLayout();
+        page2.setVisible(false);
+        page2.setSizeFull();
+        page2.getAlignItems();
+
+        Tab tab4 = new Tab ("YOUR ALL RESULTS");
+        UserResultsSummaryLayout page4 = new UserResultsSummaryLayout();
         page4.setVisible(false);
-
-        Tab tab5 = new Tab("CALCULATE CALORIES EATEN");
-        CaloriesEatenLayout page5 = new CaloriesEatenLayout();
-        page5.setVisible(false);
-        page5.setSizeFull();
-        page5.getAlignItems();
-
-        Tab tab6 = new Tab ("YOUR ALL RESULTS");
-        UserResultsSummaryLayout page6 = new UserResultsSummaryLayout();
-        page6.setVisible(false);
-        page6.setSizeFull();
-        page6.getAlignItems();
+        page4.setSizeFull();
+        page4.getAlignItems();
 
         Map<Tab, Component> tabsToPages = new HashMap<>();
 

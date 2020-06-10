@@ -18,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ActivityLoggerList extends VerticalLayout {
 
@@ -37,6 +38,8 @@ public class ActivityLoggerList extends VerticalLayout {
     private List<ActivityPerformed2> activitiesPerformedList = new ArrayList<>();
     private Div addTable;
     private Label lblInfoAboutAdding = new Label();
+//    private Button deleteSelected = new Button();
+//    private String itemForDelete = "";
 
     public ActivityLoggerList() {
         addClassName("activity-logger");
@@ -56,6 +59,8 @@ public class ActivityLoggerList extends VerticalLayout {
         add(addOptions);
         add(addButtons);
         add(addCalculation);
+
+//        deleteItem();
 
         reloadGrid();
     }
@@ -215,4 +220,28 @@ public class ActivityLoggerList extends VerticalLayout {
         }
         return df.format(calories);
     }
+//
+//    private void createOneItemDeleteButton() {
+//        deleteSelected.setText("Delete the selected choice");
+//        deleteSelected.setVisible(false);
+////        cancel.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+//
+//        add(deleteSelected);
+//    }
+//
+//    private void deleteItem() {
+//        createOneItemDeleteButton();
+//        activitiesPerformedGrid.addSelectionListener(selectionEvent -> {
+//            deleteSelected.setVisible(true);
+//            Optional<ActivityPerformed2> activitiesPerformed = selectionEvent.getFirstSelectedItem();
+//            activitiesPerformed.ifPresent(e -> {
+//                itemForDelete = activitiesPerformed.get().getName();
+//                deleteSelected.addClickListener(event -> {
+//                    repo.deleteItemFromFoodEatenTable(itemForDelete);
+//                    reloadGrid();
+//                    deleteSelected.setVisible(false);
+//                });
+//            });
+//        });
+//    }
 }
