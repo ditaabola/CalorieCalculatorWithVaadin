@@ -2,6 +2,7 @@ package lv.dita.project.layouts;
 
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Label;
@@ -63,6 +64,8 @@ public class CalculateBMILayout extends VerticalLayout {
             lblCommentIbw = new Label();
             lblCommentEer = new Label();
 
+
+
             calculate = new Button("Calculate", (ComponentEventListener<ClickEvent<Button>>) buttonClickEvent -> {
 
                 if (height.isEmpty() || weight.isEmpty() || age.isEmpty() || dailyActivityLevel.isEmpty()) {
@@ -87,18 +90,21 @@ public class CalculateBMILayout extends VerticalLayout {
                     String commentEer = Calculator.calculateEER(genderUser, ageUser, weightUser,
                             heightUser, actLevUser);
                     DecimalFormat df = new DecimalFormat("##.##");
-                    SessionHandler.setUserEEr(commentEer);
+
                     lblCommentEer.setText(commentEer);
                 }
             });
+            calculate.addClickShortcut(Key.ENTER);
             add(calculate);
             add(lblCalculatedBmi);
             add(lblCommentBmi);
             add(lblCommentIbw);
             add(lblCommentEer);
 
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }

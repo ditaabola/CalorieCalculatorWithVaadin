@@ -18,9 +18,4 @@ public class ActivityPerformed2 {
         this.calories = calories;
     }
 
-    public ActivityPerformed2(){
-
-    }
-
-
 }

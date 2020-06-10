@@ -134,7 +134,7 @@ public class FoodLogger extends VerticalLayout {
             caloriesPer100G = eatenFood.getCalories();
             double caloriesPerFoodEaten = (caloriesPer100G / 100) * quantity;
             caloriesEaten += caloriesPerFoodEaten;
-            SessionHandler.setFoodCalories(df.format(caloriesEaten));
+            SessionHandler.setFoodCalories(caloriesEaten);
         }
         return df.format(caloriesEaten);
     }
