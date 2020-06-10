@@ -29,13 +29,12 @@ public class UserResultsSummaryLayout extends VerticalLayout {
             double bd = (calculateCalorieBudget(userEer, eatenCalories, burntCalories));
 
             if (userEer == 0 && (eatenCalories == 0 || burntCalories == 0)) {
-                lblCommentDataMissingWarning.setText("Please enter the data and do calculations first");
-                lblCommentDataMissingWarning.setVisible(true);
-                add(lblCommentDataMissingWarning);
+                lblCommentEer.setVisible(true);
+                lblCommentEer.setText("Please enter the data and do calculations first");
+                add(lblCommentEer);
 
             } else {
-                lblCommentDataMissingWarning.setVisible(false);
-                remove(lblCommentDataMissingWarning);
+
                 lblCommentEer.setText("Your calorie budget for a day is " + userEer + " calories");
                 lblCommentFood.setText("You have eaten " + eatenCalories + " calories");
                 lblCommentActivities.setText("You have burnt " + burntCalories + " calories");
