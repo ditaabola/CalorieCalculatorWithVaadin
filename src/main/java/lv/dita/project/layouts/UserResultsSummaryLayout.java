@@ -33,21 +33,28 @@ public class UserResultsSummaryLayout extends VerticalLayout {
     private Component generateDataForCurrentSession() {
             Button generateUserData = new Button("Generate my calorie data", event -> {
             v.getSession();
+
+                Label lblCommentEer = new Label();
+//                DecimalFormat df = new DecimalFormat("##.##");
+//                String resultActivities = df.format(calories);
+                lblCommentEer.setText("Your EER was " + SessionHandler.getUserEEr() + " calories");
+                lblCommentEer.setVisible(true);
+                add(lblCommentEer);
                 Label lblCommentFood = new Label();
-                resultFood = activeUserFood.calculateCalories();
-                lblCommentFood.setText("You have eaten " + resultFood + " calories");
+//                resultFood = activeUserFood.calculateCalories();
+                lblCommentFood.setText("You have eaten " + SessionHandler.getFoodCalories() + " calories");
                 lblCommentFood.setVisible(true);
                 add(lblCommentFood);
 
-                list = activeUserActivities.getActivitiesPerformedList();
-                double calories = 0;
-                for(ActivityPerformed2 act: list){
-                    calories += act.getCalories();
-                }
+//                list = activeUserActivities.getActivitiesPerformedList();
+//                double calories = 0;
+//                for(ActivityPerformed2 act: list){
+//                    calories += act.getCalories();
+//                }
                 Label lblCommentActivities = new Label();
-                DecimalFormat df = new DecimalFormat("##.##");
-                String resultActivities = df.format(calories);
-                lblCommentActivities.setText("You have burned " + resultActivities + " calories");
+//                DecimalFormat df = new DecimalFormat("##.##");
+//                String resultActivities = df.format(calories);
+                lblCommentActivities.setText("You have burned " + SessionHandler.getActivitiesCalories() + " calories");
                 lblCommentActivities.setVisible(true);
                 add(lblCommentActivities);
 

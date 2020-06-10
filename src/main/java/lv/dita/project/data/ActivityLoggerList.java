@@ -224,6 +224,7 @@ public class ActivityLoggerList extends VerticalLayout {
         DecimalFormat df = new DecimalFormat("##.##");
         for (ActivityPerformed2 act : activitiesPerformedList) {
             calories += act.getCalories();
+            SessionHandler.setActivitiesCalories(df.format(calories));
         }
         return df.format(calories);
     }

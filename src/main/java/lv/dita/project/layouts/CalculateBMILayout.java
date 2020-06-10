@@ -10,8 +10,11 @@ import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.NumberField;
 import lv.dita.project.data.Calculator;
+import lv.dita.project.data.SessionHandler;
 import lv.dita.project.data.enums.DailyActivityLevel;
 import lv.dita.project.data.enums.PersonsGender;
+
+import java.text.DecimalFormat;
 
 public class CalculateBMILayout extends VerticalLayout {
 
@@ -83,6 +86,8 @@ public class CalculateBMILayout extends VerticalLayout {
 
                     String commentEer = Calculator.calculateEER(genderUser, ageUser, weightUser,
                             heightUser, actLevUser);
+                    DecimalFormat df = new DecimalFormat("##.##");
+                    SessionHandler.setUserEEr(commentEer);
                     lblCommentEer.setText(commentEer);
                 }
             });

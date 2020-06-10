@@ -79,8 +79,10 @@ public class Calculator {
 
         } else if (gender.equals(PersonsGender.MALE)) {
             eer = (int) ((662 - (9.53 * age)) + (activityLevel.getPa() * ((15.91 * weight) + (539.6 * height))));
+
             int caloriesToLoseWeight = eer - ((eer / 100) * 30);
             int caloriesToGainWeight = eer + ((eer / 100) * 30);
+
 
             return "To maintain your current weight you need " + eer + " calories a day. " +
                     " To lose weight you need " + caloriesToLoseWeight + " calories a day. " +
