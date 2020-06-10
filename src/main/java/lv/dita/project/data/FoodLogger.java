@@ -49,7 +49,6 @@ public class FoodLogger extends VerticalLayout {
         addOptions.add(createSelectOptionLayout(), lblEnterItemSuccess, lblEnterItemWarning);
         addOptions.setWidthFull();
 
-
         Div addButtons = new Div();
         addButtons.add(createButtonsLayout());
         addButtons.setWidthFull();
@@ -57,7 +56,6 @@ public class FoodLogger extends VerticalLayout {
         Div addTable = new Div();
         addTable.add(createTableData());
         addTable.setWidthFull();
-
 
         Div addCalculation = new Div();
         addCalculation.add(createCalc());
@@ -69,7 +67,6 @@ public class FoodLogger extends VerticalLayout {
         add(addCalculation);
         add(addTable);
         deleteItem();
-
         setHorizontalComponentAlignment(Alignment.CENTER, addOptions, addButtons, addCalculation);
 
     }
@@ -103,7 +100,6 @@ public class FoodLogger extends VerticalLayout {
         foodTypes.addValueChangeListener(e -> {
             List<Food> items = repo.getFoodItemsByType(e.getValue());
             foodItemsByType.setItems(items.stream().map(s -> s.getName()));
-
         });
     }
 
@@ -113,7 +109,6 @@ public class FoodLogger extends VerticalLayout {
         foodItemsByType.setItems(res.stream().map(s -> s.getName()));
         foodItemsByType.addValueChangeListener(e -> {
             calories.setValue(repo.getCaloriesByName(foodItemsByType.getValue()));
-
         });
     }
 
@@ -141,7 +136,6 @@ public class FoodLogger extends VerticalLayout {
 
     public void createCaloriesCalculationButton() {
         calculateCaloriesEaten.setText("Calculate calories eaten");
-//        calculateCaloriesEaten.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         calculateCaloriesEaten.addClickListener(e -> {
             String res = calculateCalories();
             lblCalorieCalculation.setText("The total of the calories you have eaten during the day is: " + res);
@@ -152,8 +146,8 @@ public class FoodLogger extends VerticalLayout {
     @Contract(" -> new")
     private @NotNull Component createButtonsLayout() {
         createAddFoodToGridButton();
-        createResetChoiceButton();
-        return new HorizontalLayout(addToSelect, cancel);
+//        createResetChoiceButton();
+        return new HorizontalLayout(addToSelect);
     }
 
     public void createAddFoodToGridButton() {
@@ -172,7 +166,6 @@ public class FoodLogger extends VerticalLayout {
                         quantityEaten.getValue(),
                         calories.getValue()));
                 loadData();
-//                Notification.show("The food item added").setDuration(2000);
                 lblEnterItemSuccess.setText("The food item added");
                 lblEnterItemSuccess.setVisible(true);
                 lblEnterItemWarning.setVisible(false);
@@ -183,16 +176,15 @@ public class FoodLogger extends VerticalLayout {
         add(addToSelect);
     }
 
-    private void createResetChoiceButton() {
-        cancel.setText("Reset the choice");
-//        cancel.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        cancel.addClickListener(e -> {
-            repo.emptyEatenTable();
-            clearFields();
-            loadData();
-            calculateCalories();
-        });
-    }
+//    private void createResetChoiceButton() {
+//        cancel.setText("Reset the choice");
+//        cancel.addClickListener(e -> {
+//            repo.emptyEatenTable();
+//            clearFields();
+//            loadData();
+//            calculateCalories();
+//        });
+//    }
 
     private void createOneItemDeleteButton() {
         deleteSelected.setText("Delete the selected choice");
@@ -238,7 +230,7 @@ public class FoodLogger extends VerticalLayout {
         gridEaten.setVisible(true);
         gridEaten.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
         gridEaten.setSelectionMode(Grid.SelectionMode.SINGLE);
-        add(cancel);
+//        add(cancel);
     }
 
     private void loadData() {
@@ -247,6 +239,18 @@ public class FoodLogger extends VerticalLayout {
         add(gridEaten);
     }
 
+//    private void deleteItem() {
+//        gridEaten.addSelectionListener(selectionEvent -> {
+//            Optional<FoodEaten> chosenFood = selectionEvent.getFirstSelectedItem();
+//            chosenFood.ifPresent(e -> {
+//                gridEaten.addComponentColumn(item -> new Button("Delete", click -> {
+//                    itemForDelete = chosenFood.get().getName();
+//                    repo.deleteItemFromFoodEatenTable(itemForDelete);
+//                    loadData();
+//                }));
+//            });
+//        });
+//    }
 
 //    Notification notification = new Notification("The food item added", 2000);
 //        notification.setPosition(Notification.Position.TOP_START);

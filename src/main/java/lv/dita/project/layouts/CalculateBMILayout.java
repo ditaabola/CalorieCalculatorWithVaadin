@@ -14,6 +14,7 @@ import lv.dita.project.data.Calculator;
 import lv.dita.project.data.SessionHandler;
 import lv.dita.project.data.enums.DailyActivityLevel;
 import lv.dita.project.data.enums.PersonsGender;
+import lv.dita.project.data.enums.WeightGoal;
 
 import java.text.DecimalFormat;
 
@@ -29,6 +30,7 @@ public class CalculateBMILayout extends VerticalLayout {
     private Label lblCommentEer;
     private RadioButtonGroup<PersonsGender> gender;
     private ComboBox<DailyActivityLevel> dailyActivityLevel;
+    private ComboBox<WeightGoal> weightGoal;
 
     public CalculateBMILayout() {
 
@@ -59,16 +61,21 @@ public class CalculateBMILayout extends VerticalLayout {
             dailyActivityLevel.setRequired(true);
             add(dailyActivityLevel);
 
+            weightGoal = new ComboBox<>();
+            weightGoal.setPlaceholder("Select your weight goal");
+            weightGoal.setItems(WeightGoal.values());
+            weightGoal.setRequired(true);
+            add(weightGoal);
+
             lblCalculatedBmi = new Label();
             lblCommentBmi = new Label();
             lblCommentIbw = new Label();
             lblCommentEer = new Label();
 
 
-
             calculate = new Button("Calculate", (ComponentEventListener<ClickEvent<Button>>) buttonClickEvent -> {
 
-                if (height.isEmpty() || weight.isEmpty() || age.isEmpty() || dailyActivityLevel.isEmpty()) {
+                if (height.isEmpty() || weight.isEmpty() || age.isEmpty() || dailyActivityLevel.isEmpty() || weightGoal.isEmpty()) {
                     lblCalculatedBmi.setText("Please enter data!");
                 } else {
 
@@ -77,6 +84,7 @@ public class CalculateBMILayout extends VerticalLayout {
                     PersonsGender genderUser = gender.getValue();
                     int ageUser = age.getValue();
                     DailyActivityLevel actLevUser = dailyActivityLevel.getValue();
+                    WeightGoal goalUser = weightGoal.getValue();
 
                     String bmi = Calculator.calculateBMI(weightUser, heightUser);
                     lblCalculatedBmi.setText("BMI: " + bmi);
@@ -88,7 +96,7 @@ public class CalculateBMILayout extends VerticalLayout {
                     lblCommentIbw.setText(commentIbw);
 
                     String commentEer = Calculator.calculateEER(genderUser, ageUser, weightUser,
-                            heightUser, actLevUser);
+                            heightUser, actLevUser, goalUser);
                     DecimalFormat df = new DecimalFormat("##.##");
 
                     lblCommentEer.setText(commentEer);
