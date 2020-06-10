@@ -3,10 +3,13 @@ package lv.dita.project.layouts;
 import com.vaadin.flow.component.Component;
 
 
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.server.VaadinSession;
 import lv.dita.project.data.*;
 import lv.dita.project.data.activityWithMysql.ActivityLogger;
 
@@ -14,6 +17,10 @@ public class UserResultsSummaryLayout extends VerticalLayout {
 
     private Label lblCommentFood = new Label();
     private Label lblCommentActivities = new Label();
+    private String resultFood = "";
+    private String resultActivities = "";
+    FoodLogger activeUserFood = new FoodLogger();
+    ActivityLoggerList activeUserActivities = new ActivityLoggerList();
 
     public UserResultsSummaryLayout() {
 
@@ -21,31 +28,26 @@ public class UserResultsSummaryLayout extends VerticalLayout {
         div.add(createLayout());
         add(div);
 
-        FoodLogger activeUserFood = new FoodLogger();
-        Calculator activeUserCalculation = new Calculator();
-        ActivityLogger activeUserActivities = new ActivityLogger();
-        String result = activeUserFood.totalCaloriesCalculated;
+        Button generateUserData = new Button("Generate my calorie data", event -> {
+            VaadinSession.getCurrent().getSession();
 
-//        double calories = activeUserFood.getCaloriesEaten();
+            resultFood = activeUserFood.calculateCalories();
+            lblCommentFood.setText("You have eaten " + resultFood + " calories");
+            lblCommentFood.setVisible(true);
 
-        lblCommentFood.setText("You have eaten " + result + " calories");
-        lblCommentFood.setVisible(true);
-//        lblCommentFood.setVerticalAlign(VerticalAlign.HIGH);
+            resultActivities = activeUserActivities.calculateCaloriesBurnedFromList();
+            lblCommentActivities.setText("You have burned " + resultActivities + " calories");
+            lblCommentActivities.setVisible(true);
 
+        });
 
-//        String activities = activeUserActivities.calculateCaloriesBurned();
-//        lblCommentActivities.setText(activities);
-//        lblCommentActivities.setVisible(true);
-//        lblCommentActivities.setVerticalAlign(VerticalAlign.HIGH);
-
-//        String calculation = activeUserCalculation.calculateEER();
-
+        add(generateUserData);
 
     }
 
     public Component createLayout(){
 
-        return new HorizontalLayout(lblCommentFood);
+        return new HorizontalLayout(lblCommentFood, lblCommentActivities);
     }
 
 
