@@ -36,9 +36,6 @@ public class ActivityLoggerList extends VerticalLayout {
     private Grid<ActivityPerformed2> activitiesPerformedGrid;
     private ActivityPerformed2 newActivity;
 
-    public List<ActivityPerformed2> getActivitiesPerformedList() {
-        return activitiesPerformedList;
-    }
 
     private List<ActivityPerformed2> activitiesPerformedList = new ArrayList<>();
     private Div addTable;
@@ -131,7 +128,7 @@ public class ActivityLoggerList extends VerticalLayout {
         if (minutes.getValue() == null) {
             minutes.setValue(0);
         }
-        DecimalFormat df = new DecimalFormat("##.##");
+//        DecimalFormat df = new DecimalFormat("##.##");
         int time = hours.getValue() * 60 + minutes.getValue();
         double calories = (met * 3.5 * weight) / 200 * time;
 //        calories = Double.valueOf(df.format(calories)); //not necessarry

@@ -49,7 +49,6 @@ public class FoodLogger extends VerticalLayout {
         addOptions.add(createSelectOptionLayout(), lblEnterItemSuccess, lblEnterItemWarning);
         addOptions.setWidthFull();
 
-
         Div addButtons = new Div();
         addButtons.add(createButtonsLayout());
         addButtons.setWidthFull();
@@ -68,7 +67,6 @@ public class FoodLogger extends VerticalLayout {
         add(addCalculation);
         add(addTable);
         deleteItem();
-
         setHorizontalComponentAlignment(Alignment.CENTER, addOptions, addButtons, addCalculation);
 
     }
@@ -148,8 +146,8 @@ public class FoodLogger extends VerticalLayout {
     @Contract(" -> new")
     private @NotNull Component createButtonsLayout() {
         createAddFoodToGridButton();
-        createResetChoiceButton();
-        return new HorizontalLayout(addToSelect, cancel);
+//        createResetChoiceButton();
+        return new HorizontalLayout(addToSelect);
     }
 
     public void createAddFoodToGridButton() {
@@ -178,15 +176,15 @@ public class FoodLogger extends VerticalLayout {
         add(addToSelect);
     }
 
-    private void createResetChoiceButton() {
-        cancel.setText("Reset the choice");
-        cancel.addClickListener(e -> {
-            repo.emptyEatenTable();
-            clearFields();
-            loadData();
-            calculateCalories();
-        });
-    }
+//    private void createResetChoiceButton() {
+//        cancel.setText("Reset the choice");
+//        cancel.addClickListener(e -> {
+//            repo.emptyEatenTable();
+//            clearFields();
+//            loadData();
+//            calculateCalories();
+//        });
+//    }
 
     private void createOneItemDeleteButton() {
         deleteSelected.setText("Delete the selected choice");
@@ -232,7 +230,7 @@ public class FoodLogger extends VerticalLayout {
         gridEaten.setVisible(true);
         gridEaten.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
         gridEaten.setSelectionMode(Grid.SelectionMode.SINGLE);
-        add(cancel);
+//        add(cancel);
     }
 
     private void loadData() {

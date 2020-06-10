@@ -18,6 +18,7 @@ import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.server.VaadinSession;
+import lv.dita.project.data.SessionHandler;
 import lv.dita.project.layouts.*;
 
 import java.util.HashMap;
@@ -61,6 +62,9 @@ public class MainView extends VerticalLayout {
         Button close = new Button("Close session", event -> {
             VaadinSession.getCurrent().getSession().invalidate();
             UI.getCurrent().getPage().reload();
+            SessionHandler.setUserEEr(0);
+            SessionHandler.setActivitiesCalories(0);
+            SessionHandler.setFoodCalories(0);
 
         });
         add(close);

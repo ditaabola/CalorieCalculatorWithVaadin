@@ -2,16 +2,11 @@ package lv.dita.project.layouts;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.html.Label;
 import lv.dita.project.data.*;
-import java.text.DecimalFormat;
-
 
 public class UserResultsSummaryLayout extends VerticalLayout {
-
-    private DecimalFormat df = new DecimalFormat("##.##");
 
     public UserResultsSummaryLayout() {
         add(generateDataForCurrentSession());
@@ -21,30 +16,49 @@ public class UserResultsSummaryLayout extends VerticalLayout {
     private Component generateDataForCurrentSession() {
         Button generateUserData = new Button("Generate my calorie data", event -> {
 
-            Span lblCommentEer = new Span();
-            lblCommentEer.getStyle();
-            double userEer = SessionHandler.getUserEEr();
-            lblCommentEer.setText("The calorie budget suggested  for a day is " + df.format(userEer) + " calories");
-            lblCommentEer.setVisible(true);
-            add(lblCommentEer);
+            Label lblCommentEer = new Label();
             Label lblCommentFood = new Label();
-            double eatenCalories = SessionHandler.getFoodCalories();
-            lblCommentFood.setText("You have eaten " + eatenCalories + " calories");
-            lblCommentFood.setVisible(true);
-            add(lblCommentFood);
-
             Label lblCommentActivities = new Label();
-            double burntCalories = SessionHandler.getActivitiesCalories();
-            lblCommentActivities.setText("You have burnt " + burntCalories + " calories");
-            lblCommentActivities.setVisible(true);
-            add(lblCommentActivities);
-
             Label lblCommentBudget = new Label();
-            double bd = (calculateCalorieBudget(1500, eatenCalories, burntCalories));
-            lblCommentBudget.setText("Your calorie budget for the rest of the day is " + df.format(bd) + " calories");
-            lblCommentBudget.setVisible(true);
-            lblCommentBudget.setSizeFull();
-            add(lblCommentBudget);
+            Label lblCommentDataMissingWarning = new Label ();
+
+
+            double userEer = SessionHandler.getUserEEr();
+            double eatenCalories = SessionHandler.getFoodCalories();
+            double burntCalories = SessionHandler.getActivitiesCalories();
+            double bd = (calculateCalorieBudget(userEer, eatenCalories, burntCalories));
+
+            if (userEer == 0 && (eatenCalories == 0 || burntCalories == 0)) {
+                lblCommentDataMissingWarning.setText("Please enter the data and do calculations first");
+                lblCommentDataMissingWarning.setVisible(true);
+                add(lblCommentDataMissingWarning);
+
+            } else {
+                lblCommentDataMissingWarning.setVisible(false);
+                remove(lblCommentDataMissingWarning);
+                lblCommentEer.setText("Your calorie budget for a day is " + userEer + " calories");
+                lblCommentFood.setText("You have eaten " + eatenCalories + " calories");
+                lblCommentActivities.setText("You have burnt " + burntCalories + " calories");
+
+                lblCommentEer.setVisible(true);
+                lblCommentFood.setVisible(true);
+                lblCommentActivities.setVisible(true);
+
+                add(lblCommentEer);
+                add(lblCommentFood);
+                add(lblCommentActivities);
+
+                if (bd > 0) {
+                    lblCommentBudget.setText("You have " + bd + " calories left");
+                } else {
+                    lblCommentBudget.setText("Better burn " + bd + " more calories today ");
+                }
+
+                lblCommentBudget.setVisible(true);
+                add(lblCommentBudget);
+            }
+
+
         });
 
         return generateUserData;
