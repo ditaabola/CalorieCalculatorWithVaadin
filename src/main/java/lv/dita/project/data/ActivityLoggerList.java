@@ -207,7 +207,7 @@ public class ActivityLoggerList extends VerticalLayout {
         });
     }
 
-    private String calculateCaloriesBurnedFromList() {
+    public String calculateCaloriesBurnedFromList() {
         double calories = 0;
         DecimalFormat df = new DecimalFormat("##.##");
         for (ActivityPerformed2 act : activitiesPerformedList) {

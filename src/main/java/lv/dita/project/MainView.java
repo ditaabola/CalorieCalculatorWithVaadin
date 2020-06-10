@@ -2,6 +2,8 @@
 package lv.dita.project;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.*;
@@ -10,9 +12,11 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
+import com.vaadin.flow.server.VaadinSession;
 import lv.dita.project.layouts.*;
 
 import java.util.HashMap;
@@ -34,6 +38,7 @@ import java.util.stream.Stream;
  * browser tab/window.
  */
 @Route("")
+@PageTitle("Login | Calorie calculator")
 @PreserveOnRefresh
 @PWA(name = "Vaadin Application",
         shortName = "Vaadin App",
@@ -50,6 +55,16 @@ public class MainView extends VerticalLayout {
         logo.setSize("100px");
         logo.setColor("#27496d");
         add(logo);
+
+
+        Button close = new Button("Close session", event -> {
+            VaadinSession.getCurrent().getSession().invalidate();
+            UI.getCurrent().getPage().reload();
+        });
+        add(close);
+
+
+
 
         H1 header = new H1("ENJOY OUR FIRST VAADIN APP CALCULATOR");
         add(header);
