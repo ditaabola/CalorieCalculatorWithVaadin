@@ -146,14 +146,11 @@ public class ActivityLoggerList extends VerticalLayout {
         return activitiesPerformedList;
     }
 
-
-
-
-
     private void createWeightField() {
         userWeight.setLabel("Weight in kg");
         userWeight.setWidth("100px");
         userWeight.setMin(2d);
+        userWeight.getValue();
     }
 
     private void createMinutesField() {
@@ -224,18 +221,12 @@ public class ActivityLoggerList extends VerticalLayout {
         DecimalFormat df = new DecimalFormat("##.##");
         for (ActivityPerformed2 act : activitiesPerformedList) {
             calories += act.getCalories();
+            SessionHandler.setActivitiesCalories(calories);
         }
         return df.format(calories);
     }
 
-    public String getCaloriesBurned() {
-        double caloriesBurned = 0;
-        DecimalFormat df = new DecimalFormat("##.##");
-        for (ActivityPerformed2 act : activitiesPerformedList) {
-            caloriesBurned += act.getCalories();
-        }
-        return df.format(caloriesBurned);
-    }
+
 //
 //    private void createOneItemDeleteButton() {
 //        deleteSelected.setText("Delete the selected choice");
