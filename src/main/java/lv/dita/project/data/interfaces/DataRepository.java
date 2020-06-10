@@ -20,6 +20,7 @@ public interface DataRepository {
     List<Activity> getActivityByLevel (String level);
     List<Activity> getActivityByType (String type);
     List<Activity> getMetValueByActivityName (String name);
+    List<ActivityListByCalories> getListWithCalories (int time, double weight, double calories);
 
     void addFoodEaten(FoodEaten foodEaten);
     void deleteItemFromFoodEatenTable(String name);
