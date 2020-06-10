@@ -3,6 +3,8 @@ package lv.dita.project.data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 public class ActivityPerformed2 {
 
@@ -15,5 +17,10 @@ public class ActivityPerformed2 {
         this.minutes = minutes;
         this.calories = calories;
     }
+
+    public ActivityPerformed2(){
+
+    }
+
 
 }

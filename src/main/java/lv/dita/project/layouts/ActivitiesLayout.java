@@ -26,6 +26,7 @@ public class ActivitiesLayout extends VerticalLayout {
         grid.setWidth("600px");
         grid.setHeightByRows(true);
         add(grid);
+        setHorizontalComponentAlignment(Alignment.CENTER, grid);
     }
 }
 

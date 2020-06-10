@@ -91,6 +91,7 @@ public class CalculateBMILayout extends VerticalLayout {
             add(lblCommentBmi);
             add(lblCommentIbw);
             add(lblCommentEer);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

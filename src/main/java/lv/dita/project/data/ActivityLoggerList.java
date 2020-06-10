@@ -35,6 +35,11 @@ public class ActivityLoggerList extends VerticalLayout {
     private Label lblCalorieCalculation = new Label();
     private Grid<ActivityPerformed2> activitiesPerformedGrid;
     private ActivityPerformed2 newActivity;
+
+    public List<ActivityPerformed2> getActivitiesPerformedList() {
+        return activitiesPerformedList;
+    }
+
     private List<ActivityPerformed2> activitiesPerformedList = new ArrayList<>();
     private Div addTable;
     private Label lblInfoAboutAdding = new Label();
@@ -143,6 +148,8 @@ public class ActivityLoggerList extends VerticalLayout {
 
 
 
+
+
     private void createWeightField() {
         userWeight.setLabel("Weight in kg");
         userWeight.setWidth("100px");
@@ -219,6 +226,15 @@ public class ActivityLoggerList extends VerticalLayout {
             calories += act.getCalories();
         }
         return df.format(calories);
+    }
+
+    public String getCaloriesBurned() {
+        double caloriesBurned = 0;
+        DecimalFormat df = new DecimalFormat("##.##");
+        for (ActivityPerformed2 act : activitiesPerformedList) {
+            caloriesBurned += act.getCalories();
+        }
+        return df.format(caloriesBurned);
     }
 //
 //    private void createOneItemDeleteButton() {

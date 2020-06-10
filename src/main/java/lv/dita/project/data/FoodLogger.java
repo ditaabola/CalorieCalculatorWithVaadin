@@ -49,6 +49,7 @@ public class FoodLogger extends VerticalLayout {
         addOptions.add(createSelectOptionLayout(), lblEnterItemSuccess, lblEnterItemWarning);
         addOptions.setWidthFull();
 
+
         Div addButtons = new Div();
         addButtons.add(createButtonsLayout());
         addButtons.setWidthFull();
@@ -68,6 +69,8 @@ public class FoodLogger extends VerticalLayout {
         add(addCalculation);
         add(addTable);
         deleteItem();
+
+        setHorizontalComponentAlignment(Alignment.CENTER, addOptions, addButtons, addCalculation);
 
     }
 

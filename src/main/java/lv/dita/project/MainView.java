@@ -10,6 +10,7 @@ import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.page.Page;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.PageTitle;
@@ -60,6 +61,7 @@ public class MainView extends VerticalLayout {
         Button close = new Button("Close session", event -> {
             VaadinSession.getCurrent().getSession().invalidate();
             UI.getCurrent().getPage().reload();
+
         });
         add(close);
 
@@ -91,7 +93,7 @@ public class MainView extends VerticalLayout {
         page2.setSizeFull();
         page2.getAlignItems();
 
-        Tab tab4 = new Tab ("YOUR ALL RESULTS");
+        Tab tab4 = new Tab ("YOUR DATA SUMMARY");
         UserResultsSummaryLayout page4 = new UserResultsSummaryLayout();
         page4.setVisible(false);
         page4.setSizeFull();
