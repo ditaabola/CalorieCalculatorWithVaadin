@@ -162,14 +162,15 @@ public class FoodLogger extends VerticalLayout {
                 lblEnterItemSuccess.setVisible(false);
                 lblEnterItemWarning.setVisible(true);
                 lblEnterItemWarning.setText("Please select food item and / or quantity eaten!");
-
             } else {
                 repo.addFoodEaten(new FoodEaten(0,
                         foodItemsByType.getValue(),
                         quantityEaten.getValue(),
                         calories.getValue()));
                 loadData();
-                Notification.show("The food item added").setDuration(2000);
+//                Notification.show("The food item added").setDuration(2000);
+                lblEnterItemSuccess.setText("The food item added");
+                lblEnterItemSuccess.setVisible(true);
                 lblEnterItemWarning.setVisible(false);
                 clearFields();
                 lblCalorieCalculation.setVisible(false);
@@ -241,4 +242,11 @@ public class FoodLogger extends VerticalLayout {
         gridEaten.setItems(result);
         add(gridEaten);
     }
+
+
+//    Notification notification = new Notification("The food item added", 2000);
+//        notification.setPosition(Notification.Position.TOP_START);
+//                notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+// addToSelect.addClickListener(event -> notification.open());
 }
+
