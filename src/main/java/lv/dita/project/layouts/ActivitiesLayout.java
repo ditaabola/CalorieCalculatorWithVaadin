@@ -1,10 +1,11 @@
 package lv.dita.project.layouts;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.charts.model.Label;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.NumberField;
@@ -91,19 +92,22 @@ public class ActivitiesLayout extends HorizontalLayout {
     @Contract(" -> new")
     private @NotNull Component createButton() {
         btnFindOptions = new Button("Find my options");
+        btnFindOptions.addClickShortcut(Key.ENTER);
+        info.setVisible(false);
 
         btnFindOptions.addClickListener(buttonClickEvent -> {
+            if (time.isEmpty() || weight.isEmpty() || calories.isEmpty()){
+                info.setText("Please enter data!");
+                info.setVisible(true);
+            }else{
+                info.setText("");
+            }
             addGridCal.add(createGridWithCalories());
-
-//        if(createGridWithCalories() == null){
-//            info.setText("Sorry, no options. Please increase time or reduce calories.");
-//        }else{
-//            info.setText("");
-//        }
         });
 
-        return new HorizontalLayout(btnFindOptions);
+        return new HorizontalLayout(btnFindOptions, info);
     }
+
 
 
 }
