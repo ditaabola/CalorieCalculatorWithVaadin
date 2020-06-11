@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 public class ActivityPerformed2 {
-
+@Setter
     private int id;
     private String name;
     private int minutes;
