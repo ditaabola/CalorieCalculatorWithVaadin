@@ -107,8 +107,5 @@ public class ActivitiesLayout extends HorizontalLayout {
 
         return new HorizontalLayout(btnFindOptions, info);
     }
-
-
-
 }
 
