@@ -6,9 +6,12 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.server.VaadinSession;
 import lv.dita.project.data.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+
+import java.text.DecimalFormat;
 
 public class UsersResultsSummaryLayoutv2 extends VerticalLayout {
     private Component returnThings = new VerticalLayout();
@@ -23,6 +26,7 @@ public class UsersResultsSummaryLayoutv2 extends VerticalLayout {
     private double eatenCalories;
     private double burntCalories;
     private double bd;
+    DecimalFormat df = new DecimalFormat("##.##");
 
     public UsersResultsSummaryLayoutv2() {
 
@@ -31,7 +35,6 @@ public class UsersResultsSummaryLayoutv2 extends VerticalLayout {
         base.add(oneTimeThing());
         add(base);
         setHorizontalComponentAlignment(Alignment.CENTER);
-
     }
 
     @Contract(" -> new")
@@ -42,7 +45,6 @@ public class UsersResultsSummaryLayoutv2 extends VerticalLayout {
         generateUserData.getStyle().set("margin-bottom", "30px");
         generateUserData.addClickShortcut(Key.ENTER);
         generateUserData.addClickListener(e -> {
-
             getData();
             if (userEer == 0 && (eatenCalories == 0 || burntCalories == 0)) {
                 base.add(createWarningLabel());
@@ -73,6 +75,7 @@ public class UsersResultsSummaryLayoutv2 extends VerticalLayout {
     }
 
     private void getData() {
+        VaadinSession.getCurrent().getSession();
         userEer = SessionHandler.getUserEEr();
         eatenCalories = SessionHandler.getFoodCalories();
         burntCalories = SessionHandler.getActivitiesCalories();
@@ -88,22 +91,22 @@ public class UsersResultsSummaryLayoutv2 extends VerticalLayout {
 
         getData();
 
-        lblCommentEer.setText("Your calorie budget for a day is " + userEer + " calories");
+        lblCommentEer.setText("Your calorie budget for a day is " + df.format(userEer) + " calories");
         lblCommentEer.getStyle().set("margin-left", "550px");
         lblCommentEer.getStyle().set("font-weight", "bold");
 
-        lblCommentFood.setText("You have eaten " + eatenCalories + " calories");
+        lblCommentFood.setText("You have eaten " + df.format(eatenCalories) + " calories");
         lblCommentFood.getStyle().set("margin-left", "550px");
         lblCommentFood.getStyle().set("font-weight", "bold");
 
-        lblCommentActivities.setText("You have burnt " + burntCalories + " calories");
+        lblCommentActivities.setText("You have burnt " + df.format(burntCalories) + " calories");
         lblCommentActivities.getStyle().set("margin-left", "550px");
         lblCommentActivities.getStyle().set("font-weight", "bold");
 
         if (bd > 0) {
-            lblCommentBudget.setText("You have " + bd + " calories left");
+            lblCommentBudget.setText("You have " + df.format(bd) + " calories left");
         } else {
-            lblCommentBudget.setText("Better burn " + bd + " more calories today ");
+            lblCommentBudget.setText("Better burn " + df.format(bd) + " more calories today ");
         }
         lblCommentBudget.getStyle().set("margin-left", "550px");
         lblCommentBudget.getStyle().set("font-weight", "bold");

@@ -40,7 +40,6 @@ public class FoodLogger extends VerticalLayout {
     private Label lblEnterItemSuccess = new Label();
     private Label lblEnterItemWarning = new Label();
     private String itemForDelete = "";
-    public String totalCaloriesCalculated;
 
     public FoodLogger() {
         addClassName("food-logger");
@@ -129,9 +128,15 @@ public class FoodLogger extends VerticalLayout {
             caloriesPer100G = eatenFood.getCalories();
             double caloriesPerFoodEaten = (caloriesPer100G / 100) * quantity;
             caloriesEaten += caloriesPerFoodEaten;
-            SessionHandler.setFoodCalories(caloriesEaten);
+            if (caloriesEaten == 0) {
+                SessionHandler.setFoodCalories(0);
+            } else {
+                SessionHandler.setFoodCalories(caloriesEaten);
+
+            }
         }
-        return df.format(caloriesEaten);
+            return df.format(caloriesEaten);
+
     }
 
     public void createCaloriesCalculationButton() {
