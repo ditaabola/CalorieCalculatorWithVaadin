@@ -21,8 +21,4 @@ public class SessionHandler {
     @Setter
     private static double activitiesCalories;
 
-
-
-
-
 }
