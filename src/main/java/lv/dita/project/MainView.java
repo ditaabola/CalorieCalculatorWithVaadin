@@ -97,7 +97,7 @@ public class MainView extends VerticalLayout {
         page2.getAlignItems();
 
         Tab tab4 = new Tab ("YOUR DATA SUMMARY");
-        UserResultsSummaryLayout page4 = new UserResultsSummaryLayout();
+        UsersResultsSummaryLayoutv2 page4 = new UsersResultsSummaryLayoutv2();
         page4.setVisible(false);
         page4.setSizeFull();
         page4.getAlignItems();
