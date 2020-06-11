@@ -24,12 +24,8 @@ public interface DataRepository {
 
     void addFoodEaten(FoodEaten foodEaten);
     void deleteItemFromFoodEatenTable(String name);
-
     void emptyActivitiesTable();
     void emptyEatenTable();
-
-
-
     void addActivityPerformed (ActivityPerformed activityPerformed);
 
     }

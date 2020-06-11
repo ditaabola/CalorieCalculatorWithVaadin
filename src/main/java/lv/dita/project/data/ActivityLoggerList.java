@@ -35,13 +35,9 @@ public class ActivityLoggerList extends VerticalLayout {
     private Label lblCalorieCalculation = new Label();
     private Grid<ActivityPerformed2> activitiesPerformedGrid;
     private ActivityPerformed2 newActivity;
-
-
     private List<ActivityPerformed2> activitiesPerformedList = new ArrayList<>();
     private Div addTable;
     private Label lblInfoAboutAdding = new Label();
-//    private Button deleteSelected = new Button();
-//    private String itemForDelete = "";
 
     public ActivityLoggerList() {
         addClassName("activity-logger");
