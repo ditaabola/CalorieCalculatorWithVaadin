@@ -65,12 +65,9 @@ public class MainView extends VerticalLayout {
             SessionHandler.setUserEEr(0);
             SessionHandler.setActivitiesCalories(0);
             SessionHandler.setFoodCalories(0);
-
         });
+        close.getStyle().set("margin-left", "91%");
         add(close);
-
-
-
 
         H1 header = new H1("ENJOY OUR FIRST VAADIN APP CALCULATOR");
         add(header);
