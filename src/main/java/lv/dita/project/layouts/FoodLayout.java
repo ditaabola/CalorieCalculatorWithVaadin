@@ -3,7 +3,6 @@ package lv.dita.project.layouts;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import lv.dita.project.data.*;
-
 import java.util.List;
 
 public class FoodLayout extends VerticalLayout {

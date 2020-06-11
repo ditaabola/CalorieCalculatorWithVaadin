@@ -11,16 +11,13 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.NumberField;
-import com.vaadin.flow.data.selection.SingleSelect;
 import lv.dita.project.data.interfaces.DataRepository;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ActivityLoggerList extends VerticalLayout {
 
@@ -35,11 +32,11 @@ public class ActivityLoggerList extends VerticalLayout {
     private Button cancel = new Button();
     private Label lblCommentResult = new Label();
     private Label lblCalorieCalculation = new Label();
-    private Grid<ActivityPerformed2> activitiesPerformedGrid;
-    private ActivityPerformed2 newActivity;
+    private Grid<ActivityPerformed> activitiesPerformedGrid;
+    private ActivityPerformed newActivity;
     private int id = 0;
     private int catchId;
-    private List<ActivityPerformed2> activitiesPerformedList = new ArrayList<>();
+    private List<ActivityPerformed> activitiesPerformedList = new ArrayList<>();
     private Div addTable;
     private Label lblInfoAboutAdding = new Label();
     private Button deleteSelected;
@@ -78,9 +75,9 @@ public class ActivityLoggerList extends VerticalLayout {
 
         activitiesPerformedGrid = new Grid<>();
         activitiesPerformedGrid.setItems(activitiesPerformedList);
-        activitiesPerformedGrid.addColumn(ActivityPerformed2::getName).setHeader("Name");
-        activitiesPerformedGrid.addColumn(ActivityPerformed2::getCalories).setHeader("Calories");
-        activitiesPerformedGrid.addColumn(ActivityPerformed2::getMinutes).setHeader("Minutes");
+        activitiesPerformedGrid.addColumn(ActivityPerformed::getName).setHeader("Name");
+        activitiesPerformedGrid.addColumn(ActivityPerformed::getCalories).setHeader("Calories");
+        activitiesPerformedGrid.addColumn(ActivityPerformed::getMinutes).setHeader("Minutes");
 
         activitiesPerformedGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
 
@@ -138,7 +135,7 @@ public class ActivityLoggerList extends VerticalLayout {
         minutes.clear();
     }
 
-    private ActivityPerformed2 createActivity() {
+    private ActivityPerformed createActivity() {
         String name = activitiesByType.getValue();
         double met = repo.getMetValueByName1(activitiesByType.getValue());
         double weight = userWeight.getValue();
@@ -150,15 +147,15 @@ public class ActivityLoggerList extends VerticalLayout {
         }
         DecimalFormat df = new DecimalFormat("##.##");
         int time = hours.getValue() * 60 + minutes.getValue();
-        double calories = (met * 3.5 * weight) / 200 * time;
+        double calories = Math.round((met * 3.5 * weight)) / 200 * time;
 
-        newActivity = new ActivityPerformed2(id, name, time, calories);
+        newActivity = new ActivityPerformed(id, name, time, calories);
 
         System.out.println(newActivity.getId());
         return newActivity;
     }
 
-    private List<ActivityPerformed2> addActivityToListReturningList(ActivityPerformed2 newActivity) {
+    private List<ActivityPerformed> addActivityToListReturningList(ActivityPerformed newActivity) {
         activitiesPerformedList.add(newActivity);
         return activitiesPerformedList;
     }
@@ -236,7 +233,7 @@ public class ActivityLoggerList extends VerticalLayout {
     public String calculateCaloriesBurnedFromList() {
         double calories = Math.round(0);
         DecimalFormat df = new DecimalFormat("##.##");
-        for (ActivityPerformed2 act : activitiesPerformedList) {
+        for (ActivityPerformed act : activitiesPerformedList) {
             calories += act.getCalories();
             SessionHandler.setActivitiesCalories(calories);
         }
