@@ -132,10 +132,9 @@ public class FoodLogger extends VerticalLayout {
                 SessionHandler.setFoodCalories(0);
             } else {
                 SessionHandler.setFoodCalories(caloriesEaten);
-
             }
         }
-            return df.format(caloriesEaten);
+        return df.format(caloriesEaten);
 
     }
 
@@ -158,8 +157,7 @@ public class FoodLogger extends VerticalLayout {
     public void createAddFoodToGridButton() {
 
         addToSelect.setText("Add this food item");
-//        addToSelect.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        addToSelect.addClickShortcut(Key.ENTER);
+//        addToSelect.addClickShortcut(Key.ENTER);
         addToSelect.addClickListener(e -> {
             if (foodItemsByType.isEmpty() || quantityEaten.isEmpty()) {
                 lblEnterItemSuccess.setVisible(false);
@@ -194,8 +192,6 @@ public class FoodLogger extends VerticalLayout {
     private void createOneItemDeleteButton() {
         deleteSelected.setText("Delete the selected choice");
         deleteSelected.setVisible(false);
-//        cancel.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-
         add(deleteSelected);
     }
 
@@ -203,7 +199,6 @@ public class FoodLogger extends VerticalLayout {
         foodTypes.clear();
         foodItemsByType.clear();
         quantityEaten.clear();
-
     }
 
     private void deleteItem() {
@@ -235,7 +230,7 @@ public class FoodLogger extends VerticalLayout {
         gridEaten.setVisible(true);
         gridEaten.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
         gridEaten.setSelectionMode(Grid.SelectionMode.SINGLE);
-//        add(cancel);
+
     }
 
     private void loadData() {
@@ -244,22 +239,5 @@ public class FoodLogger extends VerticalLayout {
         add(gridEaten);
     }
 
-//    private void deleteItem() {
-//        gridEaten.addSelectionListener(selectionEvent -> {
-//            Optional<FoodEaten> chosenFood = selectionEvent.getFirstSelectedItem();
-//            chosenFood.ifPresent(e -> {
-//                gridEaten.addComponentColumn(item -> new Button("Delete", click -> {
-//                    itemForDelete = chosenFood.get().getName();
-//                    repo.deleteItemFromFoodEatenTable(itemForDelete);
-//                    loadData();
-//                }));
-//            });
-//        });
-//    }
-
-//    Notification notification = new Notification("The food item added", 2000);
-//        notification.setPosition(Notification.Position.TOP_START);
-//                notification.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
-// addToSelect.addClickListener(event -> notification.open());
 }
 

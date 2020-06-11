@@ -11,10 +11,12 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.NumberField;
+import com.vaadin.flow.data.selection.SingleSelect;
 import lv.dita.project.data.interfaces.DataRepository;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +37,15 @@ public class ActivityLoggerList extends VerticalLayout {
     private Label lblCalorieCalculation = new Label();
     private Grid<ActivityPerformed2> activitiesPerformedGrid;
     private ActivityPerformed2 newActivity;
+    private int id = 0;
+    private int catchId;
     private List<ActivityPerformed2> activitiesPerformedList = new ArrayList<>();
     private Div addTable;
     private Label lblInfoAboutAdding = new Label();
+    private Button deleteSelected;
+    private String itemForDelete = "";
+    private int numberId;
+    private Component gridItemWithActivities = new HorizontalLayout();
 
     public ActivityLoggerList() {
         addClassName("activity-logger");
@@ -54,20 +62,36 @@ public class ActivityLoggerList extends VerticalLayout {
         addCalculation.add(createCalc());
         addCalculation.setWidthFull();
 
+        Div addDelete = new Div();
+        addDelete.add(createOneItemDeleteButton());
+
         add(addOptions);
         add(addButtons);
         add(addCalculation);
-
-//        deleteItem();
+        add(addDelete);
 
         reloadGrid();
     }
 
     @Contract(" -> new")
     private @NotNull Component createGridFromActivitiesList() {
-        activitiesPerformedGrid = new Grid<>(ActivityPerformed2.class);
+
+        activitiesPerformedGrid = new Grid<>();
         activitiesPerformedGrid.setItems(activitiesPerformedList);
-        return new HorizontalLayout(activitiesPerformedGrid);
+        activitiesPerformedGrid.addColumn(ActivityPerformed2::getName).setHeader("Name");
+        activitiesPerformedGrid.addColumn(ActivityPerformed2::getCalories).setHeader("Calories");
+        activitiesPerformedGrid.addColumn(ActivityPerformed2::getMinutes).setHeader("Minutes");
+
+        activitiesPerformedGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
+
+        activitiesPerformedGrid.getSelectionModel().addSelectionListener(e -> {
+            deleteSelected.setEnabled(true);
+            numberId = e.getFirstSelectedItem().get().getId();
+
+        });
+
+        gridItemWithActivities = new HorizontalLayout(activitiesPerformedGrid);
+        return gridItemWithActivities;
     }
 
     private void createAddActivityToGridButton() {
@@ -87,12 +111,13 @@ public class ActivityLoggerList extends VerticalLayout {
 
                 //pievieno aktivitati no jaunizveidotas + GRID add
                 addActivityToListReturningList(createActivity());
+                id++;
+
                 reloadGrid();
 
                 //notira ievades laukus
                 clearFields();
 
-                // Notification.show("Activity added").setDuration(1000);
                 lblInfoAboutAdding.setText("Activity added");
             }
         });
@@ -114,7 +139,6 @@ public class ActivityLoggerList extends VerticalLayout {
     }
 
     private ActivityPerformed2 createActivity() {
-
         String name = activitiesByType.getValue();
         double met = repo.getMetValueByName1(activitiesByType.getValue());
         double weight = userWeight.getValue();
@@ -124,13 +148,13 @@ public class ActivityLoggerList extends VerticalLayout {
         if (minutes.getValue() == null) {
             minutes.setValue(0);
         }
-//        DecimalFormat df = new DecimalFormat("##.##");
+        DecimalFormat df = new DecimalFormat("##.##");
         int time = hours.getValue() * 60 + minutes.getValue();
-        double calories = Math.round(((met * 3.5 * weight) / 200 * time) * 100.0) / 100.0;
-//        calories = Double.valueOf(df.format(calories)); //not necessarry
+        double calories = (met * 3.5 * weight) / 200 * time;
 
-        newActivity = new ActivityPerformed2(name, time, calories);
+        newActivity = new ActivityPerformed2(id, name, time, calories);
 
+        System.out.println(newActivity.getId());
         return newActivity;
     }
 
@@ -201,16 +225,16 @@ public class ActivityLoggerList extends VerticalLayout {
     }
 
     private void createCaloriesCalculationButton() {
-        calculateCaloriesBurned.setText("Calculate burned calories");
+        calculateCaloriesBurned.setText("Calculate burnt calories");
         calculateCaloriesBurned.addClickListener(e -> {
             String res = calculateCaloriesBurnedFromList();
-            lblCalorieCalculation.setText("The total of the calories you have burned is: " + res);
+            lblCalorieCalculation.setText("The total of the calories you have burnt is: " + res);
             lblCalorieCalculation.setVisible(true);
         });
     }
 
     public String calculateCaloriesBurnedFromList() {
-        double calories = 0;
+        double calories = Math.round(0);
         DecimalFormat df = new DecimalFormat("##.##");
         for (ActivityPerformed2 act : activitiesPerformedList) {
             calories += act.getCalories();
@@ -219,29 +243,18 @@ public class ActivityLoggerList extends VerticalLayout {
         return df.format(calories);
     }
 
+    @Contract(" -> new")
+    private Component createOneItemDeleteButton() {
+        deleteSelected = new Button();
+        deleteSelected.setText("Delete selected activity");
+        deleteSelected.setEnabled(false);
 
-//
-//    private void createOneItemDeleteButton() {
-//        deleteSelected.setText("Delete the selected choice");
-//        deleteSelected.setVisible(false);
-////        cancel.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-//
-//        add(deleteSelected);
-//    }
-//
-//    private void deleteItem() {
-//        createOneItemDeleteButton();
-//        activitiesPerformedGrid.addSelectionListener(selectionEvent -> {
-//            deleteSelected.setVisible(true);
-//            Optional<ActivityPerformed2> activitiesPerformed = selectionEvent.getFirstSelectedItem();
-//            activitiesPerformed.ifPresent(e -> {
-//                itemForDelete = activitiesPerformed.get().getName();
-//                deleteSelected.addClickListener(event -> {
-//                    repo.deleteItemFromFoodEatenTable(itemForDelete);
-//                    reloadGrid();
-//                    deleteSelected.setVisible(false);
-//                });
-//            });
-//        });
-//    }
+        deleteSelected.addClickListener(e -> {
+            activitiesPerformedList.remove(numberId);
+            addTable.remove(gridItemWithActivities);
+            reloadGrid();
+            deleteSelected.setEnabled(false);
+        });
+        return deleteSelected;
+    }
 }
