@@ -48,6 +48,7 @@ public class UsersResultsSummaryLayoutv2 extends VerticalLayout {
             getData();
             if (userEer == 0 && (eatenCalories == 0 || burntCalories == 0)) {
                 base.add(createWarningLabel());
+
             } else {
                 base.add(createInfoLabels());
             }
@@ -66,10 +67,18 @@ public class UsersResultsSummaryLayoutv2 extends VerticalLayout {
     @Contract(" -> new")
     private @NotNull Component createWarningLabel() {
         lblCommentDataMissingWarning = new Label();
+
         lblCommentDataMissingWarning.setText("Please enter the data and do calculations first");
         lblCommentDataMissingWarning.getStyle().set("margin-left", "540px");
         lblCommentDataMissingWarning.getStyle().set("font-weight", "bold");
         base.remove(returnThings);
+        returnThings.setVisible(false);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+        }
+        returnThings.setVisible(true);
         returnThings = new VerticalLayout(lblCommentDataMissingWarning);
         return returnThings;
     }
@@ -111,7 +120,15 @@ public class UsersResultsSummaryLayoutv2 extends VerticalLayout {
         lblCommentBudget.getStyle().set("margin-left", "550px");
         lblCommentBudget.getStyle().set("font-weight", "bold");
 
+        returnThings.setVisible(false);
         base.remove(returnThings);
+        returnThings.setVisible(false);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException interruptedException) {
+            interruptedException.printStackTrace();
+        }
+        returnThings.setVisible(true);
         returnThings = new VerticalLayout(lblCommentEer, lblCommentFood, lblCommentActivities, lblCommentBudget);
         return returnThings;
     }
