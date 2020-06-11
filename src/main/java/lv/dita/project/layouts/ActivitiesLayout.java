@@ -39,6 +39,7 @@ public class ActivitiesLayout extends HorizontalLayout {
         Div addGrid = new Div();
         addGrid.add(createGrid());
         addGrid.setWidthFull();
+        addGrid.getStyle().set("margin-top", "19px");
 
         addGridCal = new Div();
         addGridCal.add(createInputFields());

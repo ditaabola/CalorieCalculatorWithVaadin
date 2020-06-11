@@ -74,21 +74,9 @@ public class MainView extends VerticalLayout {
         header.getStyle().set("margin-top", "10px");
         add(header);
 
-        Tab tab6 = new Tab("ACTIVITIES");
-        ActivitiesLayout page6 = new ActivitiesLayout();
-        page6.setVisible(false);
-
-        Tab tab5 = new Tab("FOOD");
-        FoodLayout page5 = new FoodLayout();
-        page5.setVisible(false);
-
         Tab tab1 = new Tab("CALCULATE BMI & EER");
         CalculateBMILayout page1 = new CalculateBMILayout();
         page1.setVisible(true);
-
-        Tab tab3 = new Tab("CALCULATE CALORIES BURNED");
-        CaloriesBurnedLayout page3 = new CaloriesBurnedLayout();
-        page3.setVisible(false);
 
         Tab tab2 = new Tab("CALCULATE CALORIES EATEN");
         CaloriesEatenLayout page2 = new CaloriesEatenLayout();
@@ -96,11 +84,23 @@ public class MainView extends VerticalLayout {
         page2.setSizeFull();
         page2.getAlignItems();
 
+        Tab tab3 = new Tab("CALCULATE CALORIES BURNED");
+        CaloriesBurnedLayout page3 = new CaloriesBurnedLayout();
+        page3.setVisible(false);
+
         Tab tab4 = new Tab ("YOUR DATA SUMMARY");
         UsersResultsSummaryLayoutv2 page4 = new UsersResultsSummaryLayoutv2();
         page4.setVisible(false);
         page4.setSizeFull();
         page4.getAlignItems();
+
+        Tab tab5 = new Tab("FOOD");
+        FoodLayout page5 = new FoodLayout();
+        page5.setVisible(false);
+
+        Tab tab6 = new Tab("ACTIVITIES");
+        ActivitiesLayout page6 = new ActivitiesLayout();
+        page6.setVisible(false);
 
         Map<Tab, Component> tabsToPages = new HashMap<>();
 
