@@ -51,10 +51,10 @@ public class Calculator {
             return "Choose gender";
         } else if (gender.equals(PersonsGender.FEMALE)) {
             ibw = 22 * Math.pow((height - 0.1), 2);
-            return "Your ideal body weight is: " + df.format(ibw) + " kg";
+            return "Your ideal body weight is: " + df.format(ibw) + " kgs.";
         } else if (gender.equals(PersonsGender.MALE)) {
             ibw = 22 * Math.pow(height, 2);
-            return "Your ideal body weight is: " + df.format(ibw) + " kg";
+            return "Your ideal body weight is: " + df.format(ibw) + " kgs.";
         } else {
             return "Something went wrong!";
         }

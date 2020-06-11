@@ -1,20 +1,21 @@
 package lv.dita.project.layouts;
 
-import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.ComponentEventListener;
-import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.NumberField;
 import lv.dita.project.data.Calculator;
-import lv.dita.project.data.SessionHandler;
 import lv.dita.project.data.enums.DailyActivityLevel;
 import lv.dita.project.data.enums.PersonsGender;
 import lv.dita.project.data.enums.WeightGoal;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 
@@ -32,7 +33,23 @@ public class CalculateBMILayout extends VerticalLayout {
     private ComboBox<DailyActivityLevel> dailyActivityLevel;
     private ComboBox<WeightGoal> weightGoal;
 
-    public CalculateBMILayout() {
+    public CalculateBMILayout(){
+
+        Div calculatorBlock = new Div();
+        calculatorBlock.add(calculatorLayout());
+        calculatorBlock.getStyle().set("margin-left", "160px");
+        add(calculatorBlock);
+
+        Div commentBlock = new Div();
+        commentBlock.add(displayComments());
+        commentBlock.getStyle().set("margin-left", "500px");
+        commentBlock.getStyle().set("padding", "30px");
+        commentBlock.getStyle().set("font-weight", "bold");
+        add(commentBlock);
+    }
+
+    @Contract(" ->new")
+    public @NotNull Component calculatorLayout() {
 
         try {
 
@@ -59,19 +76,20 @@ public class CalculateBMILayout extends VerticalLayout {
             dailyActivityLevel.setPlaceholder("Select activity level");
             dailyActivityLevel.setItems(DailyActivityLevel.values());
             dailyActivityLevel.setRequired(true);
+            dailyActivityLevel.getStyle().set("margin-top", "30px");
             add(dailyActivityLevel);
 
             weightGoal = new ComboBox<>();
             weightGoal.setPlaceholder("Select your weight goal");
             weightGoal.setItems(WeightGoal.values());
             weightGoal.setRequired(true);
+            weightGoal.getStyle().set("margin-top", "30px");
             add(weightGoal);
 
             lblCalculatedBmi = new Label();
             lblCommentBmi = new Label();
             lblCommentIbw = new Label();
             lblCommentEer = new Label();
-
 
             calculate = new Button("Calculate", (ComponentEventListener<ClickEvent<Button>>) buttonClickEvent -> {
 
@@ -87,7 +105,7 @@ public class CalculateBMILayout extends VerticalLayout {
                     WeightGoal goalUser = weightGoal.getValue();
 
                     String bmi = Calculator.calculateBMI(weightUser, heightUser);
-                    lblCalculatedBmi.setText("BMI: " + bmi);
+                    lblCalculatedBmi.setText("BMI: " + bmi + ".");
 
                     String commentBmi = Calculator.commentAboutUsersBmi(weightUser, heightUser);
                     lblCommentBmi.setText(commentBmi);
@@ -103,16 +121,16 @@ public class CalculateBMILayout extends VerticalLayout {
                 }
             });
             calculate.addClickShortcut(Key.ENTER);
-            add(calculate);
-            add(lblCalculatedBmi);
-            add(lblCommentBmi);
-            add(lblCommentIbw);
-            add(lblCommentEer);
-
+            calculate.getStyle().set("margin-top", "34px");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return new HorizontalLayout(height, weight, age, gender,dailyActivityLevel, weightGoal, calculate);
+    }
 
+    @Contract(" ->new")
+    private @NotNull Component displayComments() {
+        return new VerticalLayout(lblCalculatedBmi, lblCommentBmi, lblCommentEer, lblCommentIbw);
     }
 }

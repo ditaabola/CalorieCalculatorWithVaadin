@@ -54,8 +54,9 @@ public class MainView extends VerticalLayout {
     public MainView() {
 
         Icon logo = new Icon(VaadinIcon.CALC);
-        logo.setSize("100px");
+        logo.setSize("80px");
         logo.setColor("#27496d");
+        logo.getStyle().set("padding", "0");
         add(logo);
 
 
@@ -65,14 +66,12 @@ public class MainView extends VerticalLayout {
             SessionHandler.setUserEEr(0);
             SessionHandler.setActivitiesCalories(0);
             SessionHandler.setFoodCalories(0);
-
         });
+        close.getStyle().set("margin-left", "91%");
         add(close);
 
-
-
-
         H1 header = new H1("ENJOY OUR FIRST VAADIN APP CALCULATOR");
+        header.getStyle().set("margin-top", "10px");
         add(header);
 
         Tab tab6 = new Tab("ACTIVITIES");
@@ -114,6 +113,7 @@ public class MainView extends VerticalLayout {
 
         Tabs tabs = new Tabs(tab1, tab2, tab3, tab4, tab5, tab6);
         tabs.setSizeFull();
+        tabs.getStyle().set("margin-top", "-20px");
         Div pages = new Div(page1, page2, page3, page4, page5, page6);
         pages.setWidthFull();
 
