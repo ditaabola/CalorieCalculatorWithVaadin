@@ -11,16 +11,13 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.NumberField;
-import com.vaadin.flow.data.selection.SingleSelect;
 import lv.dita.project.data.interfaces.DataRepository;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ActivityLoggerList extends VerticalLayout {
 
@@ -157,9 +154,9 @@ private int catchId;
         double calories = (met * 3.5 * weight) / 200 * time;
 
 
-        newActivity = new ActivityPerformed2(id, name, time, calories);
+        newActivity = new ActivityPerformed2(activitiesPerformedList.size(), name, time, calories);
 
-        System.out.println(newActivity.getId());
+
         return newActivity;
     }
 
@@ -257,11 +254,21 @@ private int catchId;
         deleteSelected.addClickListener(e -> {
             activitiesPerformedList.remove(numberId);
             addTable.remove(gridItemWithActivities);
+            changeIdInList();
             reloadGrid();
             deleteSelected.setEnabled(false);
         });
 
         return deleteSelected;
+    }
+
+    public void changeIdInList(){
+        for (ActivityPerformed2 act : activitiesPerformedList) {
+        for(int i=0; i<activitiesPerformedList.size(); i++) {
+
+            act.setId(i);
+        }
+        }
     }
 
 }
