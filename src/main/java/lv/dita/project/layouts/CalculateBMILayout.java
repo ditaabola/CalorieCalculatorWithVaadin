@@ -52,7 +52,6 @@ public class CalculateBMILayout extends VerticalLayout {
     public @NotNull Component calculatorLayout() {
 
         try {
-
             height = new NumberField("Height in cm");
             add(height);
             height.setRequiredIndicatorVisible(true);
@@ -92,7 +91,6 @@ public class CalculateBMILayout extends VerticalLayout {
             lblCommentEer = new Label();
 
             calculate = new Button("Calculate", (ComponentEventListener<ClickEvent<Button>>) buttonClickEvent -> {
-
                 if (height.isEmpty() || weight.isEmpty() || age.isEmpty() || dailyActivityLevel.isEmpty() || weightGoal.isEmpty()) {
                     lblCalculatedBmi.setText("Please enter data!");
                 } else {

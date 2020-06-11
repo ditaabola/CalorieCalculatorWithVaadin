@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 
-public class UsersResultsSummaryLayoutv2 extends VerticalLayout {
+public class UsersResultsSummaryLayout extends VerticalLayout {
     private Component returnThings = new VerticalLayout();
     private Label lblCommentDataMissingWarning;
     private Label lblCommentEer;
@@ -28,7 +28,7 @@ public class UsersResultsSummaryLayoutv2 extends VerticalLayout {
     private double bd;
     DecimalFormat df = new DecimalFormat("##.##");
 
-    public UsersResultsSummaryLayoutv2() {
+    public UsersResultsSummaryLayout() {
 
         base = new Div();
         base.add(createButton());

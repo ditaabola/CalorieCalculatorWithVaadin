@@ -6,14 +6,16 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter
-public class ActivityPerformed2 {
 @Setter
+public class ActivityPerformed {
+
+
     private int id;
     private String name;
     private int minutes;
     private double calories;
 
-    public ActivityPerformed2(int id, String name, int minutes, double calories) {
+    public ActivityPerformed(int id, String name, int minutes, double calories) {
         this.id = id;
         this.name = name;
         this.minutes = minutes;

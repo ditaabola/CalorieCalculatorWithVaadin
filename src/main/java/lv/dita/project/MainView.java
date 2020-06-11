@@ -10,7 +10,6 @@ import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.page.Page;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.PageTitle;
@@ -27,24 +26,11 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * A sample Vaadin view class.
- * <p>
- * To implement a Vaadin view just extend any Vaadin component and
- * use @Route annotation to announce it in a URL as a Spring managed
- * bean.
- * Use the @PWA annotation make the application installable on phones,
- * tablets and some desktop browsers.
- * <p>
- * A new instance of this class is created for every new user and every
- * browser tab/window.
- */
 @Route("")
 @PageTitle("Login | Calorie calculator")
 @PreserveOnRefresh
 @PWA(name = "Vaadin Application",
         shortName = "Vaadin App",
-        description = "This is an example Vaadin application.",
         enableInstallPrompt = false)
 @CssImport("./styles/shared-styles.css")
 @CssImport(value = "./styles/vaadin-text-field-styles.css", themeFor = "vaadin-text-field")
@@ -59,7 +45,6 @@ public class MainView extends VerticalLayout {
         logo.getStyle().set("padding", "0");
         add(logo);
 
-
         Button close = new Button("Close session", event -> {
             VaadinSession.getCurrent().getSession().invalidate();
             UI.getCurrent().getPage().reload();
@@ -70,7 +55,7 @@ public class MainView extends VerticalLayout {
         close.getStyle().set("margin-left", "91%");
         add(close);
 
-        H1 header = new H1("ENJOY OUR FIRST VAADIN APP CALCULATOR");
+        H1 header = new H1("ENJOY OUR FIRST VAADIN CALCULATOR APP");
         header.getStyle().set("margin-top", "10px");
         add(header);
 
@@ -78,27 +63,27 @@ public class MainView extends VerticalLayout {
         CalculateBMILayout page1 = new CalculateBMILayout();
         page1.setVisible(true);
 
-        Tab tab2 = new Tab("CALCULATE CALORIES EATEN");
+        Tab tab2 = new Tab("CALCULATE CONSUMED CALORIES");
         CaloriesEatenLayout page2 = new CaloriesEatenLayout();
         page2.setVisible(false);
         page2.setSizeFull();
         page2.getAlignItems();
 
-        Tab tab3 = new Tab("CALCULATE CALORIES BURNED");
+        Tab tab3 = new Tab("CALCULATE BURNT CALORIES");
         CaloriesBurnedLayout page3 = new CaloriesBurnedLayout();
         page3.setVisible(false);
 
         Tab tab4 = new Tab ("YOUR DATA SUMMARY");
-        UsersResultsSummaryLayoutv2 page4 = new UsersResultsSummaryLayoutv2();
+        UsersResultsSummaryLayout page4 = new UsersResultsSummaryLayout();
         page4.setVisible(false);
         page4.setSizeFull();
         page4.getAlignItems();
 
-        Tab tab5 = new Tab("FOOD");
+        Tab tab5 = new Tab("FOOD DATABASE");
         FoodLayout page5 = new FoodLayout();
         page5.setVisible(false);
 
-        Tab tab6 = new Tab("ACTIVITIES");
+        Tab tab6 = new Tab("ACTIVITIES DATABASE");
         ActivitiesLayout page6 = new ActivitiesLayout();
         page6.setVisible(false);
 
@@ -134,7 +119,5 @@ public class MainView extends VerticalLayout {
 
         tabs.setFlexGrowForEnclosedTabs(1);
         setClassName("main-layout");
-
-//        });
     }
 }

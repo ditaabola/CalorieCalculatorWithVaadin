@@ -218,7 +218,6 @@ public class MySqlDataRepository implements DataRepository {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -316,7 +315,6 @@ public class MySqlDataRepository implements DataRepository {
         }
         return 0;
     }
-
 
 
     @Override

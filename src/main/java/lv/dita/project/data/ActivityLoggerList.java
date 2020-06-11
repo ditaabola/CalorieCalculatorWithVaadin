@@ -32,12 +32,11 @@ public class ActivityLoggerList extends VerticalLayout {
     private Button cancel = new Button();
     private Label lblCommentResult = new Label();
     private Label lblCalorieCalculation = new Label();
-    private Grid<ActivityPerformed2> activitiesPerformedGrid;
-    private ActivityPerformed2 newActivity;
-
-private int id = 0;
-private int catchId;
-    private List<ActivityPerformed2> activitiesPerformedList = new ArrayList<>();
+    private Grid<ActivityPerformed> activitiesPerformedGrid;
+    private ActivityPerformed newActivity;
+    private int id = 0;
+    private int catchId;
+    private List<ActivityPerformed> activitiesPerformedList = new ArrayList<>();
     private Div addTable;
     private Label lblInfoAboutAdding = new Label();
     private Button deleteSelected;
@@ -76,9 +75,9 @@ private int catchId;
 
         activitiesPerformedGrid = new Grid<>();
         activitiesPerformedGrid.setItems(activitiesPerformedList);
-        activitiesPerformedGrid.addColumn(ActivityPerformed2::getName).setHeader("Name");
-        activitiesPerformedGrid.addColumn(ActivityPerformed2::getCalories).setHeader("Calories");
-        activitiesPerformedGrid.addColumn(ActivityPerformed2::getMinutes).setHeader("Minutes");
+        activitiesPerformedGrid.addColumn(ActivityPerformed::getName).setHeader("Name");
+        activitiesPerformedGrid.addColumn(ActivityPerformed::getCalories).setHeader("Calories");
+        activitiesPerformedGrid.addColumn(ActivityPerformed::getMinutes).setHeader("Minutes");
 
         activitiesPerformedGrid.setSelectionMode(Grid.SelectionMode.SINGLE);
 
@@ -116,7 +115,6 @@ private int catchId;
                 //notira ievades laukus
                 clearFields();
 
-                // Notification.show("Activity added").setDuration(1000);
                 lblInfoAboutAdding.setText("Activity added");
             }
         });
@@ -137,9 +135,7 @@ private int catchId;
         minutes.clear();
     }
 
-    private ActivityPerformed2 createActivity() {
-
-
+    private ActivityPerformed createActivity() {
         String name = activitiesByType.getValue();
         double met = repo.getMetValueByName1(activitiesByType.getValue());
         double weight = userWeight.getValue();
@@ -151,16 +147,16 @@ private int catchId;
         }
         DecimalFormat df = new DecimalFormat("##.##");
         int time = hours.getValue() * 60 + minutes.getValue();
-        double calories = (met * 3.5 * weight) / 200 * time;
+        double calories = Math.round((met * 3.5 * weight)) / 200 * time;
 
 
-        newActivity = new ActivityPerformed2(activitiesPerformedList.size(), name, time, calories);
 
+        newActivity = new ActivityPerformed(activitiesPerformedList.size(), name, time, calories);
 
         return newActivity;
     }
 
-    private List<ActivityPerformed2> addActivityToListReturningList(ActivityPerformed2 newActivity) {
+    private List<ActivityPerformed> addActivityToListReturningList(ActivityPerformed newActivity) {
         activitiesPerformedList.add(newActivity);
         return activitiesPerformedList;
     }
@@ -227,18 +223,18 @@ private int catchId;
     }
 
     private void createCaloriesCalculationButton() {
-        calculateCaloriesBurned.setText("Calculate burned calories");
+        calculateCaloriesBurned.setText("Calculate burnt calories");
         calculateCaloriesBurned.addClickListener(e -> {
             String res = calculateCaloriesBurnedFromList();
-            lblCalorieCalculation.setText("The total of the calories you have burned is: " + res);
+            lblCalorieCalculation.setText("The total of the calories you have burnt is: " + res);
             lblCalorieCalculation.setVisible(true);
         });
     }
 
     public String calculateCaloriesBurnedFromList() {
-        double calories = 0;
+        double calories = Math.round(0);
         DecimalFormat df = new DecimalFormat("##.##");
-        for (ActivityPerformed2 act : activitiesPerformedList) {
+        for (ActivityPerformed act : activitiesPerformedList) {
             calories += act.getCalories();
             SessionHandler.setActivitiesCalories(calories);
         }
@@ -258,17 +254,16 @@ private int catchId;
             reloadGrid();
             deleteSelected.setEnabled(false);
         });
-
         return deleteSelected;
     }
 
+
     public void changeIdInList(){
-        for (ActivityPerformed2 act : activitiesPerformedList) {
+        for (ActivityPerformed act : activitiesPerformedList) {
         for(int i=0; i<activitiesPerformedList.size(); i++) {
 
             act.setId(i);
         }
         }
     }
-
 }
