@@ -130,7 +130,7 @@ public class ActivityLoggerList extends VerticalLayout {
         }
 //        DecimalFormat df = new DecimalFormat("##.##");
         int time = hours.getValue() * 60 + minutes.getValue();
-        double calories = (met * 3.5 * weight) / 200 * time;
+        double calories = Math.round(((met * 3.5 * weight) / 200 * time) * 100.0) / 100.0;
 //        calories = Double.valueOf(df.format(calories)); //not necessarry
 
         newActivity = new ActivityPerformed2(name, time, calories);
