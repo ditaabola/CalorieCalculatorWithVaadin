@@ -6,7 +6,9 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter
+@Setter
 public class ActivityPerformed {
+
 
     private int id;
     private String name;

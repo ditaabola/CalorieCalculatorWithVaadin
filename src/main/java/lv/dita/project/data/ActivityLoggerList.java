@@ -149,9 +149,10 @@ public class ActivityLoggerList extends VerticalLayout {
         int time = hours.getValue() * 60 + minutes.getValue();
         double calories = Math.round((met * 3.5 * weight)) / 200 * time;
 
-        newActivity = new ActivityPerformed(id, name, time, calories);
 
-        System.out.println(newActivity.getId());
+
+        newActivity = new ActivityPerformed(activitiesPerformedList.size(), name, time, calories);
+
         return newActivity;
     }
 
@@ -249,9 +250,20 @@ public class ActivityLoggerList extends VerticalLayout {
         deleteSelected.addClickListener(e -> {
             activitiesPerformedList.remove(numberId);
             addTable.remove(gridItemWithActivities);
+            changeIdInList();
             reloadGrid();
             deleteSelected.setEnabled(false);
         });
         return deleteSelected;
+    }
+
+
+    public void changeIdInList(){
+        for (ActivityPerformed act : activitiesPerformedList) {
+        for(int i=0; i<activitiesPerformedList.size(); i++) {
+
+            act.setId(i);
+        }
+        }
     }
 }
