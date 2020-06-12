@@ -1,0 +1,3 @@
+CREATE VIEW `activity_type` AS
+SELECT distinct (activity_type) AS activity_type
+FROM calories_all.activities_met_values order by activity_type;

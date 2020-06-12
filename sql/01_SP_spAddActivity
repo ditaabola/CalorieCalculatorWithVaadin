@@ -1,0 +1,9 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spAddActivity`(in activity_name varchar(100), 
+in activity_level varchar(100), 
+in activity_type varchar(100), 
+in activity_met_value decimal(4,2), 
+out activity_id int)
+BEGIN
+insert into calories_all.activities_met_values(activity_name, activity_level, activity_type, activity_met_value) values (activity_name, activity_level, activity_type, activity_met_value);
+SELECT last_insert_id() into activity_id;
+END

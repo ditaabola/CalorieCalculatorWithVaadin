@@ -1,0 +1,4 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spDeleteOneItemFromFoodEatenTable`(in name varchar(100))
+BEGIN
+    delete from calories_all.food_eaten where food_eaten_name = name;
+END

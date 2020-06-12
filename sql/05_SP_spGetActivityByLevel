@@ -1,0 +1,4 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spGetActivityByType`(in type varchar(100))
+BEGIN
+    select * from calories_all.activities_met_values where activity_type = type;
+END

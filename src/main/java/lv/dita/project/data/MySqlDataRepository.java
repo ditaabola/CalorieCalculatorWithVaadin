@@ -1,24 +1,23 @@
 package lv.dita.project.data;
 
+import lv.dita.project.alternatives.ActivityPerformed;
 import lv.dita.project.data.interfaces.DataRepository;
 import lv.dita.project.data.interfaces.EntityBase;
 import lv.dita.project.data.enums.Constants;
+import lv.dita.project.data.tabs.activitiesDatabase.Activity;
+import lv.dita.project.data.tabs.activitiesDatabase.ActivityListByCalories;
+import lv.dita.project.data.tabs.calculateConsumedCalories.FoodEaten;
+import lv.dita.project.data.tabs.foodDatabase.Food;
 
 import java.lang.reflect.Method;
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.Types;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MySqlDataRepository implements DataRepository {
 
     private Connection connection;
-    private static final String connectionString = "jdbc:mysql://localhost:3306/"+ Constants.SCHEMA_NAME+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static final String connectionString = "jdbc:mysql://localhost:3306/" + Constants.SCHEMA_NAME + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String userName = Constants.DB_USER;
     private static final String passWord = Constants.DB_PASSWORD;
 
@@ -142,7 +141,7 @@ public class MySqlDataRepository implements DataRepository {
     public List<Activity> getMetValueByActivityName(String name) {
         try {
             connection = DriverManager.getConnection(connectionString, userName, passWord);
-            CallableStatement statement = connection.prepareCall("{call spMetValueByActivityName(?,?)}");
+            CallableStatement statement = connection.prepareCall("{call spMetValueByActivityName(?)}");
             statement.setString("name", name);
 
             ResultSet rs = statement.executeQuery();
@@ -159,13 +158,97 @@ public class MySqlDataRepository implements DataRepository {
     }
 
     @Override
+    public List<ActivityListByCalories> getListWithCalories(int time, double weight, double calories) {
+
+        try {
+            connection = DriverManager.getConnection(connectionString, userName, passWord);
+            CallableStatement statement = connection.prepareCall("{call spGetBurnedCaloriesByTime(?,?,?)}");
+            statement.setInt("timeMin", time);
+            statement.setDouble("weight", weight);
+            statement.setDouble("cal", calories);
+
+            ResultSet rs = statement.executeQuery();
+            List<ActivityListByCalories> items = new ArrayList<>();
+            while (rs.next()) {
+                items.add(ActivityListByCalories.create(rs));
+            }
+            return items;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public double getMetValueByName1(String name) {
+        try {
+            connection = DriverManager.getConnection(connectionString, userName, passWord);
+            CallableStatement statement = connection.prepareCall("{call spMetValueByActivityName1(?,?)}");
+            statement.setString("name", name);
+            statement.registerOutParameter("met", Types.DOUBLE);
+            statement.execute();
+            double met = statement.getDouble("met");
+            return met;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public void addFoodEaten(FoodEaten foodEaten) {
+        try {
+            connection = DriverManager.getConnection(connectionString, userName, passWord);
+            CallableStatement statement = connection.prepareCall("{call spAddFoodEaten(?,?,?, ?)}");
+            statement.setInt("food_eaten_id", foodEaten.getId());
+            statement.setString("food_eaten_name", foodEaten.getName());
+            statement.setDouble("food_eaten_quantity", foodEaten.getQuantity());
+            statement.setDouble("food_eaten_calories", foodEaten.getCalories());
+            statement.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteItemFromFoodEatenTable(String name) {
+        try {
+            connection = DriverManager.getConnection(connectionString, userName, passWord);
+            CallableStatement statement = connection.prepareCall("{call spDeleteOneItemFromFoodEatenTable(?)}");
+            statement.setString("name", name);
+            statement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addActivityPerformed(ActivityPerformed activityPerformed) {
+        try {
+            connection = DriverManager.getConnection(connectionString, userName, passWord);
+            CallableStatement statement = connection.prepareCall("{call spAddActivityPerformed(?,?,?,?,?)}");
+            statement.setInt("activity_performed_id", activityPerformed.getId());
+            statement.setString("activity_performed_name", activityPerformed.getName());
+            statement.setDouble("activity_performed_met_value", activityPerformed.getMet_value());
+            statement.setDouble("activity_performed_user_weight", activityPerformed.getUser_weight());
+            statement.setDouble("activity_performed_minutes", activityPerformed.getMinutes());
+            statement.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public int addFood(Food food) {
         try {
             connection = DriverManager.getConnection(connectionString, userName, passWord);
             CallableStatement statement = connection.prepareCall("{call spAddFood(?,?,?,?,?,?,?)}");
             statement.setString("food_name", food.getName());
             statement.setString("food_type", food.getType());
-            statement.setInt("food_calories_per_100_g", food.getCaloriesPer100G());
+            statement.setDouble("food_calories_per_100_g", food.getCaloriesPer100G());
             statement.setBigDecimal("food_carbohydrates_per_100_g", food.getCarbGPer100G());
             statement.setBigDecimal("food_fats_per_100_g", food.getFatGPer100G());
             statement.setBigDecimal("food_protein_per_100_g", food.getProteinGPer100G());
@@ -206,7 +289,7 @@ public class MySqlDataRepository implements DataRepository {
         try {
             connection = DriverManager.getConnection(connectionString, userName, passWord);
             CallableStatement statement = connection.prepareCall("{call spFoodItemsByMaxCaloriesPer100g(?)}");
-            statement.setInt("calories", calories);
+            statement.setDouble("calories", calories);
 
             ResultSet rs = statement.executeQuery();
             List<Food> items = new ArrayList<>();
@@ -221,25 +304,42 @@ public class MySqlDataRepository implements DataRepository {
         return null;
     }
 
-    //šeit vajadzētu storetajā procedūrā "contains", bet neizpētīju vēl, jāmaina tā, manuprāt
     @Override
-    public List<Food> getCaloriesByName(String name) {
-
+    public double getCaloriesByName(String name) {
         try {
             connection = DriverManager.getConnection(connectionString, userName, passWord);
             CallableStatement statement = connection.prepareCall("{call spCaloriesByName(?,?)}");
             statement.setString("name", name);
-
-            ResultSet rs = statement.executeQuery();
-            List<Food> items = new ArrayList<>();
-            while (rs.next()) {
-                items.add(Food.createFood(rs));
-            }
-            return items;
-
+            statement.registerOutParameter("calories", Types.DOUBLE);
+            statement.execute();
+            double calories = statement.getDouble("calories");
+            return calories;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return 0;
+    }
+
+
+    @Override
+    public void emptyActivitiesTable() {
+        try {
+            connection = DriverManager.getConnection(connectionString, userName, passWord);
+            CallableStatement statement = connection.prepareCall("{call spResetActivityPerformedTable()}");
+            statement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void emptyEatenTable() {
+        try {
+            connection = DriverManager.getConnection(connectionString, userName, passWord);
+            CallableStatement statement = connection.prepareCall("{call spResetFoodEatenTable()}");
+            statement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

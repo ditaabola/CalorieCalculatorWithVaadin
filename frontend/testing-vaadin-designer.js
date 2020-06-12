@@ -6,6 +6,22 @@ import '@vaadin/vaadin-grid/src/vaadin-grid.js';
 import '@vaadin/vaadin-grid/src/vaadin-grid-column.js';
 import '@vaadin/vaadin-grid/src/vaadin-grid-column-group.js';
 import '@vaadin/vaadin-ordered-layout/src/vaadin-horizontal-layout.js';
+import '@vaadin/vaadin-radio-button/src/vaadin-radio-group.js';
+import '@vaadin/vaadin-radio-button/src/vaadin-radio-button.js';
+import '@vaadin/vaadin-text-field/src/vaadin-text-area.js';
+import '@vaadin/vaadin-text-field/src/vaadin-text-field.js';
+import '@polymer/iron-icon/iron-icon.js';
+import '@vaadin/vaadin-crud/src/vaadin-crud-form.js';
+import '@vaadin/vaadin-login/src/vaadin-login-form-wrapper.js';
+import '@vaadin/vaadin-form-layout/src/vaadin-form-layout.js';
+import '@vaadin/vaadin-form-layout/src/vaadin-form-item.js';
+import '@vaadin/vaadin-select/src/vaadin-select.js';
+import '@vaadin/vaadin-list-box/src/vaadin-list-box.js';
+import '@vaadin/vaadin-item/src/vaadin-item.js';
+import '@vaadin/vaadin-grid/src/vaadin-grid-selection-column.js';
+import '@vaadin/flow-frontend/vaadin-grid-flow-selection-column.js';
+import '@vaadin/vaadin-grid-pro/src/vaadin-grid-pro-edit-select.js';
+import '@vaadin/vaadin-select/src/vaadin-select-text-field.js';
 
 class TestingVaadinDesigner extends PolymerElement {
 
@@ -16,106 +32,81 @@ class TestingVaadinDesigner extends PolymerElement {
                     display: block;
                     height: 100%;
                 }
+ 
             </style>
-<vaadin-vertical-layout style="width: 100%; height: 100%;"></vaadin-vertical-layout>
-<vaadin-vertical-layout style="width: 100%; height: 100%;"></vaadin-vertical-layout>
-<vaadin-vertical-layout style="width: 100%; height: 100%;"></vaadin-vertical-layout>
-<vaadin-button theme="primary success">
-  Primary Success 
-</vaadin-button>
-<vaadin-chart type="area" title="Historic and Estimated Worldwide Population Growth by Region" subtitle="Source: Wikipedia.org" categories="[1750, 1800, 1850, 1900, 1950, 1999, 2050]" stacking="normal" no-legend="" tooltip="">
- <vaadin-chart-series title="Asia" values="[502, 635, 809, 947, 1402, 3634, 5268]" unit="Millions"></vaadin-chart-series>
- <vaadin-chart-series title="Africa" values="[106, 107, 111, 133, 221, 767, 1766]" unit="Millions"></vaadin-chart-series>
- <vaadin-chart-series title="Europe" values="[163, 203, 276, 408, 547, 729, 628]" unit="Millions"></vaadin-chart-series>
- <vaadin-chart-series title="America" values="[18, 31, 54, 156, 339, 818, 1201]" unit="Millions"></vaadin-chart-series>
- <vaadin-chart-series title="Oceania" values="[2, 2, 2, 6, 13, 30, 46]" unit="Millions"></vaadin-chart-series>
-</vaadin-chart>
-<vaadin-grid items="[[items]]">
- <vaadin-grid-column width="50px" flex-grow="0">
-  <template class="header">
-    # 
-  </template>
-  <template>
-    [[index]] 
-  </template>
-  <template class="footer">
-    # 
-  </template>
- </vaadin-grid-column>
- <vaadin-grid-column-group>
-  <template class="header">
-    Group header 1 
-  </template>
-  <vaadin-grid-column>
-   <template class="header">
-     Value1 
-   </template>
-   <template>
-     [[item.value1]] 
-   </template>
-   <template class="footer">
-     Value1 
-   </template>
-  </vaadin-grid-column>
-  <vaadin-grid-column>
-   <template class="header">
-     Value2 
-   </template>
-   <template>
-     [[item.value2]] 
-   </template>
-   <template class="footer">
-     Value2 
-   </template>
-  </vaadin-grid-column>
- </vaadin-grid-column-group>
- <vaadin-grid-column-group>
-  <template class="header">
-    Group header 2 
-  </template>
-  <vaadin-grid-column>
-   <template class="header">
-     Value3 
-   </template>
-   <template>
-     [[item.value3]] 
-   </template>
-   <template class="footer">
-     Value3 
-   </template>
-  </vaadin-grid-column>
-  <vaadin-grid-column>
-   <template class="header">
-     Value4 
-   </template>
-   <template>
-     [[item.value4]] 
-   </template>
-   <template class="footer">
-     Value4 
-   </template>
-  </vaadin-grid-column>
- </vaadin-grid-column-group>
-</vaadin-grid>
-<vaadin-horizontal-layout style="width: 100%; height: 100%;">
- <vaadin-vertical-layout class="sidebar" style="flex-basis: calc(7*var(--lumo-size-s)); flex-shrink: 0; background-color: var(--lumo-contrast-5pct);"></vaadin-vertical-layout>
- <vaadin-vertical-layout class="content" style="flex-grow: 1; flex-shrink: 1; flex-basis: auto;"></vaadin-vertical-layout>
-</vaadin-horizontal-layout>
-<vaadin-vertical-layout style="width: 100%; height: 100%;">
- <vaadin-horizontal-layout class="header" style="width: 100%; flex-basis: var(--lumo-size-l); flex-shrink: 0; background-color: var(--lumo-contrast-10pct);"></vaadin-horizontal-layout>
- <vaadin-vertical-layout class="content" style="width: 100%; flex-grow: 1; flex-shrink: 1; flex-basis: auto;"></vaadin-vertical-layout>
- <vaadin-horizontal-layout class="footer" style="width: 100%; flex-basis: var(--lumo-size-l); flex-shrink: 0; background-color: var(--lumo-contrast-10pct);"></vaadin-horizontal-layout>
-</vaadin-vertical-layout>
-<vaadin-vertical-layout style="width: 100%; height: 100%;">
- <vaadin-horizontal-layout class="header" style="width: 100%; flex-basis: var(--lumo-size-l); flex-shrink: 0; background-color: var(--lumo-contrast-10pct);"></vaadin-horizontal-layout>
- <vaadin-vertical-layout class="content" style="width: 100%; flex-grow: 1; flex-shrink: 1; flex-basis: auto;"></vaadin-vertical-layout>
- <vaadin-horizontal-layout class="footer" style="width: 100%; flex-basis: var(--lumo-size-l); flex-shrink: 0; background-color: var(--lumo-contrast-10pct);"></vaadin-horizontal-layout>
-</vaadin-vertical-layout>
-<vaadin-vertical-layout style="width: 100%; height: 100%;">
- <vaadin-horizontal-layout class="header" style="width: 100%; flex-basis: var(--lumo-size-l); flex-shrink: 0; background-color: var(--lumo-contrast-10pct);"></vaadin-horizontal-layout>
- <vaadin-vertical-layout class="content" style="width: 100%; flex-grow: 1; flex-shrink: 1; flex-basis: auto;"></vaadin-vertical-layout>
- <vaadin-horizontal-layout class="footer" style="width: 100%; flex-basis: var(--lumo-size-l); flex-shrink: 0; background-color: var(--lumo-contrast-10pct);"></vaadin-horizontal-layout>
-</vaadin-vertical-layout>
+            
+<!-- HEADER ---------->
+<div id="header">
+ <h1 id="header" class="header" style="margin-left: 40%; padding: 10px; width: 100%; color: #00909e;">Calorie calculator</h1>
+</div>
+
+<!-- EER calculator form -------------------------->
+<div style="margin-left: 100px; width: 400px;font-weight: bold; text-align: center; padding: 10px">
+ <div id="eer-top" style="color: #00909e; padding-bottom: 10px">
+  <h2 id="header-eer" class="header-eer" style="width: auto; color: #00909e">EER calculator</h2>
+  <p id="eer-description" style="width: auto; padding:0;"><i>Calories/day to maintain the current weight</i></p>
+ </div>
+ <div id="user-input">
+ 
+  <!-- Age --------------------------->
+  <div id="user-age" style="margin-bottom: 20px; margin-top: 20px">
+   <label for="age">Age:</label>
+   <input type="number" id="age" name="age" placeholder="30" min="1" max="130" style="margin-left:200px; height: 22px;">
+  </div>
+  
+  <!-- Height -------------------------->
+  <div id="user-height" style="margin-bottom: 20px;">
+   <label for="height">Height in centimeters:</label>
+   <input type="number" id="height" name="height" placeholder="170" min="1" max="300" style="margin-left:67px; height: 22px;">
+  </div>
+  
+  <!-- Weight -------------------------->
+  <div id="user-weight" style="margin-bottom: 20px;">
+   <label for="user-weight">Weight in kilograms:</label>
+   <input type="number" id="user-weight" name="user-weight" placeholder="70" min="1" max="700" style="margin-left:80px; height: 22px;">
+  </div>
+  
+  <!-- Gender -------------------------->
+  <div id="user-gender" style="margin-bottom: 20px;">
+   <div id="gender-selector" style="width: 50%; margin: 0 auto">
+    <vaadin-radio-group theme="horizontal" id="gender" class="gender" required value="on">
+     <vaadin-radio-button id="male" class="male">
+      <b>Male</b>
+      <div></div>
+     </vaadin-radio-button>
+     <vaadin-radio-button id="female" class="gender" checked>
+      <b>Female</b>
+      <div></div>
+     </vaadin-radio-button>
+    </vaadin-radio-group>
+   </div>
+   
+        <!-- Activity level------------------------>
+   <div id="activity-level"style="margin-bottom: 20px;">
+      <label for="activity-level">Select activity level</label>
+      <select id="activity-level" name="activity-level" style="font-weight: bold; ">
+      <option value="sedentary">Sedentary</option>
+      <option value="light">Light</option>
+      <option value="moderate">Moderate</option>
+      <option value="active">Active</option>
+      </select>
+   </div>
+      
+        <!-- Calculate EER ------------------------>
+   <div id="calculate-eer-button" style="margin: 20px">
+    <vaadin-button id="calculate-eer" style="color: #00909e; font-weight: bold">
+      Calculate EER 
+    </vaadin-button>
+   </div>
+   
+        <!-- EER calculation result ------------------>
+   <div id="eer result" style="color: #00909e; font-weight: bold; margin: 20px">
+    <label for="eer-result">EER result</label>
+    <input type="number" id="eer-result" name="eer-result" style="margin-left:100px; height: 22px;">
+   </div>
+  </div>
+ </div>
+</div>
 `;
     }
 

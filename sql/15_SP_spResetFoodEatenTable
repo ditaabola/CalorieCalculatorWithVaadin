@@ -1,0 +1,4 @@
+CREATE PROCEDURE `spResetFoodEatenTable` ()
+BEGIN
+    delete from calories_all.food_eaten;
+END

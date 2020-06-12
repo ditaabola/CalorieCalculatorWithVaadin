@@ -1,0 +1,4 @@
+CREATE PROCEDURE `spFoodItemsByMaxCaloriesPer100g` (in calories int)
+BEGIN
+    select * from calories_all.food_calories where food_calories_per_100g <= calories;
+END

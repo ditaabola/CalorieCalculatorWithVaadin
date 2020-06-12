@@ -70,6 +70,10 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -103,7 +107,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-spring-boot-starter</artifactId>
@@ -145,7 +149,23 @@
             <artifactId>annotations</artifactId>
             <version>18.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-split-layout-flow</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-core</artifactId>
+        </dependency>
+
     </dependencies>
+
 
     <build>
         <defaultGoal>spring-boot:run</defaultGoal>
@@ -188,13 +208,6 @@
             <properties>
                 <vaadin.productionMode>true</vaadin.productionMode>
             </properties>
-
-            <dependencies>
-                <dependency>
-                    <groupId>com.vaadin</groupId>
-                    <artifactId>flow-server-production-mode</artifactId>
-                </dependency>
-            </dependencies>
 
             <build>
                 <plugins>

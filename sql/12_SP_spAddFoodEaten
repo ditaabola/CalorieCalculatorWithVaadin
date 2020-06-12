@@ -1,0 +1,7 @@
+CREATE PROCEDURE `spAddFoodEaten`(in food_eaten_id int, in food_eaten_name varchar(100),
+                                  in food_eaten_quantity double,
+                                  out food_eaten_id int)
+BEGIN
+    insert into calories_all.food_eaten(food_eaten_name, food_eaten_quantity) values (food_eaten_name, food_eaten_quantity);
+    SELECT last_insert_id() into food_eaten_id;
+END

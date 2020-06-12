@@ -1,9 +1,11 @@
 package lv.dita.project.data;
 
+import lombok.Getter;
 import lv.dita.project.data.enums.DailyActivityLevel;
 import lv.dita.project.data.enums.PersonsGender;
 import lv.dita.project.data.enums.WeightGoal;
 
+@Getter
 public class User {
 
     private int height;
@@ -11,31 +13,5 @@ public class User {
     private int age;
     private PersonsGender gender;
     private DailyActivityLevel activityLevel;
-
-    public int getHeight() {
-        return height;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public PersonsGender getGender() {
-        return gender;
-    }
-
-    public DailyActivityLevel getActivityLevel() {
-        return activityLevel;
-    }
-
-    public WeightGoal getGoal() {
-        return goal;
-    }
-
     private WeightGoal goal;
-
 }
