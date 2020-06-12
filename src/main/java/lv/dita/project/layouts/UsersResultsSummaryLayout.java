@@ -41,8 +41,7 @@ public class UsersResultsSummaryLayout extends VerticalLayout {
     private @NotNull Component createButton() {
 
         generateUserData = new Button("Generate my calorie data");
-        generateUserData.getStyle().set("margin-left", "620px");
-        generateUserData.getStyle().set("margin-bottom", "30px");
+        generateUserData.getStyle().set("margin-left", "560px");
         generateUserData.addClickShortcut(Key.ENTER);
         generateUserData.addClickListener(e -> {
             getData();
