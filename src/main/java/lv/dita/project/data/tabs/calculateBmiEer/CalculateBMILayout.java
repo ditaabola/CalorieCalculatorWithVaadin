@@ -1,4 +1,4 @@
-package lv.dita.project.layouts;
+package lv.dita.project.data.tabs.calculateBmiEer;
 
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
@@ -10,7 +10,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.NumberField;
-import lv.dita.project.data.Calculator;
 import lv.dita.project.data.enums.DailyActivityLevel;
 import lv.dita.project.data.enums.PersonsGender;
 import lv.dita.project.data.enums.WeightGoal;

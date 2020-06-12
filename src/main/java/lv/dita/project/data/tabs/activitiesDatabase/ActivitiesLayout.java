@@ -1,4 +1,4 @@
-package lv.dita.project.layouts;
+package lv.dita.project.data.tabs.activitiesDatabase;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Key;
@@ -9,8 +9,6 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.NumberField;
-import lv.dita.project.data.Activity;
-import lv.dita.project.data.ActivityListByCalories;
 import lv.dita.project.data.MySqlDataRepository;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

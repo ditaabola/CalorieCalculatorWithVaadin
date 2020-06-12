@@ -18,7 +18,12 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.server.VaadinSession;
 import lv.dita.project.data.SessionHandler;
-import lv.dita.project.layouts.*;
+import lv.dita.project.data.tabs.activitiesDatabase.ActivitiesLayout;
+import lv.dita.project.data.tabs.calculateBmiEer.CalculateBMILayout;
+import lv.dita.project.data.tabs.calculateBurntCalories.CaloriesBurnedLayout;
+import lv.dita.project.data.tabs.calculateConsumedCalories.CaloriesEatenLayout;
+import lv.dita.project.data.tabs.foodDatabase.FoodLayout;
+import lv.dita.project.data.tabs.yourDataSummay.UsersResultsSummaryLayout;
 
 import java.util.HashMap;
 import java.util.Map;

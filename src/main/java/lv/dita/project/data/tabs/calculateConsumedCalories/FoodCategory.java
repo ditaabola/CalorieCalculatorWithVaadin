@@ -1,40 +1,36 @@
-package lv.dita.project.data;
+package lv.dita.project.data.tabs.calculateConsumedCalories;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lv.dita.project.data.interfaces.EntityBase;
 import org.jetbrains.annotations.NotNull;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import static lv.dita.project.data.enums.Constants.SCHEMA_NAME;
 
 @AllArgsConstructor
 @Data
-public class ActivityType implements EntityBase {
+public class FoodCategory implements EntityBase {
 
     private String type;
 
-    public static final String SELECT_QUERY = "select activity_type from " + SCHEMA_NAME + ".activity_type";
+    public static final String SELECT_QUERY = "select food_type from " + SCHEMA_NAME + ".food_with_categories";
 
-    public static ActivityType createActivityType(@NotNull ResultSet rs) {
-        ActivityType activityType = null;
+    public static FoodCategory createFoodCategory(@NotNull ResultSet rs) {
+        FoodCategory foodCategory = null;
         try {
-            activityType = new ActivityType(rs.getString("activity_type"));
+            foodCategory = new FoodCategory(rs.getString("food_type"));
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return activityType;
+        return foodCategory;
     }
 
     public static String getSelectSql() {
         return SELECT_QUERY;
     }
     public static EntityBase getEntity(ResultSet rs) {
-        return ActivityType.createActivityType(rs);
+        return FoodCategory.createFoodCategory(rs);
     }
 }
-
-

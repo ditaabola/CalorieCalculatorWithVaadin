@@ -1,4 +1,4 @@
-package lv.dita.project.data;
+package lv.dita.project.data.tabs.calculateConsumedCalories;
 
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
@@ -6,15 +6,13 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.html.NativeButton;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.NumberField;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lv.dita.project.data.tabs.foodDatabase.Food;
+import lv.dita.project.data.MySqlDataRepository;
+import lv.dita.project.data.SessionHandler;
 import lv.dita.project.data.interfaces.DataRepository;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

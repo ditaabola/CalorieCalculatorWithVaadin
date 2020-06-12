@@ -1,4 +1,4 @@
-package lv.dita.project.data;
+package lv.dita.project.data.tabs.activitiesDatabase;
 
 import lombok.Getter;
 import lombok.Setter;

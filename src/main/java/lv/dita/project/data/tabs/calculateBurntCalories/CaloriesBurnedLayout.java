@@ -1,8 +1,7 @@
-package lv.dita.project.layouts;
+package lv.dita.project.data.tabs.calculateBurntCalories;
 
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import lv.dita.project.data.ActivityLoggerList;
 
 public class CaloriesBurnedLayout extends VerticalLayout {
     private ActivityLoggerList form;

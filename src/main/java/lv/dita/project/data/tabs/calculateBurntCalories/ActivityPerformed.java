@@ -1,4 +1,4 @@
-package lv.dita.project.data;
+package lv.dita.project.data.tabs.calculateBurntCalories;
 
 import lombok.Getter;
 import lombok.Setter;

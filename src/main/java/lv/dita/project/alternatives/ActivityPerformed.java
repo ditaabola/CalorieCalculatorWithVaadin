@@ -1,4 +1,4 @@
-package lv.dita.project.data.activityWithMysql;
+package lv.dita.project.alternatives;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

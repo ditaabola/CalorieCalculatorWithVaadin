@@ -1,8 +1,7 @@
-package lv.dita.project.layouts;
+package lv.dita.project.data.tabs.calculateConsumedCalories;
 
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import lv.dita.project.data.FoodLogger;
 
 public class CaloriesEatenLayout extends VerticalLayout {
     private FoodLogger form;

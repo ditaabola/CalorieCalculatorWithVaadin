@@ -1,4 +1,4 @@
-package lv.dita.project.layouts;
+package lv.dita.project.data.tabs.foodDatabase;
 
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;

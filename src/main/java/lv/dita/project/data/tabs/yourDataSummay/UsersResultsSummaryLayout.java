@@ -1,4 +1,4 @@
-package lv.dita.project.layouts;
+package lv.dita.project.data.tabs.yourDataSummay;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Key;

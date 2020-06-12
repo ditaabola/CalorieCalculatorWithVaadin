@@ -1,5 +1,6 @@
-package lv.dita.project.data;
+package lv.dita.project.data.tabs.calculateBmiEer;
 
+import lv.dita.project.data.SessionHandler;
 import lv.dita.project.data.enums.DailyActivityLevel;
 import lv.dita.project.data.enums.PersonsGender;
 import lv.dita.project.data.enums.WeightGoal;

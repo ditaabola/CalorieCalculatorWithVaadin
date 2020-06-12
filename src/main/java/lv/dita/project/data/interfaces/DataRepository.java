@@ -1,7 +1,10 @@
 package lv.dita.project.data.interfaces;
 
-import lv.dita.project.data.*;
-import lv.dita.project.data.activityWithMysql.ActivityPerformed;
+import lv.dita.project.alternatives.ActivityPerformed;
+import lv.dita.project.data.tabs.activitiesDatabase.Activity;
+import lv.dita.project.data.tabs.activitiesDatabase.ActivityListByCalories;
+import lv.dita.project.data.tabs.calculateConsumedCalories.FoodEaten;
+import lv.dita.project.data.tabs.foodDatabase.Food;
 
 import java.util.List;
 
